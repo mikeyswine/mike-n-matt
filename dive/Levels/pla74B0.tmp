@@ -1,9 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://ctmu7wrocro8i"]
+[gd_scene load_steps=12 format=3 uid="uid://ctmu7wrocro8i"]
 
 [ext_resource type="Texture2D" uid="uid://b06hkbjb2074r" path="res://Player/Diver_sm.png" id="1_xvfjd"]
-[ext_resource type="Texture2D" uid="uid://bvt1cuarkum4c" path="res://Items/coin.png" id="2_c22ph"]
 [ext_resource type="AudioStream" uid="uid://bandtddvi07ng" path="res://Items/pickupCoin.wav" id="2_ku60q"]
-[ext_resource type="FontFile" uid="uid://c2aitmlu74nm7" path="res://UI/Kenney Mini.ttf" id="3_1upx8"]
 
 [sub_resource type="GDScript" id="GDScript_wpfxc"]
 script/source = "extends CharacterBody2D
@@ -11,7 +9,7 @@ script/source = "extends CharacterBody2D
 ## Node References
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var player_coins: Label = %CoinsLabel
+@onready var player_coins: Label = $CanvasLayer/MarginContainer/Label
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 
@@ -23,11 +21,10 @@ script/source = "extends CharacterBody2D
 ## Jump vertical speed
 @export var jump_speed: float = -13.0
 ## Falling vertical acceleration
-@export var sink_rate: float = 10.0
-## Floating vertical acceleration
-@export var float_rate: float = 10.0
-## Is player floating upwards?
-var floating = false
+@export var sink_speed: float = 10.0
+
+# Haven't implemented acceleration yet.
+const ACCEL = 50.0
 
 ## Coin Counter
 var coins = 0
@@ -35,95 +32,64 @@ var coins = 0
 ## Enumerator to describe possible states
 enum {
 	WALK,
-	FALL
+	FLOAT
 }
 ## State Machine current state
 var state = WALK
-
-
-
-## Runtime Functions ###########################################################
 
 func _physics_process(delta: float) -> void:
 	match state:
 		WALK:
 			walk_state(delta)
-		FALL:
-			fall_state(delta)
+		FLOAT:
+			float_state(delta)
+	
+	
 	move_and_slide()
 
 
+## Custom Functions ############################################################
 
-## State Functions #############################################################
 func walk_state(delta):
-	## Check Float State Transition
-	if not is_on_floor():
-		state = FALL
-		return
-		
-	## Handle jump
-	# Might be better to use up arrow and save space for another function?
-	if Input.is_action_just_pressed(\"up\") or Input.is_action_just_pressed(\"jump\"):
+	
+	## Handle jump.
+	if Input.is_action_just_pressed(\"up\"):
 		velocity.y = jump_speed
 	
 	## Handle move
 	var direction := Input.get_axis(\"left\", \"right\")
 	if direction:
 		velocity.x = direction * move_speed_walk
-		## Handle Sprite Animation
 		animation_player.play(\"walk\")
 		if velocity.x>0:
 			sprite_2d.flip_h = false
 		else:
 			sprite_2d.flip_h = true
 	else:
-		## Stop
-		velocity.x = 0.0
+		velocity.x = move_toward(velocity.x, 0, move_speed_walk)
 		animation_player.play(\"idle\")
 
 
-func fall_state(delta):
-	## Check Walk State Transition
-	if is_on_floor():
-		velocity.y = 0.0
-		state = WALK
-		return
-	
-	## Apply Gravity
-	if floating:
-		velocity += Vector2(0,-float_rate) * delta 
-	else:
-		velocity += Vector2(0,sink_rate) * delta 
-	#Multiplied by delta because this is an acceleration.
-	#Scaling it by delta will keep the rate from being framerate dependent.
-	
-	## Hold Down to speed up your fall
-	if Input.is_action_just_pressed(\"down\"):
-		velocity += Vector2(0,sink_rate) * delta 
-	
-	## Handle Fall Movement
-	var direction := Input.get_axis(\"left\", \"right\")
-	if direction:
-		velocity.x = direction * move_speed_sink
-		## Handle Sprite Animation
-		animation_player.play(\"fall\")
-		if velocity.x>0:
-			sprite_2d.flip_h = false
+func float_state(delta):
+	# Add the gravity.
+	if not is_on_floor():
+		# sink_speed.
+		velocity += Vector2(0,sink_speed) * delta
+		
+		# Handle Fall Move
+		var direction := Input.get_axis(\"left\", \"right\")
+		if direction:
+			velocity.x = direction * move_speed_sink
+			animation_player.play(\"fall\")
+			if velocity.x>0:
+				sprite_2d.flip_h = false
+			else:
+				sprite_2d.flip_h = true
+				
 		else:
-			sprite_2d.flip_h = true
-	else:
-		## Stop
-		velocity.x = 0.0
+			velocity.x = move_toward(velocity.x, 0, move_speed_sink)
 
 
-func start_float():
-	floating = true
-
-func stop_float():
-	floating = false
-
-
-## Custom Functions ############################################################
 func increment_coins():
 	coins += 1
 	player_coins.text = str(coins)
@@ -228,12 +194,7 @@ _data = {
 "walk": SubResource("Animation_kwoqj")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lebeh"]
-atlas = ExtResource("2_c22ph")
-region = Rect2(1, 1, 5, 6)
-
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 3
 script = SubResource("GDScript_wpfxc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -269,6 +230,10 @@ autoplay = "idle"
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = -4.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 4
@@ -276,23 +241,10 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_constants/separation = 3
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_lebeh")
-stretch_mode = 5
-
-[node name="CoinsLabel" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer"]
-unique_name_in_owner = true
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("3_1upx8")
 theme_override_font_sizes/font_size = 8
 text = "0"
 horizontal_alignment = 2
