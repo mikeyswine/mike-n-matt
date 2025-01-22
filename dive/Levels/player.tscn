@@ -1,0 +1,224 @@
+[gd_scene load_steps=12 format=3 uid="uid://ctmu7wrocro8i"]
+
+[ext_resource type="Texture2D" uid="uid://b06hkbjb2074r" path="res://Player/Diver_sm.png" id="1_xvfjd"]
+[ext_resource type="AudioStream" uid="uid://bandtddvi07ng" path="res://Items/pickupCoin.wav" id="2_ku60q"]
+
+[sub_resource type="GDScript" id="GDScript_wpfxc"]
+script/source = "extends CharacterBody2D
+
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var player_coins: Label = $CanvasLayer/MarginContainer/Label
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
+
+
+const SPEED = 20.0
+const FALLSPEED = 10.0
+const ACCEL = 50.0
+const JUMP_VELOCITY = -13
+const SINK = 10.0
+var coins = 0
+
+func increment_coins():
+	coins += 1
+	player_coins.text = str(coins)
+	audio_stream_player_2d.play()
+
+
+func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		# Sink.
+		velocity += Vector2(0,SINK) * delta
+		
+		# Handle Fall Move
+		var direction := Input.get_axis(\"left\", \"right\")
+		if direction:
+			velocity.x = direction * FALLSPEED
+			animation_player.play(\"fall\")
+			if velocity.x>0:
+				sprite_2d.flip_h = false
+			else:
+				sprite_2d.flip_h = true
+				
+		else:
+			velocity.x = move_toward(velocity.x, 0, FALLSPEED)
+			
+	else:
+		# Handle jump.
+		if Input.is_action_just_pressed(\"ui_accept\"):
+			velocity.y = JUMP_VELOCITY
+		
+		# Handle move
+		var direction := Input.get_axis(\"left\", \"right\")
+		if direction:
+			velocity.x = direction * SPEED
+			animation_player.play(\"walk\")
+			if velocity.x>0:
+				sprite_2d.flip_h = false
+			else:
+				sprite_2d.flip_h = true
+				
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			animation_player.play(\"idle\")
+
+	move_and_slide()
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dycd5"]
+radius = 2.5
+height = 7.0
+
+[sub_resource type="Gradient" id="Gradient_5ypwu"]
+offsets = PackedFloat32Array(0.54, 0.946667)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_dqptd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_bpwvm"]
+resource_name = "fall"
+length = 0.0333367
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="Animation" id="Animation_pj108"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.66667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_o3m8l"]
+resource_name = "land"
+length = 0.0333367
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_kwoqj"]
+resource_name = "walk"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mkxw6"]
+_data = {
+"RESET": SubResource("Animation_dqptd"),
+"fall": SubResource("Animation_bpwvm"),
+"idle": SubResource("Animation_pj108"),
+"land": SubResource("Animation_o3m8l"),
+"walk": SubResource("Animation_kwoqj")
+}
+
+[node name="Player" type="CharacterBody2D"]
+script = SubResource("GDScript_wpfxc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+shape = SubResource("CapsuleShape2D_dycd5")
+
+[node name="Bubbles" type="CPUParticles2D" parent="."]
+position = Vector2(-0.5, -2.5)
+amount = 6
+lifetime = 3.0
+explosiveness = 0.7
+randomness = 0.45
+direction = Vector2(0, -1)
+gravity = Vector2(0, -20)
+initial_velocity_max = 1.0
+linear_accel_max = 1.0
+color = Color(0.352, 0.88, 0.7832, 1)
+color_ramp = SubResource("Gradient_5ypwu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xvfjd")
+hframes = 11
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mkxw6")
+}
+autoplay = "idle"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 8
+text = "0"
+horizontal_alignment = 2
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_ku60q")

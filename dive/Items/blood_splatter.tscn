@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://tndx8hf8mt7p"]
+
+[sub_resource type="Gradient" id="Gradient_qqmba"]
+offsets = PackedFloat32Array(0.0977444, 0.390977)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[node name="BloodSplatter" type="CPUParticles2D"]
+emitting = false
+amount = 50
+lifetime = 4.0
+one_shot = true
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+angular_velocity_min = 1.0
+angular_velocity_max = 1.0
+color = Color(1, 0.00999999, 0.00999999, 1)
+color_ramp = SubResource("Gradient_qqmba")

@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://bqlhue63d132e"]
+
+[ext_resource type="Script" path="res://Characters/enemy.gd" id="1_25els"]
+[ext_resource type="Texture2D" uid="uid://bp0lfqvh77huv" path="res://Characters/fish.png" id="1_43h22"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lboiu"]
+size = Vector2(13, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04ohg"]
+atlas = ExtResource("1_43h22")
+region = Rect2(0, 0, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxlxa"]
+atlas = ExtResource("1_43h22")
+region = Rect2(16, 0, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jbk3"]
+atlas = ExtResource("1_43h22")
+region = Rect2(32, 0, 16, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gl7qx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04ohg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxlxa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jbk3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="Enemy" type="Area2D"]
+script = ExtResource("1_25els")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_lboiu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gl7qx")
+autoplay = "default"
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-8, 0)
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+target_position = Vector2(8, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

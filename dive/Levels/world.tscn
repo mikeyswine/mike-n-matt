@@ -1,0 +1,98 @@
+[gd_scene load_steps=10 format=4 uid="uid://bwxpu1cqkj258"]
+
+[ext_resource type="PackedScene" uid="uid://ctmu7wrocro8i" path="res://Levels/player.tscn" id="1_ixmd7"]
+[ext_resource type="Script" path="res://Levels/world.gd" id="1_tye4h"]
+[ext_resource type="Texture2D" uid="uid://1r2vox2wlxlj" path="res://Levels/Tileset1.png" id="2_6hmt5"]
+[ext_resource type="PackedScene" uid="uid://c2qcdg7dun0pf" path="res://Items/coin.tscn" id="3_k514w"]
+[ext_resource type="PackedScene" uid="uid://bqlhue63d132e" path="res://Characters/enemy.tscn" id="4_jdjuy"]
+
+[sub_resource type="Gradient" id="Gradient_8qbv0"]
+colors = PackedColorArray(0.0495, 0.416533, 0.55, 1, 0.63, 1, 0.8705, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_neg7b"]
+gradient = SubResource("Gradient_8qbv0")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eotfg"]
+texture = ExtResource("2_6hmt5")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+
+[sub_resource type="TileSet" id="TileSet_yqvxi"]
+tile_size = Vector2i(8, 8)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_eotfg")
+
+[node name="World" type="Node2D"]
+position = Vector2(1, 0)
+script = ExtResource("1_tye4h")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 128.0
+offset_bottom = 128.0
+color = Color(0.2025, 0.677, 0.75, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 128.0
+offset_bottom = 128.0
+texture = SubResource("GradientTexture2D_neg7b")
+
+[node name="Player" parent="." instance=ExtResource("1_ixmd7")]
+position = Vector2(19, 14)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAAAAAACAAIAAAAAAAEAAAACAAEAAAAAAAIAAAABAAIAAAAAAAMAAAABAAIAAAAAAAQAAAABAAIAAAAAAAUAAAABAAEAAAAAAAYAAAABAAIAAAAAAAcAAAABAAEAAAAAAAgAAAACAAEAAAAAAAkAAAACAAIAAAAAAAoAAAACAAIAAAAAAAsAAAACAAEAAAAAAAwAAAACAAIAAAAAAA0AAAACAAIAAAAAAA4AAAACAAEAAAAAAA8AAAABAAEAAAABAAIAAAACAAAAAAABAAMAAAABAAIAAAACAAMAAAACAAAAAAACAAQAAAACAAEAAAABAAQAAAABAAEAAAABAAUAAAABAAEAAAACAAYAAAACAAEAAAACAAUAAAACAAEAAAABAAYAAAABAAIAAAABAAcAAAABAAEAAAADAAgAAAAAAAAAAAAEAAgAAAABAAAAAAAFAAgAAAACAAEAAAAFAAcAAAAAAAAAAAAPAA8AAAABAAEAAAAPAAAAAAAAAAEAAAABAA8AAAAAAAMAAAACAA8AAAACAAMAAAADAA8AAAABAAMAAAAEAA8AAAACAAMAAAAFAA8AAAACAAMAAAAGAA8AAAAAAAMAAAAHAA8AAAAAAAMAAAAIAA8AAAACAAMAAAAJAA8AAAAAAAMAAAAKAA4AAAACAAMAAAALAA4AAAAAAAMAAAAMAA4AAAAAAAMAAAALAA8AAAABAAEAAAAKAA8AAAABAAIAAAAMAA8AAAABAAEAAAANAA8AAAAAAAMAAAAOAA8AAAABAAMAAAAPAAEAAAAAAAEAAAAPAAIAAAAAAAIAAAAPAAMAAAAAAAEAAAAPAAQAAAAAAAEAAAAPAAUAAAAAAAIAAAAPAAYAAAAAAAIAAAAPAAcAAAAAAAEAAAAPAAgAAAAAAAEAAAAPAAkAAAAAAAIAAAAPAAoAAAAAAAEAAAAPAAsAAAAAAAIAAAAPAAwAAAAAAAEAAAAPAA0AAAAAAAEAAAAPAA4AAAAAAAEAAAADAAkAAAAAAAIAAAAEAAkAAAABAAEAAAAFAAkAAAACAAEAAAAEAAoAAAABAAIAAAAEAAsAAAABAAEAAAAEAAwAAAABAAEAAAADAAwAAAAAAAEAAAADAAsAAAAAAAEAAAADAAoAAAAAAAEAAAAFAAoAAAACAAEAAAAFAAsAAAACAAEAAAAFAAwAAAACAAEAAAA=")
+tile_set = SubResource("TileSet_yqvxi")
+
+[node name="Coin" parent="." instance=ExtResource("3_k514w")]
+position = Vector2(36, 54)
+
+[node name="Coin2" parent="." instance=ExtResource("3_k514w")]
+position = Vector2(29, 60)
+
+[node name="Coin3" parent="." instance=ExtResource("3_k514w")]
+position = Vector2(69, 115)
+
+[node name="Coin4" parent="." instance=ExtResource("3_k514w")]
+position = Vector2(62, 102)
+
+[node name="Coin5" parent="." instance=ExtResource("3_k514w")]
+position = Vector2(73, 84)
+
+[node name="Coin6" parent="." instance=ExtResource("3_k514w")]
+position = Vector2(17, 72)
+
+[node name="Coin7" parent="." instance=ExtResource("3_k514w")]
+position = Vector2(64, 68)
+
+[node name="Enemy" parent="." instance=ExtResource("4_jdjuy")]
+position = Vector2(77, 76)
+
+[node name="Enemy2" parent="." instance=ExtResource("4_jdjuy")]
+position = Vector2(97, 93)
+
+[connection signal="body_entered" from="Enemy" to="." method="_on_enemy_body_entered"]
+[connection signal="body_entered" from="Enemy2" to="." method="_on_enemy_body_entered"]
