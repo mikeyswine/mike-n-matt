@@ -1,0 +1,28 @@
+////////////////////////////
+//          DIVE          //
+//          TODO          //
+////////////////////////////
+
+
+
+Mike Homework:
+	Handle Proliferating Blood Paricle Object
+	Giant Clam w/ pearl
+
+Matt Homework:
+	Clean Up Player Script
+		Done.  CHanged to state machine, added a couple new features.
+
+
+
+Soon:
+	Pause/Restart Screen
+
+Later:
+	Smooth Pixel Camera System
+
+
+
+Brainstorming:
+	Weights modify sink speed mechaninc?
+	Down Spear attack?
