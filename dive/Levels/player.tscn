@@ -124,10 +124,16 @@ func stop_float():
 
 
 ## Custom Functions ############################################################
-func increment_coins():
-	coins += 1
+func increment_coins(amount=1):
+	coins += amount
 	player_coins.text = str(coins)
 	audio_stream_player_2d.play()
+	
+func take_damage():
+	var blood_splatter = load(\"res://Items/blood_splatter.tscn\").instantiate()
+	blood_splatter.emitting = true
+	# blood_splatter will queue_free upon completion.
+	add_child(blood_splatter)
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dycd5"]
@@ -233,6 +239,7 @@ atlas = ExtResource("2_c22ph")
 region = Rect2(1, 1, 5, 6)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 3
 script = SubResource("GDScript_wpfxc")
 
