@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bwxpu1cqkj258"]
+[gd_scene load_steps=12 format=4 uid="uid://bwxpu1cqkj258"]
 
 [ext_resource type="PackedScene" uid="uid://ctmu7wrocro8i" path="res://Levels/player.tscn" id="1_ixmd7"]
 [ext_resource type="Script" path="res://Levels/world.gd" id="1_tye4h"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c2qcdg7dun0pf" path="res://Items/coin.tscn" id="3_k514w"]
 [ext_resource type="PackedScene" uid="uid://bqlhue63d132e" path="res://Characters/enemy.tscn" id="4_jdjuy"]
 [ext_resource type="PackedScene" uid="uid://dphic4krr41an" path="res://Items/lift_collumn.tscn" id="6_wp7yt"]
+[ext_resource type="PackedScene" uid="uid://d02dpuu1cdksx" path="res://Characters/clam.tscn" id="7_orxob"]
 
 [sub_resource type="Gradient" id="Gradient_8qbv0"]
 colors = PackedColorArray(0.0495, 0.416533, 0.55, 1, 0.63, 1, 0.8705, 1)
@@ -95,13 +96,16 @@ position = Vector2(64, 68)
 position = Vector2(36, 92)
 
 [node name="Enemy" parent="." instance=ExtResource("4_jdjuy")]
-position = Vector2(77, 76)
+position = Vector2(82, 65)
 
 [node name="Enemy2" parent="." instance=ExtResource("4_jdjuy")]
-position = Vector2(97, 93)
+position = Vector2(102, 79)
 
 [node name="LiftCollumn" parent="." instance=ExtResource("6_wp7yt")]
 position = Vector2(20, 84)
+
+[node name="Clam" parent="." instance=ExtResource("7_orxob")]
+position = Vector2(92, 107)
 
 [connection signal="body_entered" from="Enemy" to="." method="_on_enemy_body_entered"]
 [connection signal="body_entered" from="Enemy2" to="." method="_on_enemy_body_entered"]

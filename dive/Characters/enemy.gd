@@ -36,7 +36,6 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	pass
-	# Don't make changes here; the World node has its own listener.
-	#if body.name == "Player":
-		#body.queue_free()
+	if body.name == 'Player':
+		body.take_damage()
+	
