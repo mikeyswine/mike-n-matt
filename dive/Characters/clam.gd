@@ -36,10 +36,16 @@ func _process(delta: float) -> void:
 func _on_timer_timeout() -> void:
 	if state == OPEN:
 		state = CLOSING
-		animated_sprite_2d.play('close')
+		if pearl.collected:
+			animated_sprite_2d.play('close_without_pearl')
+		else:
+			animated_sprite_2d.play('close')
 	elif state == CLOSED:
 		state = OPENING
-		animated_sprite_2d.play('open')
+		if pearl.collected:
+			animated_sprite_2d.play('open_without_pearl')
+		else:
+			animated_sprite_2d.play('open')
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
@@ -55,3 +61,17 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		if not pearl.collected:
 			pearl.collision_shape_2d.disabled = false
 		timer.start(wait_to_close)
+
+
+func _on_pearl_body_entered(body: Node2D) -> void:
+	#Change clam animations/sprites to those without pearl
+	var current_frame = animated_sprite_2d.get_frame()
+	var current_progress = animated_sprite_2d.get_frame_progress()
+	var current_animation = animated_sprite_2d.get_animation()
+	if current_animation == 'open':
+		#animated_sprite_2d.play("open_without_pearl")
+		animated_sprite_2d.set_animation("open_without_pearl")
+	if current_animation == 'close':
+		#animated_sprite_2d.play("close_without_pearl")
+		animated_sprite_2d.set_animation("close_without_pearl")
+		animated_sprite_2d.set_frame_and_progress(current_frame, current_progress)
