@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://cvlxi03yfituk"]
+
+[ext_resource type="Script" path="res://Items/Sea Mines/sea_mine.gd" id="1_wah1h"]
+[ext_resource type="Texture2D" uid="uid://b78e03hp0xoeu" path="res://Items/Sea Mines/SeaMine.png" id="2_4cyu3"]
+[ext_resource type="Script" path="res://Items/Sea Mines/mine.gd" id="3_gpogx"]
+[ext_resource type="AudioStream" uid="uid://ctmq6ky5h4kxu" path="res://Items/Sea Mines/click (5).wav" id="3_udidn"]
+[ext_resource type="AudioStream" uid="uid://cg53rqmtb5cfw" path="res://Items/Sea Mines/cutloose.wav" id="5_ri7fd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1qxc"]
+size = Vector2(9, 6)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xgcgv"]
+radius = 7.51665
+
+[node name="SeaMine" type="Node2D"]
+script = ExtResource("1_wah1h")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, -3)
+shape = SubResource("RectangleShape2D_c1qxc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -6)
+texture = ExtResource("2_4cyu3")
+hframes = 2
+frame = 1
+
+[node name="Line2D" type="Line2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0.5, -5)
+points = PackedVector2Array(0, 0, 0, -20)
+width = 1.0
+default_color = Color(0.2, 0.223529, 0.254902, 1)
+
+[node name="Mine" type="CharacterBody2D" parent="."]
+position = Vector2(0, -30)
+collision_mask = 3
+script = ExtResource("3_gpogx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mine"]
+shape = SubResource("CircleShape2D_xgcgv")
+
+[node name="Sprite2D" type="Sprite2D" parent="Mine"]
+texture = ExtResource("2_4cyu3")
+hframes = 2
+
+[node name="DetonationTimer" type="Timer" parent="Mine"]
+wait_time = 0.3
+one_shot = true
+
+[node name="TriggerSound" type="AudioStreamPlayer" parent="Mine"]
+stream = ExtResource("3_udidn")
+
+[node name="ReleaseSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ri7fd")
+
+[connection signal="body_entered" from="Area2D" to="Mine" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Mine/DetonationTimer" to="Mine" method="_on_detonation_timer_timeout"]

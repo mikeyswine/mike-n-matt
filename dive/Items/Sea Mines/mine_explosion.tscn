@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://genccmqh5b7u"]
+
+[ext_resource type="Script" path="res://Items/Sea Mines/mine_explosion.gd" id="1_vcp1k"]
+[ext_resource type="Texture2D" uid="uid://b78e03hp0xoeu" path="res://Items/Sea Mines/SeaMine.png" id="2_y566i"]
+[ext_resource type="Texture2D" uid="uid://trb7wghd7yvt" path="res://Items/circle_16px.png" id="3_06fq4"]
+[ext_resource type="AudioStream" uid="uid://bmxj2cg4opw1q" path="res://Items/Sea Mines/explosion (2).wav" id="4_6jcm8"]
+
+[sub_resource type="Curve" id="Curve_eq61v"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.123153, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_eoj7l"]
+offsets = PackedFloat32Array(0.137143, 0.32, 0.531429, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.92549, 0.894118, 0, 1, 0.15786, 0.473509, 0.679076, 0.722689, 0, 0, 0, 0)
+
+[sub_resource type="Curve" id="Curve_f1ear"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.300493, 1), 0.0, 0.0, 0, 0, Vector2(0.788177, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.824176), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_413p6"]
+offsets = PackedFloat32Array(0.137143, 0.794286, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.2923, 0.79, 0.748525, 1, 0, 0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_83n47"]
+colors = PackedColorArray(1, 1, 1, 1, 0.598983, 0.768732, 0.755113, 1)
+
+[node name="MineExplosion" type="Node2D"]
+script = ExtResource("1_vcp1k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_y566i")
+hframes = 2
+
+[node name="ExplosionParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 10
+one_shot = true
+explosiveness = 0.7
+texture = ExtResource("3_06fq4")
+emission_shape = 1
+emission_sphere_radius = 8.0
+gravity = Vector2(0, -10)
+scale_amount_min = 0.5
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_eq61v")
+color_ramp = SubResource("Gradient_eoj7l")
+
+[node name="BubbleParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 100
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.5
+emission_shape = 1
+emission_sphere_radius = 8.0
+gravity = Vector2(0, -20)
+scale_amount_min = 0.5
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_f1ear")
+color_ramp = SubResource("Gradient_413p6")
+color_initial_ramp = SubResource("Gradient_83n47")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_6jcm8")
+autoplay = true
+
+[connection signal="finished" from="ExplosionParticles" to="." method="_on_explosion_particles_finished"]
+[connection signal="finished" from="BubbleParticles" to="." method="_on_bubble_particles_finished"]

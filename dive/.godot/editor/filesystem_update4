@@ -1,2 +1,14 @@
+res://Items/sea_mine.tscn
+res://Items/sea_mine.gd
 res://Levels/world.tscn
-res://TODO.txt
+res://Levels/player.tscn
+res://Items/lift_collumn.tscn
+res://Items/coin.tscn
+res://Levels/mine_level.tscn
+res://Items/mine_explosion.gd
+res://Items/mine_explosion.tscn
+res://Items/teleporter.gd
+res://Items/teleporter.tscn
+res://Items/mine.gd
+res://Items/Sea Mines/mine_explosion.tscn
+res://Items/Sea Mines/mine.gd
