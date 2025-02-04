@@ -1,7 +1,5 @@
 res://Levels/world.tscn
-res://Items/teleporter.tscn
-res://Items/teleporter.gd
+res://Levels/mine_level.tscn
+res://Items/lift_collumn.tscn
+res://Items/lift_collumn.gd
 res://Items/Sea Mines/sea_mine.tscn
-res://Items/Sea Mines/mine.gd
-res://Components/hitbox.tscn
-res://Components/hitbox.gd

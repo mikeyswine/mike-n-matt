@@ -53,6 +53,7 @@ sources/0 = SubResource("TileSetAtlasSource_eotfg")
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_tye4h")
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -100
@@ -104,7 +105,8 @@ position = Vector2(82, 65)
 position = Vector2(102, 79)
 
 [node name="LiftCollumn" parent="." instance=ExtResource("6_wp7yt")]
-position = Vector2(20, 84)
+position = Vector2(16, 120)
+height = 72
 
 [node name="Clam" parent="." instance=ExtResource("7_orxob")]
 position = Vector2(92, 107)
