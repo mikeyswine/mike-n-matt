@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkhhrkppbc3iv"]
+
+[ext_resource type="Script" path="res://Items/box.gd" id="1_bse41"]
+[ext_resource type="Texture2D" uid="uid://doujxdpxv3opg" path="res://Items/crate.png" id="1_utne4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8ky7"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0b26c"]
+size = Vector2(6, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ejulq"]
+size = Vector2(6, 8)
+
+[node name="Box" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_bse41")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_utne4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_d8ky7")
+
+[node name="LeftSide" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftSide"]
+position = Vector2(-7, 4)
+shape = SubResource("RectangleShape2D_0b26c")
+
+[node name="RightSide" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightSide"]
+position = Vector2(7, 4)
+shape = SubResource("RectangleShape2D_ejulq")
+
+[connection signal="body_entered" from="LeftSide" to="." method="_on_left_side_body_entered"]
+[connection signal="body_exited" from="LeftSide" to="." method="_on_left_side_body_exited"]
+[connection signal="body_entered" from="RightSide" to="." method="_on_right_side_body_entered"]
+[connection signal="body_exited" from="RightSide" to="." method="_on_right_side_body_exited"]
