@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://genccmqh5b7u"]
+[gd_scene load_steps=12 format=3 uid="uid://genccmqh5b7u"]
 
 [ext_resource type="Script" path="res://Items/Sea Mines/mine_explosion.gd" id="1_vcp1k"]
 [ext_resource type="Texture2D" uid="uid://b78e03hp0xoeu" path="res://Items/Sea Mines/SeaMine.png" id="2_y566i"]
 [ext_resource type="Texture2D" uid="uid://trb7wghd7yvt" path="res://Items/circle_16px.png" id="3_06fq4"]
-[ext_resource type="AudioStream" uid="uid://bmxj2cg4opw1q" path="res://Items/Sea Mines/explosion (2).wav" id="4_6jcm8"]
+[ext_resource type="AudioStream" uid="uid://b6a2xpthycaw5" path="res://Items/Sea Mines/explosion (2).wav" id="4_6jcm8"]
+[ext_resource type="PackedScene" uid="uid://ccvpfkv8qygrg" path="res://Components/hitbox.tscn" id="5_7mg6e"]
 
 [sub_resource type="Curve" id="Curve_eq61v"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.123153, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -23,6 +24,9 @@ colors = PackedColorArray(1, 1, 1, 1, 0.2923, 0.79, 0.748525, 1, 0, 0, 0, 0)
 
 [sub_resource type="Gradient" id="Gradient_83n47"]
 colors = PackedColorArray(1, 1, 1, 1, 0.598983, 0.768732, 0.755113, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3wsqm"]
+radius = 23.0
 
 [node name="MineExplosion" type="Node2D"]
 script = ExtResource("1_vcp1k")
@@ -65,5 +69,16 @@ color_initial_ramp = SubResource("Gradient_83n47")
 stream = ExtResource("4_6jcm8")
 autoplay = true
 
-[connection signal="finished" from="ExplosionParticles" to="." method="_on_explosion_particles_finished"]
+[node name="Hitbox" parent="." instance=ExtResource("5_7mg6e")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_3wsqm")
+debug_color = Color(0.989567, 0, 0.288921, 0.42)
+
+[node name="ExplodeTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+autostart = true
+
 [connection signal="finished" from="BubbleParticles" to="." method="_on_bubble_particles_finished"]
+[connection signal="timeout" from="ExplodeTimer" to="." method="_on_explode_timer_timeout"]

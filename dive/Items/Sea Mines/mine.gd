@@ -7,7 +7,6 @@ const MINE_EXPLOSION = preload("res://Items/Sea Mines/mine_explosion.tscn")
 @onready var release_sound: AudioStreamPlayer = $"../ReleaseSound"
 
 
-
 @export var horrizontal_range:float = 1.50
 @export var drift_speed:float = 0.03
 var move = drift_speed
@@ -49,7 +48,7 @@ func tethered(delta):
 func untethered(delta):
 	velocity.x = 0.0
 	velocity.y -= float_rate * delta
-	if position.y >= 1000: queue_free()  ## Delete if it rises offscreen 
+	if position.y >= 100: queue_free()  ## Delete if it rises offscreen 
 
 func explode():
 	is_armed = false
@@ -71,3 +70,7 @@ func _on_detonation_timer_timeout() -> void:
 	new_explosion.global_position = global_position
 	get_tree().get_current_scene().call_deferred("add_child", new_explosion)
 	queue_free()
+
+
+func take_damage():
+	explode()

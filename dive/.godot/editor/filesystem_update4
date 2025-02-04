@@ -1,14 +1,14 @@
-res://Items/sea_mine.tscn
-res://Items/sea_mine.gd
-res://Levels/world.tscn
-res://Levels/player.tscn
-res://Items/lift_collumn.tscn
-res://Items/coin.tscn
-res://Levels/mine_level.tscn
-res://Items/mine_explosion.gd
-res://Items/mine_explosion.tscn
-res://Items/teleporter.gd
-res://Items/teleporter.tscn
-res://Items/mine.gd
-res://Items/Sea Mines/mine_explosion.tscn
 res://Items/Sea Mines/mine.gd
+res://Components/hurtbox.tscn
+res://Components/hurtbox.gd
+res://Levels/player.tscn
+res://Components/hitbox.tscn
+res://Characters/enemy.tscn
+res://Characters/enemy.gd
+res://Levels/world.tscn
+res://Items/Sea Mines/mine_explosion.tscn
+res://Components/hitbox.gd
+res://Items/Sea Mines/sea_mine.tscn
+res://Items/Sea Mines/mine_explosion.gd
+res://Items/teleporter.gd
+res://Player/player.tscn

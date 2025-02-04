@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://ctmu7wrocro8i"]
+[gd_scene load_steps=17 format=3 uid="uid://ctmu7wrocro8i"]
 
-[ext_resource type="Texture2D" uid="uid://b06hkbjb2074r" path="res://Player/Diver_sm.png" id="1_xvfjd"]
-[ext_resource type="Texture2D" uid="uid://bvt1cuarkum4c" path="res://Items/coin.png" id="2_c22ph"]
-[ext_resource type="AudioStream" uid="uid://bandtddvi07ng" path="res://Items/pickupCoin.wav" id="2_ku60q"]
-[ext_resource type="FontFile" uid="uid://c2aitmlu74nm7" path="res://UI/Kenney Mini.ttf" id="3_1upx8"]
+[ext_resource type="Texture2D" uid="uid://b06hkbjb2074r" path="res://Player/Diver_sm.png" id="1_tmfi8"]
+[ext_resource type="PackedScene" uid="uid://ccvpfkv8qygrg" path="res://Components/hitbox.tscn" id="2_qwpb1"]
+[ext_resource type="Texture2D" uid="uid://bvt1cuarkum4c" path="res://Items/coin.png" id="3_q5d3r"]
+[ext_resource type="FontFile" uid="uid://c2aitmlu74nm7" path="res://UI/Kenney Mini.ttf" id="4_b4135"]
+[ext_resource type="AudioStream" uid="uid://bandtddvi07ng" path="res://Items/pickupCoin.wav" id="5_ahh53"]
 
 [sub_resource type="GDScript" id="GDScript_wpfxc"]
 script/source = "extends CharacterBody2D
@@ -144,6 +145,9 @@ height = 7.0
 offsets = PackedFloat32Array(0.54, 0.946667)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ckt35"]
+radius = 5.0
+
 [sub_resource type="Animation" id="Animation_dqptd"]
 length = 0.001
 tracks/0/type = "value"
@@ -235,7 +239,7 @@ _data = {
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lebeh"]
-atlas = ExtResource("2_c22ph")
+atlas = ExtResource("3_q5d3r")
 region = Rect2(1, 1, 5, 6)
 
 [node name="Player" type="CharacterBody2D"]
@@ -261,8 +265,16 @@ color = Color(0.352, 0.88, 0.7832, 1)
 color_ramp = SubResource("Gradient_5ypwu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_xvfjd")
+texture = ExtResource("1_tmfi8")
 hframes = 11
+
+[node name="Hitbox" parent="Sprite2D" instance=ExtResource("2_qwpb1")]
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox"]
+position = Vector2(6, 0)
+shape = SubResource("CircleShape2D_ckt35")
+debug_color = Color(0.997247, 0, 0.170129, 0.42)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -299,10 +311,10 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("3_1upx8")
+theme_override_fonts/font = ExtResource("4_b4135")
 theme_override_font_sizes/font_size = 8
 text = "0"
 horizontal_alignment = 2
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_ku60q")
+stream = ExtResource("5_ahh53")

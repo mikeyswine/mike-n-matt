@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b78e03hp0xoeu" path="res://Items/Sea Mines/SeaMine.png" id="2_4cyu3"]
 [ext_resource type="Script" path="res://Items/Sea Mines/mine.gd" id="3_gpogx"]
 [ext_resource type="AudioStream" uid="uid://ctmq6ky5h4kxu" path="res://Items/Sea Mines/click (5).wav" id="3_udidn"]
-[ext_resource type="AudioStream" uid="uid://cg53rqmtb5cfw" path="res://Items/Sea Mines/cutloose.wav" id="5_ri7fd"]
+[ext_resource type="AudioStream" uid="uid://p2vuhwrorhc" path="res://Items/Sea Mines/cutloose.wav" id="5_ri7fd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c1qxc"]
 size = Vector2(9, 6)
@@ -38,6 +38,7 @@ default_color = Color(0.2, 0.223529, 0.254902, 1)
 
 [node name="Mine" type="CharacterBody2D" parent="."]
 position = Vector2(0, -30)
+collision_layer = 9
 collision_mask = 3
 script = ExtResource("3_gpogx")
 
