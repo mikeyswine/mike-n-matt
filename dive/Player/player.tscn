@@ -1,7 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://ctmu7wrocro8i"]
+[gd_scene load_steps=15 format=3 uid="uid://ctmu7wrocro8i"]
 
 [ext_resource type="Texture2D" uid="uid://b06hkbjb2074r" path="res://Player/Diver_sm.png" id="1_tmfi8"]
-[ext_resource type="PackedScene" uid="uid://ccvpfkv8qygrg" path="res://Components/hitbox.tscn" id="2_qwpb1"]
 [ext_resource type="Texture2D" uid="uid://bvt1cuarkum4c" path="res://Items/coin.png" id="3_q5d3r"]
 [ext_resource type="FontFile" uid="uid://c2aitmlu74nm7" path="res://UI/Kenney Mini.ttf" id="4_b4135"]
 [ext_resource type="AudioStream" uid="uid://bandtddvi07ng" path="res://Items/pickupCoin.wav" id="5_ahh53"]
@@ -145,9 +144,6 @@ height = 7.0
 offsets = PackedFloat32Array(0.54, 0.946667)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ckt35"]
-radius = 5.0
-
 [sub_resource type="Animation" id="Animation_dqptd"]
 length = 0.001
 tracks/0/type = "value"
@@ -267,14 +263,6 @@ color_ramp = SubResource("Gradient_5ypwu")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_tmfi8")
 hframes = 11
-
-[node name="Hitbox" parent="Sprite2D" instance=ExtResource("2_qwpb1")]
-monitoring = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox"]
-position = Vector2(6, 0)
-shape = SubResource("CircleShape2D_ckt35")
-debug_color = Color(0.997247, 0, 0.170129, 0.42)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

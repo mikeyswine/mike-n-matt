@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://genccmqh5b7u"]
+[gd_scene load_steps=13 format=3 uid="uid://genccmqh5b7u"]
 
 [ext_resource type="Script" path="res://Items/Sea Mines/mine_explosion.gd" id="1_vcp1k"]
 [ext_resource type="Texture2D" uid="uid://b78e03hp0xoeu" path="res://Items/Sea Mines/SeaMine.png" id="2_y566i"]
@@ -6,13 +6,16 @@
 [ext_resource type="AudioStream" uid="uid://b6a2xpthycaw5" path="res://Items/Sea Mines/explosion (2).wav" id="4_6jcm8"]
 [ext_resource type="PackedScene" uid="uid://ccvpfkv8qygrg" path="res://Components/hitbox.tscn" id="5_7mg6e"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_805bo"]
+blend_mode = 1
+
 [sub_resource type="Curve" id="Curve_eq61v"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.123153, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Gradient" id="Gradient_eoj7l"]
-offsets = PackedFloat32Array(0.137143, 0.32, 0.531429, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.92549, 0.894118, 0, 1, 0.15786, 0.473509, 0.679076, 0.722689, 0, 0, 0, 0)
+[sub_resource type="Gradient" id="Gradient_un4ut"]
+offsets = PackedFloat32Array(0.137143, 0.32, 0.557329, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.92549, 0.894118, 0, 1, 0.94, 0.91462, 0.1786, 0.72549, 0.94, 0.91368, 0.1504, 0)
 
 [sub_resource type="Curve" id="Curve_f1ear"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.300493, 1), 0.0, 0.0, 0, 0, Vector2(0.788177, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.824176), 0.0, 0.0, 0, 0]
@@ -37,6 +40,7 @@ texture = ExtResource("2_y566i")
 hframes = 2
 
 [node name="ExplosionParticles" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_805bo")
 emitting = false
 amount = 10
 one_shot = true
@@ -48,9 +52,10 @@ gravity = Vector2(0, -10)
 scale_amount_min = 0.5
 scale_amount_max = 3.0
 scale_amount_curve = SubResource("Curve_eq61v")
-color_ramp = SubResource("Gradient_eoj7l")
+color_ramp = SubResource("Gradient_un4ut")
 
 [node name="BubbleParticles" type="CPUParticles2D" parent="."]
+z_index = -10
 emitting = false
 amount = 100
 lifetime = 3.0

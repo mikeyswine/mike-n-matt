@@ -57,8 +57,6 @@ func explode():
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if is_tethered:
-		print("Released by ")
-		print(body)
 		is_tethered = false
 		release_sound.play()
 		line_2d.visible = false

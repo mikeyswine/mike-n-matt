@@ -10,7 +10,5 @@ func _on_area_entered(area: Area2D) -> void:
 	attempt_damage(area)
 
 func attempt_damage(body):
-	print("Hitbox Entered")
 	if body.has_method("take_damage"):
-		print("Attempting damage")
 		body.take_damage()

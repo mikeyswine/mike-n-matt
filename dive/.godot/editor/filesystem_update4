@@ -1,14 +1,7 @@
-res://Items/Sea Mines/mine.gd
-res://Components/hurtbox.tscn
-res://Components/hurtbox.gd
-res://Levels/player.tscn
-res://Components/hitbox.tscn
-res://Characters/enemy.tscn
-res://Characters/enemy.gd
 res://Levels/world.tscn
-res://Items/Sea Mines/mine_explosion.tscn
-res://Components/hitbox.gd
-res://Items/Sea Mines/sea_mine.tscn
-res://Items/Sea Mines/mine_explosion.gd
+res://Items/teleporter.tscn
 res://Items/teleporter.gd
-res://Player/player.tscn
+res://Items/Sea Mines/sea_mine.tscn
+res://Items/Sea Mines/mine.gd
+res://Components/hitbox.tscn
+res://Components/hitbox.gd
