@@ -1,53 +1,56 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1738650146
-TODO.txt::TextFile::-1::1738027011::0::1::::<><>::
-::res://Characters/::1738642702
-clam.gd::GDScript::-1::1738132077::0::1::::<>Area2D<>::
-clam.png::CompressedTexture2D::8599042678331280247::1738132077::1738637934::1::::<><>::
-clam.tscn::PackedScene::8969931361823814555::1738132077::0::1::::<><>::uid://duro8g6malwpj::::res://Characters/clam.png<>res://Characters/clam.gd<>uid://bygjmxurlxk0s::::res://Items/pearl.tscn<>uid://ceg5yue2x6fo8::::res://Characters/clam_without_pearl.png
-clam_without_pearl.png::CompressedTexture2D::5067848435204339161::1738132077::1738637934::1::::<><>::
-enemy.gd::GDScript::-1::1738640035::0::1::::<>Node2D<>::
-enemy.tscn::PackedScene::3532611331283333450::1738642702::0::1::::<><>::res://Characters/enemy.gd<>uid://bp0lfqvh77huv::::res://Characters/fish.png
-fish.png::CompressedTexture2D::3491540471181609081::1738027011::1738637934::1::::<><>::
-::res://Components/::1738649560
-hitbox.gd::GDScript::-1::1738649560::0::1::::<>Area2D<>::
-hitbox.tscn::PackedScene::4957491230554638976::1738649560::0::1::::<><>::res://Components/hitbox.gd
-::res://Items/::1738649470
-blood_splatter.gd::GDScript::-1::1738132077::0::1::::<>CPUParticles2D<>::
-blood_splatter.tscn::PackedScene::1360649908519460971::1738132077::0::1::::<><>::res://Items/blood_splatter.gd
-box.gd::GDScript::-1::1738638018::0::1::::<>CharacterBody2D<>::
-box.tscn::PackedScene::-1::1738638018::0::1::::<><>::
-circle_16px.png::CompressedTexture2D::1368801478445227469::1738132077::1738637934::1::::<><>::
-coin.gd::GDScript::-1::1738027011::0::1::::<>Area2D<>::
-coin.png::CompressedTexture2D::3901192842072224108::1738027011::1738637934::1::::<><>::
-coin.tscn::PackedScene::6701097345782696047::1738132077::0::1::::<><>::res://Items/coin.gd<>uid://bvt1cuarkum4c::::res://Items/coin.png
-crate.png::CompressedTexture2D::8183781125103974540::1738638018::1738638082::1::::<><>::
-lift_collumn.gd::GDScript::-1::1738027011::0::1::::<>Area2D<>::
-lift_collumn.tscn::PackedScene::8227036196879637005::1738036179::0::1::::<><>::res://Items/lift_collumn.gd
-pearl.gd::GDScript::-1::1738132077::0::1::::<>Area2D<>::
-pearl.tscn::PackedScene::4083908319713153812::1738132077::0::1::::<><>::res://Items/pearl.gd
-pickupCoin.wav::AudioStreamWAV::2413473838728688872::1738027011::1738637934::1::::<><>::
-teleporter.gd::GDScript::-1::1738649470::0::1::::<>Area2D<>::
-teleporter.tscn::PackedScene::744682258969004819::1738649348::0::1::::<><>::res://Items/teleporter.gd
-::res://Items/Sea Mines/::1738649544
-click (5).wav::AudioStreamWAV::6132229324735226594::1738132077::1738637934::1::::<><>::
-cutloose.wav::AudioStreamWAV::32643589091094964::1738132077::1738641360::1::::<><>::
-explosion (2).wav::AudioStreamWAV::4563956086088347578::1738132077::1738641314::1::::<><>::
-mine.gd::GDScript::-1::1738649544::0::1::::<>CharacterBody2D<>::
-mine_explosion.gd::GDScript::-1::1738640884::0::1::::<>Node2D<>::
-mine_explosion.tscn::PackedScene::430183589660063032::1738648401::0::1::::<><>::res://Items/Sea Mines/mine_explosion.gd<>uid://b78e03hp0xoeu::::res://Items/Sea Mines/SeaMine.png<>uid://trb7wghd7yvt::::res://Items/circle_16px.png<>uid://b6a2xpthycaw5::::res://Items/Sea Mines/explosion (2).wav<>uid://ccvpfkv8qygrg::::res://Components/hitbox.tscn
-SeaMine.png::CompressedTexture2D::4700877140996093244::1738132077::1738637934::1::::<><>::
-sea_mine.gd::GDScript::-1::1738132077::0::1::::<>Node2D<>::
-sea_mine.tscn::PackedScene::6270927373700153742::1738649544::0::1::::<><>::res://Items/Sea Mines/sea_mine.gd<>uid://b78e03hp0xoeu::::res://Items/Sea Mines/SeaMine.png<>res://Items/Sea Mines/mine.gd<>uid://ctmq6ky5h4kxu::::res://Items/Sea Mines/click (5).wav<>uid://p2vuhwrorhc::::res://Items/Sea Mines/cutloose.wav
-::res://Levels/::1738649635
-mine_level.tscn::PackedScene::8619084416021675354::1738649147::0::1::::<><>::uid://ctmu7wrocro8i::::res://Player/player.tscn<>uid://1r2vox2wlxlj::::res://Levels/Tileset1.png<>uid://c2qcdg7dun0pf::::res://Items/coin.tscn<>uid://cvlxi03yfituk::::res://Items/Sea Mines/sea_mine.tscn<>uid://kuy2qb4hg4mh::::res://Items/teleporter.tscn<>uid://trb7wghd7yvt::::res://Items/circle_16px.png
-Tileset1.png::CompressedTexture2D::1861681988998574259::1738027011::1738637934::1::::<><>::
-world.gd::GDScript::-1::1738132077::0::1::::<>Node2D<>::
-world.tscn::PackedScene::3979003772280211953::1738649635::0::1::::<><>::uid://ctmu7wrocro8i::::res://Player/player.tscn<>res://Levels/world.gd<>uid://1r2vox2wlxlj::::res://Levels/Tileset1.png<>uid://c2qcdg7dun0pf::::res://Items/coin.tscn<>uid://bqlhue63d132e::::res://Characters/enemy.tscn<>uid://dphic4krr41an::::res://Items/lift_collumn.tscn<>uid://d02dpuu1cdksx::::res://Characters/clam.tscn<>res://Items/box.tscn<>uid://kuy2qb4hg4mh::::res://Items/teleporter.tscn<>uid://du2fccuhhhccg::::res://Levels/mine_level.tscn
-::res://Player/::1738648401
-Diver_sm.png::CompressedTexture2D::4205580428417304899::1738027011::1738637934::1::::<><>::
-player.gd::GDScript::-1::1738027011::0::1::::<>CharacterBody2D<>::
-player.tscn::PackedScene::6132474597232653002::1738648401::0::1::::<><>::uid://b06hkbjb2074r::::res://Player/Diver_sm.png<>uid://bvt1cuarkum4c::::res://Items/coin.png<>uid://c2aitmlu74nm7::::res://UI/Kenney Mini.ttf<>uid://bandtddvi07ng::::res://Items/pickupCoin.wav
-::res://UI/::1738641684
-icon.svg::CompressedTexture2D::9060563706120919172::1738027011::1738641684::1::::<><>::
-Kenney Mini.ttf::FontFile::6668460459865078036::1738027011::1738637934::1::::<><>::
+::res://::1738738602
+TODO.txt::TextFile::-1::1737525214::0::1::::<><>::
+::res://Characters/::1738734854
+clam.gd::GDScript::-1::1738039898::0::1::::<>Area2D<>::
+clam.png::CompressedTexture2D::8599042678331280247::1738039898::1738734854::1::::<><>::
+clam.tscn::PackedScene::8969931361823814555::1738039898::0::1::::<><>::uid://duro8g6malwpj::::res://Characters/clam.png<>res://Characters/clam.gd<>uid://bygjmxurlxk0s::::res://Items/pearl.tscn<>uid://ceg5yue2x6fo8::::res://Characters/clam_without_pearl.png
+clam_without_pearl.png::CompressedTexture2D::5067848435204339161::1738039898::1738734854::1::::<><>::
+enemy.gd::GDScript::-1::1738641813::0::1::::<>Node2D<>::
+enemy.tscn::PackedScene::3532611331283333450::1738641813::0::1::::<><>::res://Characters/enemy.gd<>uid://bp0lfqvh77huv::::res://Characters/fish.png
+fish.png::CompressedTexture2D::3491540471181609081::1737524080::1738734854::1::::<><>::
+::res://Components/::1738651652
+hitbox.gd::GDScript::-1::1738651652::0::1::::<>Area2D<>::
+hitbox.tscn::PackedScene::4957491230554638976::1738641813::0::1::::<><>::res://Components/hitbox.gd
+::res://Items/::1738738593
+Background Fish.png::CompressedTexture2D::6385134620075379071::1738735261::1738735267::1::::<><>::
+background_fish.gd::GDScript::-1::1738737804::0::1::::<>AnimatedSprite2D<>::
+background_fish.tscn::PackedScene::6199637066733463010::1738737985::0::1::::<><>::uid://cw8ah74ovl4c6::::res://Items/Background Fish.png<>res://Items/background_fish.gd
+blood_splatter.gd::GDScript::-1::1738039898::0::1::::<>CPUParticles2D<>::
+blood_splatter.tscn::PackedScene::1360649908519460971::1738039898::0::1::::<><>::res://Items/blood_splatter.gd
+box.gd::GDScript::-1::1738641813::0::1::::<>CharacterBody2D<>::
+box.tscn::PackedScene::7876057058272340565::1738641813::0::1::::<><>::res://Items/box.gd<>uid://doujxdpxv3opg::::res://Items/crate.png
+circle_16px.png::CompressedTexture2D::1368801478445227469::1738046111::1738734854::1::::<><>::
+coin.gd::GDScript::-1::1737515861::0::1::::<>Area2D<>::
+coin.png::CompressedTexture2D::3901192842072224108::1737515861::1738734854::1::::<><>::
+coin.tscn::PackedScene::6701097345782696047::1738050959::0::1::::<><>::res://Items/coin.gd<>uid://bvt1cuarkum4c::::res://Items/coin.png
+crate.png::CompressedTexture2D::8183781125103974540::1738641813::1738734854::1::::<><>::
+lift_collumn.gd::GDScript::-1::1738738593::0::1::::<>Area2D<>::
+lift_collumn.tscn::PackedScene::8227036196879637005::1738738593::0::1::::<><>::res://Items/lift_collumn.gd
+pearl.gd::GDScript::-1::1738039898::0::1::::<>Area2D<>::
+pearl.tscn::PackedScene::4083908319713153812::1738039898::0::1::::<><>::res://Items/pearl.gd
+pickupCoin.wav::AudioStreamWAV::2413473838728688872::1737515861::1738734854::1::::<><>::
+teleporter.gd::GDScript::-1::1738651652::0::1::::<>Area2D<>::
+teleporter.tscn::PackedScene::744682258969004819::1738050960::0::1::::<><>::res://Items/teleporter.gd
+::res://Items/Sea Mines/::1738737985
+click (5).wav::AudioStreamWAV::6132229324735226594::1738047093::1738734854::1::::<><>::
+cutloose.wav::AudioStreamWAV::32643589091094964::1738049865::1738734854::1::::<><>::
+explosion (2).wav::AudioStreamWAV::4563956086088347578::1738047332::1738734854::1::::<><>::
+mine.gd::GDScript::-1::1738651652::0::1::::<>CharacterBody2D<>::
+mine_explosion.gd::GDScript::-1::1738641813::0::1::::<>Node2D<>::
+mine_explosion.tscn::PackedScene::430183589660063032::1738651652::0::1::::<><>::res://Items/Sea Mines/mine_explosion.gd<>uid://b78e03hp0xoeu::::res://Items/Sea Mines/SeaMine.png<>uid://trb7wghd7yvt::::res://Items/circle_16px.png<>uid://b6a2xpthycaw5::::res://Items/Sea Mines/explosion (2).wav<>uid://ccvpfkv8qygrg::::res://Components/hitbox.tscn
+SeaMine.png::CompressedTexture2D::4700877140996093244::1738041278::1738734854::1::::<><>::
+sea_mine.gd::GDScript::-1::1738643472::0::1::::<>Node2D<>::
+sea_mine.tscn::PackedScene::6270927373700153742::1738737985::0::1::::<><>::res://Items/Sea Mines/sea_mine.gd<>uid://b78e03hp0xoeu::::res://Items/Sea Mines/SeaMine.png<>res://Items/Sea Mines/mine.gd<>uid://ctmq6ky5h4kxu::::res://Items/Sea Mines/click (5).wav<>uid://p2vuhwrorhc::::res://Items/Sea Mines/cutloose.wav
+::res://Levels/::1738738303
+mine_level.tscn::PackedScene::8619084416021675354::1738737985::0::1::::<><>::uid://ctmu7wrocro8i::::res://Player/player.tscn<>uid://1r2vox2wlxlj::::res://Levels/Tileset1.png<>uid://c2qcdg7dun0pf::::res://Items/coin.tscn<>uid://dphic4krr41an::::res://Items/lift_collumn.tscn<>uid://cvlxi03yfituk::::res://Items/Sea Mines/sea_mine.tscn
+Tileset1.png::CompressedTexture2D::1861681988998574259::1737515861::1738734854::1::::<><>::
+world.gd::GDScript::-1::1738039898::0::1::::<>Node2D<>::
+world.tscn::PackedScene::3979003772280211953::1738738303::0::1::::<><>::uid://ctmu7wrocro8i::::res://Player/player.tscn<>res://Levels/world.gd<>uid://1r2vox2wlxlj::::res://Levels/Tileset1.png<>uid://c2qcdg7dun0pf::::res://Items/coin.tscn<>uid://bqlhue63d132e::::res://Characters/enemy.tscn<>uid://dphic4krr41an::::res://Items/lift_collumn.tscn<>uid://d02dpuu1cdksx::::res://Characters/clam.tscn<>uid://dkhhrkppbc3iv::::res://Items/box.tscn<>uid://kuy2qb4hg4mh::::res://Items/teleporter.tscn<>uid://du2fccuhhhccg::::res://Levels/mine_level.tscn<>uid://culfd76g3gbha::::res://Items/background_fish.tscn
+::res://Player/::1738734854
+Diver_sm.png::CompressedTexture2D::4205580428417304899::1737515861::1738734854::1::::<><>::
+player.gd::GDScript::-1::1738641813::0::1::::<>CharacterBody2D<>::
+player.tscn::PackedScene::6132474597232653002::1738651652::0::1::::<><>::uid://b06hkbjb2074r::::res://Player/Diver_sm.png<>uid://bvt1cuarkum4c::::res://Items/coin.png<>uid://c2aitmlu74nm7::::res://UI/Kenney Mini.ttf<>uid://bandtddvi07ng::::res://Items/pickupCoin.wav
+::res://UI/::1738734854
+icon.svg::CompressedTexture2D::9060563706120919172::1738641813::1738734854::1::::<><>::
+Kenney Mini.ttf::FontFile::6668460459865078036::1737524174::1738734854::1::::<><>::

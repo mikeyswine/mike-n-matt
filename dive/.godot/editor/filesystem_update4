@@ -1,5 +1,7 @@
-res://Levels/world.tscn
-res://Levels/mine_level.tscn
 res://Items/lift_collumn.tscn
 res://Items/lift_collumn.gd
+res://Levels/world.tscn
+res://Levels/mine_level.tscn
 res://Items/Sea Mines/sea_mine.tscn
+res://Items/background_fish.tscn
+res://Items/background_fish.gd

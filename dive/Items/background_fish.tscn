@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://culfd76g3gbha"]
+
+[ext_resource type="Texture2D" uid="uid://cw8ah74ovl4c6" path="res://Items/Background Fish.png" id="1_barum"]
+[ext_resource type="Script" path="res://Items/background_fish.gd" id="2_y65gk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wktrn"]
+atlas = ExtResource("1_barum")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfxoe"]
+atlas = ExtResource("1_barum")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k50ps"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wktrn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfxoe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BackgroundFish" type="AnimatedSprite2D"]
+modulate = Color(0.0614667, 0.370917, 0.387275, 0.156863)
+z_index = -20
+sprite_frames = SubResource("SpriteFrames_k50ps")
+autoplay = "default"
+frame = 1
+frame_progress = 0.115277
+script = ExtResource("2_y65gk")

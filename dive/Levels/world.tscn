@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://bwxpu1cqkj258"]
+[gd_scene load_steps=16 format=4 uid="uid://bwxpu1cqkj258"]
 
 [ext_resource type="PackedScene" uid="uid://ctmu7wrocro8i" path="res://Player/player.tscn" id="1_ixmd7"]
 [ext_resource type="Script" path="res://Levels/world.gd" id="1_tye4h"]
@@ -7,9 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://bqlhue63d132e" path="res://Characters/enemy.tscn" id="4_jdjuy"]
 [ext_resource type="PackedScene" uid="uid://dphic4krr41an" path="res://Items/lift_collumn.tscn" id="6_wp7yt"]
 [ext_resource type="PackedScene" uid="uid://d02dpuu1cdksx" path="res://Characters/clam.tscn" id="7_orxob"]
-[ext_resource type="PackedScene" path="res://Items/box.tscn" id="9_3cppd"]
+[ext_resource type="PackedScene" uid="uid://dkhhrkppbc3iv" path="res://Items/box.tscn" id="9_3cppd"]
 [ext_resource type="PackedScene" uid="uid://kuy2qb4hg4mh" path="res://Items/teleporter.tscn" id="9_j2wx0"]
 [ext_resource type="PackedScene" uid="uid://du2fccuhhhccg" path="res://Levels/mine_level.tscn" id="10_etp8y"]
+[ext_resource type="PackedScene" uid="uid://culfd76g3gbha" path="res://Items/background_fish.tscn" id="11_1ue7x"]
 
 [sub_resource type="Gradient" id="Gradient_8qbv0"]
 colors = PackedColorArray(0.0495, 0.416533, 0.55, 1, 0.63, 1, 0.8705, 1)
@@ -117,6 +118,14 @@ position = Vector2(54, 116)
 [node name="Teleporter" parent="." instance=ExtResource("9_j2wx0")]
 position = Vector2(123, 112)
 destination_level = ExtResource("10_etp8y")
+
+[node name="BackgroundFish" parent="." instance=ExtResource("11_1ue7x")]
+
+[node name="BackgroundFish3" parent="." instance=ExtResource("11_1ue7x")]
+position = Vector2(74, 103)
+
+[node name="BackgroundFish2" parent="." instance=ExtResource("11_1ue7x")]
+position = Vector2(39, 27)
 
 [connection signal="body_entered" from="Enemy" to="." method="_on_enemy_body_entered"]
 [connection signal="body_entered" from="Enemy2" to="." method="_on_enemy_body_entered"]

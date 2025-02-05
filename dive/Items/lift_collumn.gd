@@ -2,8 +2,8 @@
 ## This sets up file to be run in editor
 extends Area2D
 
+@onready var collision_shape_2d: CollisionShape2D = %CollisionShape2D
 
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 @export var height := 80 : set = set_height
 
@@ -27,8 +27,10 @@ func _ready() -> void:
 
 ## Adjust physical collider according to the height variable.
 func update_collider():
-	collision_shape_2d.shape.size.y = height
-	collision_shape_2d.position.y = -height/2
+	if collision_shape_2d != null:
+		collision_shape_2d.shape.size.y = height
+		collision_shape_2d.position.y = -height/2
+	##TODO: Modify particle system to mimick height setting.
 
 
 func _on_body_entered(body: Node2D) -> void:
