@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bwxpu1cqkj258"]
+[gd_scene load_steps=17 format=4 uid="uid://bwxpu1cqkj258"]
 
 [ext_resource type="PackedScene" uid="uid://ctmu7wrocro8i" path="res://Player/player.tscn" id="1_ixmd7"]
 [ext_resource type="Script" path="res://Levels/world.gd" id="1_tye4h"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://kuy2qb4hg4mh" path="res://Items/teleporter.tscn" id="9_j2wx0"]
 [ext_resource type="PackedScene" uid="uid://du2fccuhhhccg" path="res://Levels/mine_level.tscn" id="10_etp8y"]
 [ext_resource type="PackedScene" uid="uid://culfd76g3gbha" path="res://Items/background_fish.tscn" id="11_1ue7x"]
+[ext_resource type="PackedScene" uid="uid://b1ueesm0qsbpy" path="res://Items/destructible.tscn" id="12_o4lh6"]
 
 [sub_resource type="Gradient" id="Gradient_8qbv0"]
 colors = PackedColorArray(0.0495, 0.416533, 0.55, 1, 0.63, 1, 0.8705, 1)
@@ -85,7 +86,7 @@ position = Vector2(29, 60)
 position = Vector2(69, 115)
 
 [node name="Coin4" parent="." instance=ExtResource("3_k514w")]
-position = Vector2(62, 102)
+position = Vector2(62, 92)
 
 [node name="Coin5" parent="." instance=ExtResource("3_k514w")]
 position = Vector2(73, 84)
@@ -126,6 +127,63 @@ position = Vector2(74, 103)
 
 [node name="BackgroundFish2" parent="." instance=ExtResource("11_1ue7x")]
 position = Vector2(39, 27)
+
+[node name="Destructible" parent="." instance=ExtResource("12_o4lh6")]
+position = Vector2(51, 100)
+
+[node name="Destructible11" parent="." instance=ExtResource("12_o4lh6")]
+position = Vector2(59, 100)
+
+[node name="Destructible12" parent="." instance=ExtResource("12_o4lh6")]
+position = Vector2(51, 92)
+
+[node name="Destructible13" parent="." instance=ExtResource("12_o4lh6")]
+position = Vector2(59, 92)
+
+[node name="Destructible3" parent="." instance=ExtResource("12_o4lh6")]
+position = Vector2(46, 116)
+
+[node name="Destructible4" parent="." instance=ExtResource("12_o4lh6")]
+position = Vector2(38, 116)
+
+[node name="Destructible2" parent="." instance=ExtResource("12_o4lh6")]
+position = Vector2(59, 47)
+
+[node name="Destructible5" parent="." instance=ExtResource("12_o4lh6")]
+position = Vector2(108, 52)
+make_debris = true
+test_damage = true
+
+[node name="Destructible6" parent="." instance=ExtResource("12_o4lh6")]
+position = Vector2(100, 52)
+
+[node name="Destructible7" parent="." instance=ExtResource("12_o4lh6")]
+position = Vector2(92, 52)
+
+[node name="Destructible8" parent="." instance=ExtResource("12_o4lh6")]
+position = Vector2(108, 44)
+
+[node name="Destructible16" parent="." instance=ExtResource("12_o4lh6")]
+position = Vector2(108, 36)
+
+[node name="Destructible17" parent="." instance=ExtResource("12_o4lh6")]
+position = Vector2(100, 36)
+
+[node name="Destructible18" parent="." instance=ExtResource("12_o4lh6")]
+position = Vector2(92, 36)
+make_debris = true
+
+[node name="Destructible9" parent="." instance=ExtResource("12_o4lh6")]
+position = Vector2(116, 52)
+
+[node name="Destructible10" parent="." instance=ExtResource("12_o4lh6")]
+position = Vector2(92, 44)
+
+[node name="Destructible14" parent="." instance=ExtResource("12_o4lh6")]
+position = Vector2(108, 60)
+
+[node name="Destructible15" parent="." instance=ExtResource("12_o4lh6")]
+position = Vector2(92, 60)
 
 [connection signal="body_entered" from="Enemy" to="." method="_on_enemy_body_entered"]
 [connection signal="body_entered" from="Enemy2" to="." method="_on_enemy_body_entered"]
