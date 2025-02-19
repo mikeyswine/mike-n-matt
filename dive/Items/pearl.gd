@@ -19,4 +19,4 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.name == 'Player' and collected == false:
 		body.increment_coins(10)
 		collected = true
-		collision_shape_2d.disabled = true
+		collision_shape_2d.set_deferred("disabled", true)

@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1ueesm0qsbpy"]
+
+[ext_resource type="Texture2D" uid="uid://c6wa6ha4m4pyp" path="res://Items/destructible.png" id="1_0sksf"]
+[ext_resource type="Script" path="res://Items/destructible.gd" id="2_vq7tg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_paa57"]
+size = Vector2(8, 8)
+
+[node name="Destructible" type="CharacterBody2D"]
+collision_layer = 17
+script = ExtResource("2_vq7tg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.835294)
+texture = ExtResource("1_0sksf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_paa57")
+
+[node name="LeftRayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-4, 0)
+target_position = Vector2(-3.5, 0)
+collision_mask = 16
+hit_from_inside = true
+
+[node name="RightRayCast2D" type="RayCast2D" parent="."]
+position = Vector2(4, 0)
+target_position = Vector2(3.5, 0)
+collision_mask = 16
+hit_from_inside = true
+
+[node name="DownRayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, 4)
+target_position = Vector2(0, 3.5)
+collision_mask = 16
+hit_from_inside = true
+
+[node name="UpRayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, -4)
+target_position = Vector2(0, -3.5)
+collision_mask = 16
+hit_from_inside = true

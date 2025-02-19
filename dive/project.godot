@@ -19,8 +19,8 @@ config/icon="res://UI/icon.svg"
 
 window/size/viewport_width=128
 window/size/viewport_height=128
-window/size/window_width_override=512
-window/size/window_height_override=512
+window/size/window_width_override=1280
+window/size/window_height_override=1280
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
@@ -72,6 +72,7 @@ grab={
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Character"
 2d_physics/layer_4="Hitboxes"
+2d_physics/layer_5="Destructible"
 
 [rendering]
 

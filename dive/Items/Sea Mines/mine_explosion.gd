@@ -11,7 +11,6 @@ func _ready() -> void:
 	bubble_particles.emitting = true
 
 
-
 func _on_bubble_particles_finished() -> void:
 	queue_free()
 
