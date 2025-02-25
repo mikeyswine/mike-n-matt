@@ -7,20 +7,25 @@ const MINE_EXPLOSION = preload("res://Items/Sea Mines/mine_explosion.tscn")
 @onready var release_sound: AudioStreamPlayer = $"../ReleaseSound"
 
 
-@export var horrizontal_range:float = 1.50
+@export var horrizontal_range:float = 4.0
 @export var drift_speed:float = 0.03
 var move = drift_speed
-@export var vary_drift = true
 @export var float_rate:float = 1.0
+@export var randomize_home: bool = true
+@export var randomize_speed: bool = true
+@export var speed_rand_ammount: float = 0.01
 
 
 var is_tethered = true
 var is_armed = true
 
 func _ready() -> void:
-	position.x = horrizontal_range/2
-	if vary_drift:
-		drift_speed = drift_speed * randf_range(0.9,1.1)
+	if randomize_home:
+		position.x = randf_range(-horrizontal_range/2, horrizontal_range/2)
+	if randomize_speed:
+		drift_speed = randf_range(drift_speed - speed_rand_ammount, drift_speed + speed_rand_ammount)
+	velocity.x = drift_speed
+
 
 
 func _physics_process(delta: float) -> void:
@@ -40,10 +45,10 @@ func _physics_process(delta: float) -> void:
 func tethered(delta):
 	line_2d.set_point_position(1,position)
 	if position.x >= horrizontal_range/2:
-		move = -drift_speed
+		velocity.x = -drift_speed
 	if position.x <= -horrizontal_range/2:
-		move = drift_speed
-	velocity.x += move*delta
+		velocity.x = drift_speed
+
 
 func untethered(delta):
 	velocity.x = 0.0
