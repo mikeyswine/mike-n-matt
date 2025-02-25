@@ -1,3 +1,4 @@
+@ -0,0 +1,85 @@
 extends CharacterBody2D
 
 
@@ -63,7 +64,7 @@ func take_damage():
 		debris.position = position
 		# Place debris where this destructible is and make it a child
 		# of the World node.
-		get_parent().call_deferred("add_child",debris)
+		get_parent().add_child(debris)
 		
 	# Finally, remove Destructible.
 	queue_free()
