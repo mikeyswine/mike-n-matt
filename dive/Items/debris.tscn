@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://cd2buch48xexf"]
+[gd_scene load_steps=6 format=3 uid="uid://cd2buch48xexf"]
 
 [ext_resource type="Script" path="res://Items/debris.gd" id="1_64cj5"]
 [ext_resource type="Texture2D" uid="uid://cyqg1byhvcnc7" path="res://Items/debris.png" id="1_qkobs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ot3mc"]
 size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t83ff"]
+size = Vector2(3, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3lvuv"]
+size = Vector2(3, 4)
 
 [node name="Debris" type="CharacterBody2D"]
 script = ExtResource("1_64cj5")
@@ -14,3 +20,20 @@ texture = ExtResource("1_qkobs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ot3mc")
+
+[node name="LeftSide" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftSide"]
+position = Vector2(-3.5, 2)
+shape = SubResource("RectangleShape2D_t83ff")
+
+[node name="RightSide" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightSide"]
+position = Vector2(3.5, 2)
+shape = SubResource("RectangleShape2D_3lvuv")
+
+[connection signal="body_entered" from="LeftSide" to="." method="_on_left_side_body_entered"]
+[connection signal="body_exited" from="LeftSide" to="." method="_on_left_side_body_exited"]
+[connection signal="body_entered" from="RightSide" to="." method="_on_right_side_body_entered"]
+[connection signal="body_exited" from="RightSide" to="." method="_on_right_side_body_exited"]
