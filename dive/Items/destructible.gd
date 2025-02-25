@@ -1,4 +1,4 @@
-@ -0,0 +1,85 @@
+#@ -0,0 +1,85 @@
 extends CharacterBody2D
 
 
@@ -37,6 +37,7 @@ func take_damage():
 	if is_destroyed:
 		return
 	else:
+		await get_tree().create_timer(0.1).timeout
 		is_destroyed = true
 	
 	# Possibly use similar logic to mine._on_detonation_timer_timeout()

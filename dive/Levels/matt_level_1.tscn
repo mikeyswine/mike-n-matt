@@ -1,0 +1,165 @@
+[gd_scene load_steps=12 format=4 uid="uid://csuh5mbmwi6bs"]
+
+[ext_resource type="PackedScene" uid="uid://ctmu7wrocro8i" path="res://Player/player.tscn" id="1_y4ngb"]
+[ext_resource type="Texture2D" uid="uid://1r2vox2wlxlj" path="res://Levels/Tileset1.png" id="2_rguj1"]
+[ext_resource type="PackedScene" uid="uid://b1ueesm0qsbpy" path="res://Items/destructible.tscn" id="3_14uvx"]
+[ext_resource type="PackedScene" uid="uid://c2qcdg7dun0pf" path="res://Items/coin.tscn" id="4_cb5al"]
+[ext_resource type="PackedScene" uid="uid://cvlxi03yfituk" path="res://Items/Sea Mines/sea_mine.tscn" id="5_dhqo6"]
+[ext_resource type="PackedScene" uid="uid://dphic4krr41an" path="res://Items/lift_collumn.tscn" id="6_tq4vx"]
+[ext_resource type="PackedScene" uid="uid://dkhhrkppbc3iv" path="res://Items/box.tscn" id="7_gcvq3"]
+
+[sub_resource type="Gradient" id="Gradient_8qbv0"]
+colors = PackedColorArray(0.0495, 0.416533, 0.55, 1, 0.63, 1, 0.8705, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_neg7b"]
+gradient = SubResource("Gradient_8qbv0")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eotfg"]
+texture = ExtResource("2_rguj1")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+
+[sub_resource type="TileSet" id="TileSet_yqvxi"]
+tile_size = Vector2i(8, 8)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_eotfg")
+
+[node name="World" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -100
+offset_right = 128.0
+offset_bottom = 128.0
+color = Color(0.2025, 0.677, 0.75, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -100
+offset_right = 128.0
+offset_bottom = 128.0
+texture = SubResource("GradientTexture2D_neg7b")
+
+[node name="Player" parent="." instance=ExtResource("1_y4ngb")]
+position = Vector2(3, 116)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAAAAAABAAEAAAAAAAMAAAABAAIAAAAAAAQAAAABAAIAAAAAAAUAAAABAAEAAAAAAAYAAAABAAIAAAAAAAcAAAABAAEAAAAAAAgAAAACAAEAAAAAAAkAAAACAAIAAAAAAAoAAAACAAIAAAAAAAsAAAACAAEAAAAAAAwAAAACAAIAAAAAAA0AAAACAAIAAAAAAA8AAAABAAMAAAAPAA8AAAABAAEAAAAPAAAAAAABAAEAAAABAA8AAAAAAAMAAAACAA8AAAACAAMAAAADAA8AAAABAAMAAAAEAA8AAAACAAMAAAAFAA8AAAACAAMAAAAGAA8AAAAAAAMAAAAHAA8AAAAAAAMAAAAIAA8AAAACAAMAAAAJAA8AAAAAAAMAAAALAA8AAAAAAAMAAAAKAA8AAAAAAAMAAAAMAA8AAAAAAAMAAAANAA8AAAAAAAMAAAAOAA8AAAABAAMAAAAPAAEAAAAAAAEAAAAPAAIAAAAAAAIAAAAPAAMAAAABAAEAAAAPAAQAAAABAAIAAAAPAAUAAAAAAAEAAAAPAAYAAAAAAAIAAAAPAAcAAAAAAAEAAAAPAAgAAAAAAAEAAAAPAAkAAAAAAAIAAAAPAAoAAAAAAAEAAAAPAAsAAAAAAAIAAAAPAAwAAAAAAAEAAAAPAA0AAAAAAAEAAAAPAA4AAAAAAAEAAAAAAAEAAAABAAEAAAAJAAgAAAABAAEAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAEAAAAKAAUAAAAAAAEAAAAKAAgAAAABAAEAAAAMAP//AAABAAIAAAALAP//AAABAAIAAAAKAP//AAABAAIAAAAJAP//AAABAAIAAAAIAP//AAABAAEAAAAHAP7/AAABAAIAAAAGAP7/AAABAAIAAAAGAP//AAABAAIAAAAFAP//AAABAAIAAAAEAP//AAABAAIAAAADAP//AAABAAIAAAACAP//AAABAAIAAAABAP//AAABAAIAAAAAAP//AAABAAIAAAAHAP//AAABAAEAAAD//w8AAAABAAMAAAD//w0AAAABAAEAAAD//w4AAAABAAEAAAAAAAIAAAACAAEAAAAOAP//AAABAAEAAAANAP//AAABAAEAAAAPAP//AAABAAEAAAADAAoAAAABAAEAAAADAAkAAAABAAEAAAAIAAAAAAABAAEAAAAIAA4AAAABAAEAAAAIAA0AAAABAAEAAAAIAAwAAAABAAEAAAAIAAsAAAABAAEAAAAIAAoAAAABAAEAAAAIAAkAAAABAAEAAAAIAAYAAAABAAEAAAAIAAUAAAABAAEAAAAIAAMAAAABAAEAAAAHAA0AAAABAAEAAAAHAAwAAAABAAEAAAAHAAsAAAABAAEAAAAHAAoAAAABAAEAAAAHAA4AAAABAAEAAAAHAAkAAAABAAEAAAAHAAgAAAABAAEAAAAHAAMAAAABAAEAAAAHAAIAAAABAAEAAAAHAAAAAAABAAEAAAAJAAkAAAABAAEAAAAJAAUAAAABAAEAAAAOAAUAAAABAAEAAAAOAAQAAAABAAEAAAADAAsAAAABAAEAAAA=")
+tile_set = SubResource("TileSet_yqvxi")
+
+[node name="Destructible" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
+position = Vector2(116, 4)
+
+[node name="Destructible2" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
+position = Vector2(116, 12)
+
+[node name="Destructible3" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
+position = Vector2(116, 20)
+
+[node name="Destructible4" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
+position = Vector2(116, 28)
+
+[node name="Destructible5" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
+position = Vector2(108, 28)
+
+[node name="Destructible6" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
+position = Vector2(100, 28)
+
+[node name="Destructible7" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
+position = Vector2(108, 4)
+
+[node name="Destructible8" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
+position = Vector2(100, 4)
+
+[node name="Destructible9" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
+position = Vector2(92, 4)
+
+[node name="Destructible10" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
+position = Vector2(84, 4)
+
+[node name="Destructible11" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
+position = Vector2(76, 4)
+
+[node name="Destructible12" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
+position = Vector2(76, 12)
+
+[node name="Destructible13" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
+position = Vector2(76, 20)
+
+[node name="Destructible14" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
+position = Vector2(76, 28)
+
+[node name="Destructible15" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
+position = Vector2(76, 36)
+
+[node name="Destructible16" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
+position = Vector2(68, 36)
+
+[node name="Destructible17" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
+position = Vector2(60, 36)
+
+[node name="Destructible18" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
+position = Vector2(52, 36)
+
+[node name="Coin3" parent="." instance=ExtResource("4_cb5al")]
+position = Vector2(101, 12)
+
+[node name="Coin5" parent="." instance=ExtResource("4_cb5al")]
+position = Vector2(39, 85)
+
+[node name="Coin6" parent="." instance=ExtResource("4_cb5al")]
+position = Vector2(80, 86)
+
+[node name="Coin7" parent="." instance=ExtResource("4_cb5al")]
+position = Vector2(15, 114)
+
+[node name="Coin8" parent="." instance=ExtResource("4_cb5al")]
+position = Vector2(51, 111)
+
+[node name="Coin9" parent="." instance=ExtResource("4_cb5al")]
+position = Vector2(99, 112)
+
+[node name="SeaMine4" parent="." instance=ExtResource("5_dhqo6")]
+position = Vector2(41, 120)
+height = 20.0
+
+[node name="SeaMine6" parent="." instance=ExtResource("5_dhqo6")]
+position = Vector2(81, 120)
+height = 20.0
+
+[node name="SeaMine8" parent="." instance=ExtResource("5_dhqo6")]
+position = Vector2(105, 120)
+height = 60.0
+horrizontal_range = 13.0
+drift_speed = 0.3
+randomize_home = false
+randomize_speed = false
+
+[node name="LiftCollumn" parent="." instance=ExtResource("6_tq4vx")]
+position = Vector2(46, 121)
+height = 120
+
+[node name="Box" parent="." instance=ExtResource("7_gcvq3")]
+position = Vector2(83, 60)
