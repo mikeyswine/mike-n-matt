@@ -61,8 +61,9 @@ func take_damage():
 				colliding_object.take_damage()
 				
 	if make_debris:
+		$CollisionShape2D.disabled = true
 		var debris = load("res://Items/debris.tscn").instantiate()
-		debris.position = position
+		debris.global_position = global_position
 		# Place debris where this destructible is and make it a child
 		# of the World node.
 		get_parent().call_deferred("add_child", debris)

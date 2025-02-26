@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://csuh5mbmwi6bs"]
+[gd_scene load_steps=14 format=4 uid="uid://csuh5mbmwi6bs"]
 
 [ext_resource type="PackedScene" uid="uid://ctmu7wrocro8i" path="res://Player/player.tscn" id="1_y4ngb"]
 [ext_resource type="Texture2D" uid="uid://1r2vox2wlxlj" path="res://Levels/Tileset1.png" id="2_rguj1"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cvlxi03yfituk" path="res://Items/Sea Mines/sea_mine.tscn" id="5_dhqo6"]
 [ext_resource type="PackedScene" uid="uid://dphic4krr41an" path="res://Items/lift_collumn.tscn" id="6_tq4vx"]
 [ext_resource type="PackedScene" uid="uid://dkhhrkppbc3iv" path="res://Items/box.tscn" id="7_gcvq3"]
+[ext_resource type="PackedScene" uid="uid://kuy2qb4hg4mh" path="res://Items/teleporter.tscn" id="8_ih3c3"]
+[ext_resource type="PackedScene" uid="uid://rrpkogmt3dh" path="res://Items/Chest/chest.tscn" id="8_qrqaq"]
 
 [sub_resource type="Gradient" id="Gradient_8qbv0"]
 colors = PackedColorArray(0.0495, 0.416533, 0.55, 1, 0.63, 1, 0.8705, 1)
@@ -66,100 +68,147 @@ texture = SubResource("GradientTexture2D_neg7b")
 position = Vector2(3, 116)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAAAAAAAAABAAEAAAAAAAMAAAABAAIAAAAAAAQAAAABAAIAAAAAAAUAAAABAAEAAAAAAAYAAAABAAIAAAAAAAcAAAABAAEAAAAAAAgAAAACAAEAAAAAAAkAAAACAAIAAAAAAAoAAAACAAIAAAAAAAsAAAACAAEAAAAAAAwAAAACAAIAAAAAAA0AAAACAAIAAAAAAA8AAAABAAMAAAAPAA8AAAABAAEAAAAPAAAAAAABAAEAAAABAA8AAAAAAAMAAAACAA8AAAACAAMAAAADAA8AAAABAAMAAAAEAA8AAAACAAMAAAAFAA8AAAACAAMAAAAGAA8AAAAAAAMAAAAHAA8AAAAAAAMAAAAIAA8AAAACAAMAAAAJAA8AAAAAAAMAAAALAA8AAAAAAAMAAAAKAA8AAAAAAAMAAAAMAA8AAAAAAAMAAAANAA8AAAAAAAMAAAAOAA8AAAABAAMAAAAPAAEAAAAAAAEAAAAPAAIAAAAAAAIAAAAPAAMAAAABAAEAAAAPAAQAAAABAAIAAAAPAAUAAAAAAAEAAAAPAAYAAAAAAAIAAAAPAAcAAAAAAAEAAAAPAAgAAAAAAAEAAAAPAAkAAAAAAAIAAAAPAAoAAAAAAAEAAAAPAAsAAAAAAAIAAAAPAAwAAAAAAAEAAAAPAA0AAAAAAAEAAAAPAA4AAAAAAAEAAAAAAAEAAAABAAEAAAAJAAgAAAABAAEAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAEAAAAKAAUAAAAAAAEAAAAKAAgAAAABAAEAAAAMAP//AAABAAIAAAALAP//AAABAAIAAAAKAP//AAABAAIAAAAJAP//AAABAAIAAAAIAP//AAABAAEAAAAHAP7/AAABAAIAAAAGAP7/AAABAAIAAAAGAP//AAABAAIAAAAFAP//AAABAAIAAAAEAP//AAABAAIAAAADAP//AAABAAIAAAACAP//AAABAAIAAAABAP//AAABAAIAAAAAAP//AAABAAIAAAAHAP//AAABAAEAAAD//w8AAAABAAMAAAD//w0AAAABAAEAAAD//w4AAAABAAEAAAAAAAIAAAACAAEAAAAOAP//AAABAAEAAAANAP//AAABAAEAAAAPAP//AAABAAEAAAADAAoAAAABAAEAAAADAAkAAAABAAEAAAAIAAAAAAABAAEAAAAIAA4AAAABAAEAAAAIAA0AAAABAAEAAAAIAAwAAAABAAEAAAAIAAsAAAABAAEAAAAIAAoAAAABAAEAAAAIAAkAAAABAAEAAAAIAAYAAAABAAEAAAAIAAUAAAABAAEAAAAIAAMAAAABAAEAAAAHAA0AAAABAAEAAAAHAAwAAAABAAEAAAAHAAsAAAABAAEAAAAHAAoAAAABAAEAAAAHAA4AAAABAAEAAAAHAAkAAAABAAEAAAAHAAgAAAABAAEAAAAHAAMAAAABAAEAAAAHAAIAAAABAAEAAAAHAAAAAAABAAEAAAAJAAkAAAABAAEAAAAJAAUAAAABAAEAAAAOAAUAAAABAAEAAAAOAAQAAAABAAEAAAADAAsAAAABAAEAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAAABAAEAAAAAAAMAAAABAAIAAAAAAAQAAAABAAIAAAAAAAUAAAABAAEAAAAAAAYAAAABAAIAAAAAAAcAAAABAAEAAAAAAAgAAAACAAEAAAAAAAkAAAACAAIAAAAAAAoAAAACAAIAAAAAAAsAAAACAAEAAAAAAAwAAAACAAIAAAAAAA0AAAACAAIAAAAAAA8AAAABAAMAAAAPAA8AAAABAAEAAAAPAAAAAAABAAEAAAABAA8AAAAAAAMAAAACAA8AAAACAAMAAAADAA8AAAABAAMAAAAEAA8AAAACAAMAAAAFAA8AAAACAAMAAAAGAA8AAAAAAAMAAAAHAA8AAAAAAAMAAAAIAA8AAAACAAMAAAAJAA8AAAAAAAMAAAALAA8AAAAAAAMAAAAKAA8AAAAAAAMAAAAMAA8AAAAAAAMAAAANAA8AAAAAAAMAAAAOAA8AAAABAAMAAAAPAAEAAAAAAAEAAAAPAAIAAAAAAAIAAAAPAAMAAAABAAEAAAAPAAQAAAABAAIAAAAPAAUAAAAAAAEAAAAPAAYAAAAAAAIAAAAPAAcAAAAAAAEAAAAPAAgAAAAAAAEAAAAPAAkAAAAAAAIAAAAPAAoAAAAAAAEAAAAPAAsAAAAAAAIAAAAPAAwAAAAAAAEAAAAPAA0AAAAAAAEAAAAPAA4AAAAAAAEAAAAAAAEAAAABAAEAAAAJAAgAAAABAAEAAAAKAAMAAAAAAAAAAAAMAP//AAABAAIAAAALAP//AAABAAIAAAAKAP//AAABAAIAAAAJAP//AAABAAIAAAAIAP//AAABAAEAAAAGAP//AAABAAIAAAAFAP//AAABAAIAAAAEAP//AAABAAIAAAADAP//AAABAAIAAAACAP//AAABAAIAAAABAP//AAABAAIAAAAAAP//AAABAAIAAAAHAP//AAABAAEAAAD//w8AAAAAAAMAAAD//w0AAAABAAEAAAAAAAIAAAACAAEAAAANAP//AAABAAEAAAAPAP//AAABAAEAAAAIAAAAAAABAAEAAAAIAA4AAAABAAEAAAAIAAsAAAABAAEAAAAIAAoAAAABAAEAAAAIAAkAAAABAAEAAAAIAAYAAAABAAEAAAAIAAUAAAABAAEAAAAIAAMAAAABAAEAAAAHAA0AAAABAAEAAAAHAAsAAAABAAEAAAAHAAoAAAABAAEAAAAHAA4AAAABAAEAAAAHAAkAAAABAAEAAAAHAAgAAAABAAEAAAAHAAMAAAABAAEAAAAHAAAAAAABAAEAAAAJAAkAAAABAAEAAAAJAAUAAAABAAEAAAAEAAQAAAABAAEAAAAGAAsAAAABAAAAAAANAAAAAAABAAEAAAAMAAAAAAABAAEAAAALAAAAAAABAAEAAAAKAAAAAAABAAEAAAAJAAAAAAABAAEAAAAPAP7/AAABAAEAAAAOAP7/AAABAAEAAAANAP7/AAABAAEAAAD+/w0AAAABAAEAAAD+/w4AAAABAAEAAAD+/w8AAAAAAAMAAAAGAAAAAAABAAEAAAAFAAAAAAABAAEAAAAEAAAAAAABAAEAAAADAAAAAAABAAEAAAACAAAAAAABAAEAAAABAAAAAAABAAEAAAALAAUAAAABAAEAAAAIAAgAAAABAAEAAAALAAgAAAABAAEAAAALAAcAAAABAAEAAAALAAYAAAABAAEAAAAHAAUAAAABAAEAAAAGAAUAAAABAAEAAAAFAAUAAAABAAEAAAAEAAUAAAABAAEAAAAEAAMAAAABAAEAAAAEAAIAAAABAAEAAAAEAAEAAAABAAEAAAA=")
 tile_set = SubResource("TileSet_yqvxi")
-
-[node name="Destructible" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
-position = Vector2(116, 4)
 
 [node name="Destructible2" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
 position = Vector2(116, 12)
 
-[node name="Destructible3" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
-position = Vector2(116, 20)
+[node name="Destructible7" parent="TileMapLayer/Destructible2" instance=ExtResource("3_14uvx")]
+position = Vector2(-8, 0)
+
+[node name="Destructible8" parent="TileMapLayer/Destructible2" instance=ExtResource("3_14uvx")]
+position = Vector2(-16, 0)
+
+[node name="Destructible9" parent="TileMapLayer/Destructible2" instance=ExtResource("3_14uvx")]
+position = Vector2(-24, 0)
+
+[node name="Destructible10" parent="TileMapLayer/Destructible2" instance=ExtResource("3_14uvx")]
+position = Vector2(-32, 0)
+
+[node name="Destructible11" parent="TileMapLayer/Destructible2" instance=ExtResource("3_14uvx")]
+position = Vector2(-40, 0)
+
+[node name="Destructible13" parent="TileMapLayer/Destructible2" instance=ExtResource("3_14uvx")]
+position = Vector2(-48, 0)
+
+[node name="Destructible14" parent="TileMapLayer/Destructible2" instance=ExtResource("3_14uvx")]
+position = Vector2(-56, 0)
+
+[node name="Destructible15" parent="TileMapLayer/Destructible2" instance=ExtResource("3_14uvx")]
+position = Vector2(-64, 0)
+
+[node name="Destructible16" parent="TileMapLayer/Destructible2" instance=ExtResource("3_14uvx")]
+position = Vector2(-72, 0)
 
 [node name="Destructible4" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
-position = Vector2(116, 28)
+position = Vector2(116, 44)
 
-[node name="Destructible5" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
-position = Vector2(108, 28)
+[node name="Destructible5" parent="TileMapLayer/Destructible4" instance=ExtResource("3_14uvx")]
+position = Vector2(-8, 0)
 
-[node name="Destructible6" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
-position = Vector2(100, 28)
+[node name="Destructible6" parent="TileMapLayer/Destructible4" instance=ExtResource("3_14uvx")]
+position = Vector2(-16, 0)
 
-[node name="Destructible7" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
-position = Vector2(108, 4)
+[node name="Destructible14" parent="TileMapLayer/Destructible4" instance=ExtResource("3_14uvx")]
+position = Vector2(-24, 0)
 
-[node name="Destructible8" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
-position = Vector2(100, 4)
+[node name="Destructible3" parent="TileMapLayer/Destructible4" instance=ExtResource("3_14uvx")]
+position = Vector2(-32, 0)
+make_debris = true
 
-[node name="Destructible9" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
-position = Vector2(92, 4)
+[node name="Destructible4" parent="TileMapLayer/Destructible4" instance=ExtResource("3_14uvx")]
+position = Vector2(-32, -8)
+make_debris = true
 
-[node name="Destructible10" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
-position = Vector2(84, 4)
+[node name="Destructible15" parent="TileMapLayer/Destructible4" instance=ExtResource("3_14uvx")]
+position = Vector2(-40, 0)
 
-[node name="Destructible11" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
-position = Vector2(76, 4)
+[node name="Destructible16" parent="TileMapLayer/Destructible4" instance=ExtResource("3_14uvx")]
+position = Vector2(-48, 0)
 
-[node name="Destructible12" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
-position = Vector2(76, 12)
+[node name="Destructible17" parent="TileMapLayer/Destructible4" instance=ExtResource("3_14uvx")]
+position = Vector2(-56, 0)
 
-[node name="Destructible13" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
-position = Vector2(76, 20)
+[node name="Destructible18" parent="TileMapLayer/Destructible4" instance=ExtResource("3_14uvx")]
+position = Vector2(-64, 0)
 
-[node name="Destructible14" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
-position = Vector2(76, 28)
+[node name="Destructible19" parent="TileMapLayer/Destructible4" instance=ExtResource("3_14uvx")]
+position = Vector2(-72, 0)
 
-[node name="Destructible15" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
-position = Vector2(76, 36)
+[node name="Destructible20" parent="TileMapLayer/Destructible4" instance=ExtResource("3_14uvx")]
+position = Vector2(-80, 0)
 
-[node name="Destructible16" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
-position = Vector2(68, 36)
+[node name="Destructible21" parent="." instance=ExtResource("3_14uvx")]
+position = Vector2(52, 68)
 
-[node name="Destructible17" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
-position = Vector2(60, 36)
+[node name="Destructible22" parent="." instance=ExtResource("3_14uvx")]
+position = Vector2(44, 68)
 
-[node name="Destructible18" parent="TileMapLayer" instance=ExtResource("3_14uvx")]
-position = Vector2(52, 36)
+[node name="Destructible23" parent="." instance=ExtResource("3_14uvx")]
+position = Vector2(96, 116)
+
+[node name="Destructible24" parent="." instance=ExtResource("3_14uvx")]
+position = Vector2(96, 108)
 
 [node name="Coin3" parent="." instance=ExtResource("4_cb5al")]
-position = Vector2(101, 12)
+position = Vector2(100, 20)
 
 [node name="Coin5" parent="." instance=ExtResource("4_cb5al")]
-position = Vector2(39, 85)
+position = Vector2(30, 68)
 
 [node name="Coin6" parent="." instance=ExtResource("4_cb5al")]
-position = Vector2(80, 86)
+position = Vector2(68, 60)
 
 [node name="Coin7" parent="." instance=ExtResource("4_cb5al")]
-position = Vector2(15, 114)
+position = Vector2(59, 60)
 
 [node name="Coin8" parent="." instance=ExtResource("4_cb5al")]
+visible = false
 position = Vector2(51, 111)
 
 [node name="Coin9" parent="." instance=ExtResource("4_cb5al")]
-position = Vector2(99, 112)
-
-[node name="SeaMine4" parent="." instance=ExtResource("5_dhqo6")]
-position = Vector2(41, 120)
-height = 20.0
+position = Vector2(60, 100)
 
 [node name="SeaMine6" parent="." instance=ExtResource("5_dhqo6")]
-position = Vector2(81, 120)
-height = 20.0
+position = Vector2(48, 39)
+height = 14.0
+horrizontal_range = 2.0
+
+[node name="SeaMine6" parent="SeaMine6" instance=ExtResource("5_dhqo6")]
+position = Vector2(36, 81)
+height = 15.0
 
 [node name="SeaMine8" parent="." instance=ExtResource("5_dhqo6")]
-position = Vector2(105, 120)
+position = Vector2(111, 120)
 height = 60.0
-horrizontal_range = 13.0
-drift_speed = 0.3
+drift_speed = 0.05
 randomize_home = false
 randomize_speed = false
 
 [node name="LiftCollumn" parent="." instance=ExtResource("6_tq4vx")]
-position = Vector2(46, 121)
+z_index = -10
+position = Vector2(18, 120)
 height = 120
 
+[node name="LiftCollumn2" parent="." instance=ExtResource("6_tq4vx")]
+z_index = -10
+position = Vector2(110, 120)
+height = 100
+
 [node name="Box" parent="." instance=ExtResource("7_gcvq3")]
-position = Vector2(83, 60)
+position = Vector2(50, 57)
+
+[node name="TeleporterMine" parent="." instance=ExtResource("8_ih3c3")]
+position = Vector2(-8, 112)
+destination_level_file = "res://Levels/mine_level.tscn"
+custom_start_position = Vector2(112, 5)
+
+[node name="Chest" parent="." instance=ExtResource("8_qrqaq")]
+position = Vector2(47, 116)
+contents_count = 10
+
+[node name="ChestKey" parent="Chest" index="3"]
+position = Vector2(46, -83)
+
+[editable path="Chest"]

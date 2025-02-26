@@ -1,0 +1,86 @@
+[gd_scene load_steps=10 format=3 uid="uid://rrpkogmt3dh"]
+
+[ext_resource type="Script" path="res://Items/Chest/chest.gd" id="1_3kccp"]
+[ext_resource type="Texture2D" uid="uid://c0t4g66ub7ep1" path="res://Items/Chest/Chest.png" id="1_xd8xo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdnos"]
+size = Vector2(12, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7ei5"]
+atlas = ExtResource("1_xd8xo")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sj8rj"]
+atlas = ExtResource("1_xd8xo")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4yjd"]
+atlas = ExtResource("1_xd8xo")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7psrt"]
+atlas = ExtResource("1_xd8xo")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ae66e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7ei5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sj8rj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4yjd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7psrt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h0noa"]
+radius = 4.12311
+
+[node name="Chest" type="Node2D"]
+script = ExtResource("1_3kccp")
+contents_count = 50
+
+[node name="ChestArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChestArea"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_fdnos")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xd8xo")
+hframes = 6
+frame = 4
+metadata/_edit_lock_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="ChestKey" type="AnimatedSprite2D" parent="."]
+position = Vector2(12, -5)
+sprite_frames = SubResource("SpriteFrames_ae66e")
+autoplay = "default"
+frame_progress = 0.633141
+
+[node name="KeyArea" type="Area2D" parent="ChestKey"]
+collision_layer = 0
+collision_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChestKey/KeyArea"]
+shape = SubResource("CircleShape2D_h0noa")
+metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="ChestArea" to="." method="_on_chest_area_body_entered"]
+[connection signal="body_entered" from="ChestKey/KeyArea" to="." method="_on_key_area_body_entered"]

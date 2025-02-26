@@ -43,6 +43,10 @@ var state = WALK
 
 
 ## Runtime Functions ###########################################################
+func _ready() -> void:
+	if LevelSingleton.custom_start_position:
+		global_position = LevelSingleton.custom_start_position
+		LevelSingleton.custom_start_position = null
 
 func _physics_process(delta: float) -> void:
 	match state:
@@ -240,8 +244,13 @@ region = Rect2(1, 1, 5, 6)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
-collision_layer = 3
+collision_layer = 2
 script = SubResource("GDScript_wpfxc")
+move_speed_walk = null
+move_speed_sink = null
+jump_speed = null
+sink_rate = null
+float_rate = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0.5)

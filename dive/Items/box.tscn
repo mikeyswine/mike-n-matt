@@ -23,12 +23,16 @@ texture = ExtResource("1_utne4")
 shape = SubResource("RectangleShape2D_d8ky7")
 
 [node name="LeftSide" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftSide"]
 position = Vector2(-7, 4)
 shape = SubResource("RectangleShape2D_0b26c")
 
 [node name="RightSide" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightSide"]
 position = Vector2(7, 4)

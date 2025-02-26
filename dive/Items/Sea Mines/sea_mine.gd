@@ -12,8 +12,6 @@ extends Node2D
 @export var speed_rand_ammount: float = 0.01
 
 
-
-
 func _ready() -> void:
 	mine.position.y = -height
 	mine.horrizontal_range = horrizontal_range
