@@ -13,6 +13,7 @@ size = Vector2(3, 5)
 size = Vector2(3, 5)
 
 [node name="Debris" type="CharacterBody2D"]
+collision_layer = 33
 script = ExtResource("1_64cj5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
