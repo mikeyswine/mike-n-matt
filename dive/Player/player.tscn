@@ -29,6 +29,8 @@ script/source = "extends CharacterBody2D
 ## Is player floating upwards?
 var floating = false
 
+var high = false
+
 ## Coin Counter
 var coins = 0
 
@@ -54,6 +56,8 @@ func _physics_process(delta: float) -> void:
 			walk_state(delta)
 		FALL:
 			fall_state(delta)
+	if high:
+		velocity.x *= -1
 	move_and_slide()
 
 
@@ -138,6 +142,9 @@ func take_damage():
 	blood_splatter.emitting = true
 	# blood_splatter will queue_free upon completion.
 	add_child(blood_splatter)
+
+func get_high():
+	high = true
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dycd5"]
@@ -246,11 +253,6 @@ region = Rect2(1, 1, 5, 6)
 z_index = 1
 collision_layer = 2
 script = SubResource("GDScript_wpfxc")
-move_speed_walk = null
-move_speed_sink = null
-jump_speed = null
-sink_rate = null
-float_rate = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0.5)
