@@ -14,6 +14,7 @@ size = Vector2(6, 8)
 
 [node name="Box" type="CharacterBody2D"]
 scale = Vector2(0.5, 0.5)
+collision_layer = 33
 script = ExtResource("1_bse41")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

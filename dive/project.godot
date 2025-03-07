@@ -77,6 +77,7 @@ grab={
 2d_physics/layer_3="Character"
 2d_physics/layer_4="Hitboxes"
 2d_physics/layer_5="Destructible"
+2d_physics/layer_6="press_switch"
 
 [rendering]
 

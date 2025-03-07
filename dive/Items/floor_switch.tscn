@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://h3us3fwplggv"]
+
+[ext_resource type="Script" path="res://Items/floor_switch.gd" id="1_0kdii"]
+[ext_resource type="Texture2D" uid="uid://cajw6mo3em0im" path="res://Items/floor_switch.png" id="1_r7xvo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dotoe"]
+size = Vector2(20, 8)
+
+[node name="FloorSwitch" type="Area2D"]
+collision_mask = 32
+script = ExtResource("1_0kdii")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_r7xvo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.25, 0.25)
+shape = SubResource("RectangleShape2D_dotoe")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
