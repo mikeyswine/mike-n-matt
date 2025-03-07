@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://csuh5mbmwi6bs"]
+[gd_scene load_steps=16 format=4 uid="uid://csuh5mbmwi6bs"]
 
 [ext_resource type="PackedScene" uid="uid://ctmu7wrocro8i" path="res://Player/player.tscn" id="1_y4ngb"]
 [ext_resource type="Texture2D" uid="uid://1r2vox2wlxlj" path="res://Levels/Tileset1.png" id="2_rguj1"]
@@ -49,6 +49,12 @@ texture_region_size = Vector2i(8, 8)
 tile_size = Vector2i(8, 8)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_eotfg")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_74jks"]
+size = Vector2(20, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e6qsx"]
+size = Vector2(20, 50)
 
 [node name="World" type="Node2D"]
 
@@ -191,10 +197,16 @@ z_index = -10
 position = Vector2(18, 120)
 height = 120
 
+[node name="CollisionShape2D" parent="LiftCollumn" index="0"]
+position = Vector2(0, -60)
+shape = SubResource("RectangleShape2D_74jks")
+
 [node name="LiftCollumn2" parent="." instance=ExtResource("6_tq4vx")]
 z_index = -10
 position = Vector2(110, 120)
-height = 100
+
+[node name="CollisionShape2D" parent="LiftCollumn2" index="0"]
+shape = SubResource("RectangleShape2D_e6qsx")
 
 [node name="Box" parent="." instance=ExtResource("7_gcvq3")]
 position = Vector2(50, 57)
@@ -211,4 +223,6 @@ contents_count = 10
 [node name="ChestKey" parent="Chest" index="3"]
 position = Vector2(46, -83)
 
+[editable path="LiftCollumn"]
+[editable path="LiftCollumn2"]
 [editable path="Chest"]

@@ -1,11 +1,10 @@
-[gd_scene load_steps=18 format=4 uid="uid://b0bswn6ka2hqy"]
+[gd_scene load_steps=17 format=4 uid="uid://b0bswn6ka2hqy"]
 
 [ext_resource type="PackedScene" uid="uid://ctmu7wrocro8i" path="res://Player/player.tscn" id="2_lg1ic"]
 [ext_resource type="Texture2D" uid="uid://1r2vox2wlxlj" path="res://Levels/Tileset1.png" id="3_7lbvs"]
 [ext_resource type="PackedScene" uid="uid://c2qcdg7dun0pf" path="res://Items/coin.tscn" id="4_l8gnc"]
 [ext_resource type="Script" path="res://Items/pufferfish.gd" id="5_4tnb8"]
 [ext_resource type="Texture2D" uid="uid://yhypaudemdch" path="res://Items/Puffer.png" id="6_ivmt8"]
-[ext_resource type="Script" path="res://UI/high.gd" id="7_o1k3v"]
 [ext_resource type="PackedScene" uid="uid://culfd76g3gbha" path="res://Items/background_fish.tscn" id="10_t6ccp"]
 
 [sub_resource type="Gradient" id="Gradient_8qbv0"]
@@ -148,8 +147,3 @@ sprite_frames = SubResource("SpriteFrames_n730m")
 animation = &"unpuffed"
 autoplay = "unpuffed"
 frame_progress = 0.00709762
-
-[node name="Highness" type="CanvasModulate" parent="."]
-visible = false
-z_index = 100
-script = ExtResource("7_o1k3v")

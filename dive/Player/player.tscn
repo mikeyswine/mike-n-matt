@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ctmu7wrocro8i"]
+[gd_scene load_steps=16 format=3 uid="uid://ctmu7wrocro8i"]
 
 [ext_resource type="Texture2D" uid="uid://b06hkbjb2074r" path="res://Player/Diver_sm.png" id="1_tmfi8"]
 [ext_resource type="Texture2D" uid="uid://bvt1cuarkum4c" path="res://Items/coin.png" id="3_q5d3r"]
@@ -37,7 +37,8 @@ var coins = 0
 ## Enumerator to describe possible states
 enum {
 	WALK,
-	FALL
+	FALL,
+	ANCHOR
 }
 ## State Machine current state
 var state = WALK
@@ -123,6 +124,10 @@ func fall_state(delta):
 		## Stop
 		velocity.x = 0.0
 
+func anchor_state(delta):
+	#exit on jump or imact
+	pass
+
 
 func start_float():
 	floating = true
@@ -168,6 +173,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_gqgwl"]
+resource_name = "anchor"
+length = 0.500003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [10, 11, 12]
 }
 
 [sub_resource type="Animation" id="Animation_bpwvm"]
@@ -239,6 +260,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mkxw6"]
 _data = {
 "RESET": SubResource("Animation_dqptd"),
+"anchor": SubResource("Animation_gqgwl"),
 "fall": SubResource("Animation_bpwvm"),
 "idle": SubResource("Animation_pj108"),
 "land": SubResource("Animation_o3m8l"),
@@ -273,7 +295,7 @@ color_ramp = SubResource("Gradient_5ypwu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_tmfi8")
-hframes = 11
+hframes = 16
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
