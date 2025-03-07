@@ -154,8 +154,8 @@ position = Vector2(116, 31)
 position = Vector2(112, 26)
 
 [node name="LiftCollumn4" parent="." instance=ExtResource("6_s21k7")]
-position = Vector2(59, 9)
-height = 80
+position = Vector2(-16, 120)
+height = 10
 
 [node name="LiftCollumn3" parent="." instance=ExtResource("6_s21k7")]
 position = Vector2(18, 127)

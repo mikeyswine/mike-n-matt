@@ -1,8 +1,8 @@
-@tool
+#@tool
 ## This sets up file to be run in editor
 extends Area2D
 
-@onready var collision_shape_2d: CollisionShape2D = %CollisionShape2D
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 
 @export var height := 80 : set = set_height
@@ -12,8 +12,8 @@ func set_height(height_nuevo):
 	height = height_nuevo
 	## This causes code inside to run in editor!
 	## We also do it in a custom setter here, so the collision shape adjusts when you change the export var.
-	if Engine.is_editor_hint():
-			update_collider()
+	#if Engine.is_editor_hint():
+			#update_collider()
 	update_collider()
 
 

@@ -1,7 +1,7 @@
 class_name LiftCollumnSmall
 extends Area2D
 
-@export var disabled_height: int = 0
+@export var disabled_height: int = 2
 @export var small_height: int = 10
 @export var big_height: int = 60
 @export var disabled_particles_amount: int = 1
@@ -53,6 +53,6 @@ func deactivate():
 	cpu_particles_2d.lifetime = small_particles_lifetime
 
 func disable():
-	#update_collider(disabled_height)
+	update_collider(disabled_height)
 	cpu_particles_2d.amount = disabled_particles_amount
 	cpu_particles_2d.lifetime = disabled_particles_lifetime

@@ -23,9 +23,10 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func _on_body_exited(body: Node2D) -> void:
-	deactivate_tethered_object()
-	if tethered_object_secondary:
-		tethered_object_secondary.deactivate()
+	if not get_overlapping_bodies():
+		deactivate_tethered_object()
+		if tethered_object_secondary:
+			tethered_object_secondary.deactivate()
 	
 	
 func activate_tethered_object():

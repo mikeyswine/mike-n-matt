@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" path="res://Items/lift_collumn_small.gd" id="1_t1fvn"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d4vij"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7onyf"]
+resource_local_to_scene = true
 size = Vector2(20, 6)
 
 [sub_resource type="Curve" id="Curve_8e3vr"]
@@ -23,7 +24,7 @@ script = ExtResource("1_t1fvn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
-shape = SubResource("RectangleShape2D_d4vij")
+shape = SubResource("RectangleShape2D_7onyf")
 debug_color = Color(0, 0.495799, 0.959887, 0.419608)
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
