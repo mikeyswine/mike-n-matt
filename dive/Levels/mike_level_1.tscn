@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://byjhdya15x08"]
+[gd_scene load_steps=15 format=4 uid="uid://byjhdya15x08"]
 
 [ext_resource type="PackedScene" uid="uid://ctmu7wrocro8i" path="res://Player/player.tscn" id="1_6povc"]
 [ext_resource type="Texture2D" uid="uid://1r2vox2wlxlj" path="res://Levels/Tileset1.png" id="2_n47ne"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://cvlxi03yfituk" path="res://Items/Sea Mines/sea_mine.tscn" id="5_jqqmk"]
 [ext_resource type="PackedScene" uid="uid://dphic4krr41an" path="res://Items/lift_collumn.tscn" id="6_s21k7"]
 [ext_resource type="PackedScene" uid="uid://kuy2qb4hg4mh" path="res://Items/teleporter.tscn" id="7_oj3s7"]
+[ext_resource type="PackedScene" uid="uid://cgdcc7uvf8nrc" path="res://Items/lift_collumn_small.tscn" id="8_5la4u"]
+[ext_resource type="PackedScene" uid="uid://h3us3fwplggv" path="res://Items/floor_switch.tscn" id="9_d4w21"]
+[ext_resource type="PackedScene" uid="uid://dkhhrkppbc3iv" path="res://Items/box.tscn" id="10_n161r"]
 
 [sub_resource type="Gradient" id="Gradient_8qbv0"]
 colors = PackedColorArray(0.0495, 0.416533, 0.55, 1, 0.63, 1, 0.8705, 1)
@@ -150,20 +153,35 @@ position = Vector2(116, 31)
 [node name="Coin8" parent="." instance=ExtResource("4_ncn6d")]
 position = Vector2(112, 26)
 
-[node name="LiftCollumn2" parent="." instance=ExtResource("6_s21k7")]
-position = Vector2(46, 128)
-height = 80
-
 [node name="LiftCollumn4" parent="." instance=ExtResource("6_s21k7")]
-position = Vector2(59, 9)
-height = 80
+position = Vector2(-16, 120)
+height = 10
 
 [node name="LiftCollumn3" parent="." instance=ExtResource("6_s21k7")]
 position = Vector2(18, 127)
-height = 80
+height = 40
 
 [node name="SeaMine" parent="." instance=ExtResource("5_jqqmk")]
 position = Vector2(90, 80)
 
 [node name="Teleporter" parent="." instance=ExtResource("7_oj3s7")]
 position = Vector2(113, 123)
+
+[node name="LiftCollumnSmall2" parent="." instance=ExtResource("8_5la4u")]
+position = Vector2(80, 120)
+
+[node name="LiftCollumnSmall1" parent="." instance=ExtResource("8_5la4u")]
+position = Vector2(52, 120)
+
+[node name="FloorSwitch1" parent="." node_paths=PackedStringArray("tethered_object", "tethered_object_secondary") instance=ExtResource("9_d4w21")]
+position = Vector2(80, 120)
+tethered_object = NodePath("../LiftCollumnSmall1")
+tethered_object_secondary = NodePath("../LiftCollumnSmall2")
+
+[node name="FloorSwitch2" parent="." node_paths=PackedStringArray("tethered_object", "tethered_object_secondary") instance=ExtResource("9_d4w21")]
+position = Vector2(52, 120)
+tethered_object = NodePath("../LiftCollumnSmall2")
+tethered_object_secondary = NodePath("../LiftCollumnSmall1")
+
+[node name="Box" parent="." instance=ExtResource("10_n161r")]
+position = Vector2(64, 112)
