@@ -6,6 +6,8 @@
 size = Vector2(4, 3)
 
 [node name="Pearl" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_uvrck")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

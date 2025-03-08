@@ -7,7 +7,7 @@ const MINE_EXPLOSION = preload("res://Items/Sea Mines/mine_explosion.tscn")
 @onready var release_sound: AudioStreamPlayer = $"../ReleaseSound"
 
 
-var horrizontal_range:float #= 4.0
+var horrizontal_range:float = 3.0
 var drift_speed:float# = 0.03
 var float_rate:float = 1.0
 var randomize_home: bool = true

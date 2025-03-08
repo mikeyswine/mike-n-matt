@@ -1,4 +1,4 @@
-#@tool
+@tool
 ## This sets up file to be run in editor
 extends Area2D
 
@@ -10,19 +10,17 @@ extends Area2D
 ## Custom Setter for height variable.
 func set_height(height_nuevo):
 	height = height_nuevo
-	## This causes code inside to run in editor!
-	## We also do it in a custom setter here, so the collision shape adjusts when you change the export var.
-	#if Engine.is_editor_hint():
-			#update_collider()
 	update_collider()
 
 
 func _ready() -> void:
+	update_collider()
 	## This causes code inside to run in editor!
 	## I run it once in ready so that the height is initially adjusted in the editor
 	## The standard approach is to toss it in _process(), but then it'll execute every step forever, needlessly
 	if Engine.is_editor_hint():
 			update_collider()
+
 
 
 ## Adjust physical collider according to the height variable.

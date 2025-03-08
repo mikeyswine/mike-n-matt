@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://ctmu7wrocro8i"]
+[gd_scene load_steps=20 format=3 uid="uid://ctmu7wrocro8i"]
 
 [ext_resource type="Texture2D" uid="uid://b06hkbjb2074r" path="res://Player/Diver_sm.png" id="1_tmfi8"]
+[ext_resource type="AudioStream" uid="uid://55ot2o7pf8ev" path="res://Player/anchorstart.wav" id="2_hcufs"]
 [ext_resource type="Texture2D" uid="uid://bvt1cuarkum4c" path="res://Items/coin.png" id="3_q5d3r"]
 [ext_resource type="FontFile" uid="uid://c2aitmlu74nm7" path="res://UI/Kenney Mini.ttf" id="4_b4135"]
-[ext_resource type="AudioStream" uid="uid://bandtddvi07ng" path="res://Items/pickupCoin.wav" id="5_ahh53"]
+[ext_resource type="Texture2D" uid="uid://djqhnykyrt42" path="res://Items/DustCloud.png" id="5_omk4e"]
 
 [sub_resource type="GDScript" id="GDScript_wpfxc"]
 script/source = "extends CharacterBody2D
@@ -13,7 +14,8 @@ script/source = "extends CharacterBody2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var player_coins: Label = %CoinsLabel
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
-
+const PICKUP_COIN = preload(\"res://Items/pickupCoin.wav\")
+const ANCHOR_CLANG = preload(\"res://Player/clang - Marker #10.wav\")
 
 @export_category(\"Movement\")
 ## Grounded horizontal speed
@@ -28,17 +30,23 @@ script/source = "extends CharacterBody2D
 @export var float_rate: float = 10.0
 ## Is player floating upwards?
 var floating = false
+## Speed at which player drops during an anchor downstrike attack
+@export var anchor_rate: float = 1.0
+## Has anchor completed its warmup?
+@export var anchor_armed = false
+
+var death_timer:float = 5.0
+
 
 var high = false
 
-## Coin Counter
-var coins = 0
 
 ## Enumerator to describe possible states
 enum {
 	WALK,
 	FALL,
-	ANCHOR
+	ANCHOR,
+	DEAD
 }
 ## State Machine current state
 var state = WALK
@@ -57,9 +65,16 @@ func _physics_process(delta: float) -> void:
 			walk_state(delta)
 		FALL:
 			fall_state(delta)
-	if high:
-		velocity.x *= -1
-	move_and_slide()
+		ANCHOR:
+			anchor_state(delta)
+		DEAD:
+			dead_state(delta)
+			
+	if Input.is_action_just_pressed(\"restart\"):
+		get_tree().call_deferred(\"reload_current_scene\")
+	## TODO This used to handle being high.  Refactor if you wanna move forward with that feature.
+	#if high:
+		#velocity.x *= -1
 
 
 
@@ -89,6 +104,8 @@ func walk_state(delta):
 		## Stop
 		velocity.x = 0.0
 		animation_player.play(\"idle\")
+	
+	move_and_slide()
 
 
 func fall_state(delta):
@@ -100,7 +117,7 @@ func fall_state(delta):
 	
 	## Apply Gravity
 	if floating:
-		velocity += Vector2(0,-float_rate) * delta 
+		velocity += Vector2(0,-float_rate) * delta
 	else:
 		velocity += Vector2(0,sink_rate) * delta 
 	#Multiplied by delta because this is an acceleration.
@@ -108,6 +125,11 @@ func fall_state(delta):
 	
 	## Hold Down to speed up your fall
 	if Input.is_action_just_pressed(\"down\"):
+		if PlayerSingleton.has_anchor:
+			velocity=Vector2.ZERO
+			state = ANCHOR
+			animation_player.play(\"anchor\")
+			return
 		velocity += Vector2(0,sink_rate) * delta 
 	
 	## Handle Fall Movement
@@ -123,11 +145,51 @@ func fall_state(delta):
 	else:
 		## Stop
 		velocity.x = 0.0
+	
+	move_and_slide()
+
+
 
 func anchor_state(delta):
-	#exit on jump or imact
-	pass
+	if is_on_floor():
+		state = WALK
+		anchor_armed = false
+		return
+	velocity.x = 0.0
+	if anchor_armed:
+		velocity.y = anchor_rate
+	var collision = move_and_collide(velocity)
+	if collision:
+		var body = collision.get_collider()
+		if anchor_armed:
+			if body.has_method(\"take_damage\"): body.take_damage()
+			audio_stream_player_2d.stream = ANCHOR_CLANG
+			audio_stream_player_2d.play()
+			$DustClouds.emitting = true
+			anchor_armed = false
+			animation_player.play(\"fall\")
+			state = FALL
+		move_and_slide()
 
+
+func dead_state(delta):
+	if (Input.is_action_just_pressed(\"up\") or 
+	Input.is_action_just_pressed(\"down\") or 
+	Input.is_action_just_pressed(\"left\") or 
+	Input.is_action_just_pressed(\"right\") or 
+	Input.is_action_just_pressed(\"jump\")):
+		get_tree().call_deferred(\"reload_current_scene\")
+		#get_tree().reload_current_scene()
+		return
+	death_timer -= delta
+	if death_timer <= 0.0:
+		get_tree().call_deferred(\"reload_current_scene\")
+		return
+	velocity.y -= float_rate * delta
+	velocity.x = move_toward(velocity.x,0.0,1.0*delta)
+	move_and_slide()
+	## Throwing an error on level reset for some reason.
+	
 
 func start_float():
 	floating = true
@@ -138,8 +200,9 @@ func stop_float():
 
 ## Custom Functions ############################################################
 func increment_coins(amount=1):
-	coins += amount
-	player_coins.text = str(coins)
+	PlayerSingleton.coins += amount
+	player_coins.text = str(PlayerSingleton.coins)
+	audio_stream_player_2d.stream = PICKUP_COIN
 	audio_stream_player_2d.play()
 	
 func take_damage():
@@ -150,6 +213,12 @@ func take_damage():
 
 func get_high():
 	high = true
+
+func die():
+	animation_player.play(\"death\")
+	## Unset Player Collision Layer so that player won't trigger world objects anymore.
+	set_collision_layer_value(2,false)
+	state = DEAD
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dycd5"]
@@ -174,10 +243,34 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:anchor_armed")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_gqgwl"]
 resource_name = "anchor"
-length = 0.500003
+length = 0.300003
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -185,10 +278,64 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.266667),
+"times": PackedFloat32Array(0, 0.0666667, 0.266667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [10, 11, 12]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_hcufs")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:anchor_armed")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_lqtwg"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
 }
 
 [sub_resource type="Animation" id="Animation_bpwvm"]
@@ -261,6 +408,7 @@ tracks/0/keys = {
 _data = {
 "RESET": SubResource("Animation_dqptd"),
 "anchor": SubResource("Animation_gqgwl"),
+"death": SubResource("Animation_lqtwg"),
 "fall": SubResource("Animation_bpwvm"),
 "idle": SubResource("Animation_pj108"),
 "land": SubResource("Animation_o3m8l"),
@@ -271,8 +419,17 @@ _data = {
 atlas = ExtResource("3_q5d3r")
 region = Rect2(1, 1, 5, 6)
 
+[sub_resource type="Curve" id="Curve_q4f0e"]
+_data = [Vector2(0, 0.388813), 0.0, 0.0, 0, 0, Vector2(0.808, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_bfln2"]
+offsets = PackedFloat32Array(0, 0.578125, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.729412, 1, 1, 1, 0)
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
+disable_mode = 2
 collision_layer = 34
 script = SubResource("GDScript_wpfxc")
 
@@ -338,4 +495,23 @@ text = "0"
 horizontal_alignment = 2
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_ahh53")
+
+[node name="DustClouds" type="CPUParticles2D" parent="."]
+position = Vector2(1, 4)
+emitting = false
+amount = 6
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.9
+texture = ExtResource("5_omk4e")
+emission_shape = 3
+emission_rect_extents = Vector2(2, 1)
+direction = Vector2(0, -1)
+spread = 90.0
+gravity = Vector2(0, -1)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+scale_amount_min = 0.25
+scale_amount_curve = SubResource("Curve_q4f0e")
+color = Color(1, 0.945098, 0.772549, 1)
+color_ramp = SubResource("Gradient_bfln2")

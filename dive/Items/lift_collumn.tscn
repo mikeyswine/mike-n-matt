@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Items/lift_collumn.gd" id="1_mw64u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d4vij"]
+resource_local_to_scene = true
 size = Vector2(20, 10)
 
 [sub_resource type="Curve" id="Curve_8e3vr"]

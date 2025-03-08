@@ -12,3 +12,5 @@ func _on_area_entered(area: Area2D) -> void:
 func attempt_damage(body):
 	if body.has_method("take_damage"):
 		body.take_damage()
+	if body.has_method("die"):
+		body.die()
