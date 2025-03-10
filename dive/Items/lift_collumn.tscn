@@ -4,7 +4,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d4vij"]
 resource_local_to_scene = true
-size = Vector2(20, 10)
+size = Vector2(20, 50)
 
 [sub_resource type="Curve" id="Curve_8e3vr"]
 min_value = 1.0

@@ -11,6 +11,8 @@ extends Node2D
 @export var randomize_speed: bool = true
 @export var speed_rand_ammount: float = 0.01
 
+var can_explode_by_switch = true
+
 ##TODO This is bugging out in editor;  seems like child isn't ready yet.  Figure out how to fix it.
 ## I thought children ready before parents normally?  Maybe call it in child's ready function,
 ## But that would also break if parent isn't ready?  Could handshake between them, but that sucks.
@@ -29,6 +31,15 @@ func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		mine.position.y = -height
 		%Line2D.set_point_position(1,mine.position)
+		
+func activate():
+	if can_explode_by_switch:
+		can_explode_by_switch = false
+		mine.is_tethered = false
+		mine.explode()
+		
+func deactivate():
+	pass
 
 
 #func _draw() -> void:
