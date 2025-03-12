@@ -30,13 +30,14 @@ const ANCHOR_CLANG = preload(\"res://Player/clang - Marker #10.wav\")
 @export var float_rate: float = 10.0
 ## Is player floating upwards?
 var floating = false
+
+
 ## Speed at which player drops during an anchor downstrike attack
 @export var anchor_rate: float = 1.0
 ## Has anchor completed its warmup?
 @export var anchor_armed = false
 
 var death_timer:float = 5.0
-
 
 var high = false
 
@@ -155,21 +156,21 @@ func anchor_state(delta):
 		state = WALK
 		anchor_armed = false
 		return
+		
 	velocity.x = 0.0
 	if anchor_armed:
 		velocity.y = anchor_rate
-	var collision = move_and_collide(velocity)
-	if collision:
-		var body = collision.get_collider()
-		if anchor_armed:
+		var collision = move_and_collide(velocity)
+		if collision:
+			var body = collision.get_collider()
 			if body.has_method(\"take_damage\"): body.take_damage()
 			audio_stream_player_2d.stream = ANCHOR_CLANG
 			audio_stream_player_2d.play()
 			$DustClouds.emitting = true
 			anchor_armed = false
-			animation_player.play(\"fall\")
-			state = FALL
-		move_and_slide()
+			animation_player.play(\"walk\")
+			state = WALK
+			#move_and_slide()
 
 
 func dead_state(delta):
@@ -305,10 +306,10 @@ tracks/2/path = NodePath(".:anchor_armed")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_lqtwg"]
