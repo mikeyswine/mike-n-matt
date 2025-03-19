@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctsotuehide0s"]
+
+[ext_resource type="Script" path="res://Components/json_read_writer.gd" id="1_b53yd"]
+
+[node name="JsonReadWriter" type="Node2D"]
+script = ExtResource("1_b53yd")
