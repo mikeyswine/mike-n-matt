@@ -114,7 +114,7 @@ _data = {
 "pickup": SubResource("Animation_oxga2")
 }
 
-[node name="AnchorPickup" type="Area2D"]
+[node name="AnchorPickup" type="Area2D" groups=["persistent"]]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_hgjkw")

@@ -12,34 +12,34 @@ var direction = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+    pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if ray_cast_right.is_colliding():
-		if ray_cast_right.get_collider().get_name() != "Player":
-			direction = -1
-			animated_sprite_2d.flip_h = false
-	if ray_cast_left.is_colliding():
-		if ray_cast_left.get_collider().get_name() != "Player":
-			direction = 1
-			animated_sprite_2d.flip_h = true
-	
-	position.x += direction * SPEED * delta
+    if ray_cast_right.is_colliding():
+        if ray_cast_right.get_collider().get_name() != "Player":
+            direction = -1
+            animated_sprite_2d.flip_h = false
+    if ray_cast_left.is_colliding():
+        if ray_cast_left.get_collider().get_name() != "Player":
+            direction = 1
+            animated_sprite_2d.flip_h = true
+    
+    position.x += direction * SPEED * delta
 
 
 # Not used. From when Enemy was Node and contained an Area2D Node.
 #func _on_area_2d_body_entered(body: Node2D) -> void:
-	#if body.name == "Player":
-		#body.queue_free()
+    #if body.name == "Player":
+        #body.queue_free()
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.name == 'Player':
-		body.take_damage()
-	
+    if body.name == 'Player':
+        body.take_damage()
+    
 
 func take_damage():
-	print("DEAD FEESH")
-	queue_free()
+    print("DEAD FEESH")
+    queue_free()

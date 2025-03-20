@@ -3,26 +3,47 @@
 //          TODO          //
 ////////////////////////////
 
+Teleporter Bug
+
+Double Not-Jump
+
+Dynamic Permanent Coin/Pickup Tracking
+	Object should be able to register itself with a singleton automatically.
+
+Coin currency- what is it used for?
+	Upgrade abilities?
+	Consumables
+		invulnerability? attack? movement? fast-travel?
+	Keys
+	Lives/Restarts/etc.
+
+Pause Menu
+
+SHARK
+	Smells blood and KILLS you.
+
+Flounder
+	Rideable!
+
+Smooth Pixel Camera System
 
 
-Mike Homework:
-	Handle Proliferating Blood Paricle Object
-	Giant Clam w/ pearl
-
-Matt Homework:
-	Clean Up Player Script
-		Done.  CHanged to state machine, added a couple new features.
-
-
-
-Soon:
-	Pause/Restart Screen
-
-Later:
-	Smooth Pixel Camera System
-
-
-
-Brainstorming:
-	Weights modify sink speed mechaninc?
-	Down Spear attack?
+Fun Stuff That should be included that we don't necc. have game concepts for:
+	-Dive Boat
+	-Jellyfish
+	-Sunfish
+	-Crab and/or lobster
+	-Hermit Crab
+	-Seahorse
+	-Dolphin
+	-Eels
+	-Stingray
+	-Davey Jones
+	-Giant Squid
+	-Hula Girls
+	-RUM!!!!!
+	-Merfolk?
+	-Narwhal
+	-Beluga
+	-Baracuda
+	-Anglerfish

@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=4 uid="uid://bwxpu1cqkj258"]
+[gd_scene load_steps=17 format=4 uid="uid://bwxpu1cqkj258"]
 
 [ext_resource type="PackedScene" uid="uid://ctmu7wrocro8i" path="res://Player/player.tscn" id="1_ixmd7"]
 [ext_resource type="Script" path="res://Levels/world.gd" id="1_tye4h"]
 [ext_resource type="Texture2D" uid="uid://1r2vox2wlxlj" path="res://Levels/Tileset1.png" id="2_6hmt5"]
+[ext_resource type="PackedScene" uid="uid://ctsotuehide0s" path="res://Components/json_read_writer.tscn" id="2_qjjs3"]
 [ext_resource type="PackedScene" uid="uid://c2qcdg7dun0pf" path="res://Items/coin.tscn" id="3_k514w"]
 [ext_resource type="PackedScene" uid="uid://bqlhue63d132e" path="res://Characters/enemy.tscn" id="4_jdjuy"]
 [ext_resource type="PackedScene" uid="uid://dphic4krr41an" path="res://Items/lift_collumn.tscn" id="6_wp7yt"]
@@ -55,6 +56,8 @@ sources/0 = SubResource("TileSetAtlasSource_eotfg")
 [node name="World" type="Node2D"]
 script = ExtResource("1_tye4h")
 metadata/_edit_lock_ = true
+
+[node name="JsonReadWriter" parent="." instance=ExtResource("2_qjjs3")]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -100
