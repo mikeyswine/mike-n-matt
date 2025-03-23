@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://dwvjnlc1410ku"]
+
+[ext_resource type="Script" uid="uid://dcxh04hfplvq6" path="res://Player/Weapons/scythe_pickup.gd" id="1_g5dur"]
+[ext_resource type="Texture2D" uid="uid://b78baqiek514c" path="res://Player/Weapons/scythe.svg" id="1_oa7dv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g5dur"]
+size = Vector2(100, 90)
+
+[sub_resource type="Animation" id="Animation_1daok"]
+resource_name = "float"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(10, -47), Vector2(10, -52)]
+}
+
+[sub_resource type="Animation" id="Animation_xxara"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, -47)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gvr48"]
+_data = {
+&"RESET": SubResource("Animation_xxara"),
+&"float": SubResource("Animation_1daok")
+}
+
+[node name="Scythe Pickup" type="Area2D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_g5dur")
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.192157)
+position = Vector2(10, 19)
+scale = Vector2(1, 0.1)
+texture = ExtResource("1_oa7dv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(10, -47)
+texture = ExtResource("1_oa7dv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_g5dur")
+debug_color = Color(0, 0.6, 0.701961, 0.137255)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_gvr48")
+}
+autoplay = "float"

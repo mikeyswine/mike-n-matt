@@ -1,11 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0eu1i6lwku2b"]
+[gd_scene load_steps=5 format=3 uid="uid://c0eu1i6lwku2b"]
 
 [ext_resource type="PackedScene" uid="uid://da8owc1tf6iyy" path="res://Map/terrain_square.tscn" id="1_otu5x"]
 [ext_resource type="PackedScene" uid="uid://b7gevtn5qptsv" path="res://Player/player.tscn" id="2_dem7s"]
+[ext_resource type="PackedScene" uid="uid://1ghsj83k4lht" path="res://Plants/grass.tscn" id="3_pa6j6"]
+[ext_resource type="PackedScene" uid="uid://bd14e486dr4th" path="res://Plants/pepper_plant.tscn" id="4_4dvsh"]
 
 [node name="World" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_dem7s")]
+z_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position_smoothing_enabled = true
@@ -131,3 +135,80 @@ position = Vector2(800, 0)
 
 [node name="TerrainSquare10" parent="TerrainSquare4" instance=ExtResource("1_otu5x")]
 position = Vector2(900, 0)
+
+[node name="TerrainSquare5" parent="." instance=ExtResource("1_otu5x")]
+position = Vector2(1, 320)
+
+[node name="TerrainSquare2" parent="TerrainSquare5" instance=ExtResource("1_otu5x")]
+position = Vector2(100, 0)
+
+[node name="TerrainSquare3" parent="TerrainSquare5" instance=ExtResource("1_otu5x")]
+position = Vector2(200, 0)
+
+[node name="TerrainSquare4" parent="TerrainSquare5" instance=ExtResource("1_otu5x")]
+position = Vector2(300, 0)
+
+[node name="TerrainSquare5" parent="TerrainSquare5" instance=ExtResource("1_otu5x")]
+position = Vector2(400, 0)
+
+[node name="TerrainSquare6" parent="TerrainSquare5" instance=ExtResource("1_otu5x")]
+position = Vector2(500, 0)
+
+[node name="TerrainSquare7" parent="TerrainSquare5" instance=ExtResource("1_otu5x")]
+position = Vector2(600, 0)
+
+[node name="TerrainSquare8" parent="TerrainSquare5" instance=ExtResource("1_otu5x")]
+position = Vector2(700, 0)
+
+[node name="TerrainSquare9" parent="TerrainSquare5" instance=ExtResource("1_otu5x")]
+position = Vector2(800, 0)
+
+[node name="TerrainSquare10" parent="TerrainSquare5" instance=ExtResource("1_otu5x")]
+position = Vector2(900, 0)
+
+[node name="TerrainSquare6" parent="." instance=ExtResource("1_otu5x")]
+position = Vector2(1, 400)
+
+[node name="TerrainSquare2" parent="TerrainSquare6" instance=ExtResource("1_otu5x")]
+position = Vector2(100, 0)
+
+[node name="TerrainSquare3" parent="TerrainSquare6" instance=ExtResource("1_otu5x")]
+position = Vector2(200, 0)
+
+[node name="TerrainSquare4" parent="TerrainSquare6" instance=ExtResource("1_otu5x")]
+position = Vector2(300, 0)
+
+[node name="TerrainSquare5" parent="TerrainSquare6" instance=ExtResource("1_otu5x")]
+position = Vector2(400, 0)
+
+[node name="TerrainSquare6" parent="TerrainSquare6" instance=ExtResource("1_otu5x")]
+position = Vector2(500, 0)
+
+[node name="TerrainSquare7" parent="TerrainSquare6" instance=ExtResource("1_otu5x")]
+position = Vector2(600, 0)
+
+[node name="TerrainSquare8" parent="TerrainSquare6" instance=ExtResource("1_otu5x")]
+position = Vector2(700, 0)
+
+[node name="TerrainSquare9" parent="TerrainSquare6" instance=ExtResource("1_otu5x")]
+position = Vector2(800, 0)
+
+[node name="TerrainSquare10" parent="TerrainSquare6" instance=ExtResource("1_otu5x")]
+position = Vector2(900, 0)
+
+[node name="Grass" parent="." instance=ExtResource("3_pa6j6")]
+
+[node name="Grass2" parent="." instance=ExtResource("3_pa6j6")]
+position = Vector2(100, 0)
+
+[node name="Grass3" parent="." instance=ExtResource("3_pa6j6")]
+position = Vector2(200, 0)
+
+[node name="PepperPlant" parent="." instance=ExtResource("4_4dvsh")]
+position = Vector2(500, 80)
+
+[node name="PepperPlant2" parent="." instance=ExtResource("4_4dvsh")]
+position = Vector2(600, 80)
+
+[node name="PepperPlant3" parent="." instance=ExtResource("4_4dvsh")]
+position = Vector2(700, 80)
