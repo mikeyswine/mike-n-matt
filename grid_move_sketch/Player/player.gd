@@ -81,7 +81,7 @@ func attempt_move(new_direction):
 	if my_weapon:
 		my_weapon.set_direction(new_direction)
 	var move_target = attempt_raycast.get_collider()
-	print(move_target)
+	#print(move_target)
 	if !move_target: 
 		print("no terrain")
 		return false
