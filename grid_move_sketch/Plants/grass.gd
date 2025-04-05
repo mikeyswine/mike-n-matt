@@ -52,7 +52,7 @@ func _on_cpu_particles_2d_finished() -> void:
 	pass
 	#queue_free()
 
-func _time_elapsed(_new_time):
+func _time_elapsed():
 	growth_counter += 1
 	if growth_counter >= 5:
 		growth_counter = 0

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-var speed:= 13.0
-var accel:= 10.0
+var speed:= 250.0
+var accel:= 150.0
 var overripe:= false
 
 func _ready() -> void:
@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	speed += accel * delta
-	velocity = Vector2(speed,0.0).rotated(rotation)
+	velocity = Vector2(speed*delta,0.0).rotated(rotation)
 	var collision = move_and_collide(velocity)
 
 func get_stored():

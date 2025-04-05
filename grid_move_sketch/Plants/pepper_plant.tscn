@@ -1,17 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bd14e486dr4th"]
+[gd_scene load_steps=4 format=3 uid="uid://bd14e486dr4th"]
 
 [ext_resource type="Script" uid="uid://dvy8ufbgdp1sp" path="res://Plants/pepper_plant.gd" id="1_rkdws"]
 [ext_resource type="Texture2D" uid="uid://boctrf0wmhl38" path="res://Plants/Pepper.png" id="1_sspxd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ks8n1"]
 size = Vector2(100, 80)
-
-[sub_resource type="Gradient" id="Gradient_rkdws"]
-offsets = PackedFloat32Array(0.74, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="Gradient" id="Gradient_hilkw"]
-colors = PackedColorArray(0.556863, 0.545098, 0.266667, 1, 0.294118, 0.329412, 0.176471, 1)
 
 [node name="PepperPlant" type="Area2D"]
 collision_layer = 4
@@ -27,29 +20,3 @@ position = Vector2(0, -43)
 scale = Vector2(3, 3)
 texture = ExtResource("1_sspxd")
 hframes = 11
-
-[node name="DeathParticles" type="CPUParticles2D" parent="."]
-z_index = 10
-position = Vector2(0, -19)
-emitting = false
-amount = 24
-lifetime = 0.8
-one_shot = true
-explosiveness = 0.8
-emission_shape = 3
-emission_rect_extents = Vector2(20, 50)
-direction = Vector2(0, -2)
-gravity = Vector2(0, 200)
-initial_velocity_min = 150.0
-initial_velocity_max = 250.0
-angular_velocity_max = 60.0
-angle_max = 45.0
-scale_amount_min = 4.0
-scale_amount_max = 4.0
-split_scale = true
-scale_curve_x = null
-scale_curve_y = null
-color_ramp = SubResource("Gradient_rkdws")
-color_initial_ramp = SubResource("Gradient_hilkw")
-
-[connection signal="finished" from="DeathParticles" to="." method="_on_death_particles_finished"]

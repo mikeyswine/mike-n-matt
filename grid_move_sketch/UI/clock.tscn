@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bxs3tsfbo4sie"]
 
-[ext_resource type="Script" uid="uid://dlpli70422crx" path="res://Levels/clock.gd" id="1_mojwd"]
+[ext_resource type="Script" uid="uid://dlpli70422crx" path="res://Map/clock.gd" id="1_mojwd"]
 
 [node name="Clock" type="Node"]
 script = ExtResource("1_mojwd")

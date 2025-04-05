@@ -8,6 +8,8 @@ extends Area2D
 
 @onready var use_raycast: RayCast2D = $UseRaycast
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 @onready var player: Area2D = $"."
 @onready var popup: Label = $Popup
 
@@ -23,6 +25,14 @@ enum{
 }
 var facing = UP
 
+enum{
+	IDLE,
+	MOVING,
+	USING
+}
+
+var state = IDLE
+
 var current_location: Node2D
 
 
@@ -33,20 +43,32 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-		if Input.is_action_just_pressed("action"):
-			use()
-		if Input.is_action_just_pressed("up"):
-			attempt_move(UP)
-		if Input.is_action_just_pressed("down"):
-			attempt_move(DOWN)
-		if Input.is_action_just_pressed("left"):
-			attempt_move(LEFT)
-		if Input.is_action_just_pressed("right"):
-			attempt_move(RIGHT)
-		
-		if current_location:
+	match state:
+		IDLE:
+			if Input.is_action_just_pressed("action"):
+				use()
+			if Input.is_action_just_pressed("up"):
+				attempt_move(UP)
+			if Input.is_action_just_pressed("down"):
+				attempt_move(DOWN)
+			if Input.is_action_just_pressed("left"):
+				attempt_move(LEFT)
+			if Input.is_action_just_pressed("right"):
+				attempt_move(RIGHT)
+		MOVING:
+			## Check for complete move
 			if global_position == current_location.global_position:
-				get_info()
+				animation_player.play("idle")
+				state = IDLE
+				
+			if Input.is_action_just_pressed("action"):
+				use()
+		USING:
+			pass
+		
+		#if current_location:
+			#if global_position == current_location.global_position:
+				#get_info()
 
 
 func attempt_move(new_direction):
@@ -80,6 +102,9 @@ func attempt_move(new_direction):
 	#height_tween.set_ease(Tween.EASE_IN)
 	#height_tween.set_trans(Tween.TRANS_BACK)
 	#height_tween.tween_property($Sprite2D,"scale:y",0.6,move_time)
+	
+	state = MOVING
+	animation_player.play("move")
 	
 	if current_location:
 		current_location.occupied = null
