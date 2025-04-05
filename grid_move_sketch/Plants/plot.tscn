@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjj5otdaqgmre"]
+
+[ext_resource type="Script" uid="uid://dpbc8img82kex" path="res://Plants/plot.gd" id="1_2p2dl"]
+[ext_resource type="Texture2D" uid="uid://c7fyok4oqvtfw" path="res://Plants/Plot.png" id="1_g6g2f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rljl1"]
+size = Vector2(100, 80)
+
+[node name="Plot" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_2p2dl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rljl1")
+debug_color = Color(0.76, 0.5016, 0.2432, 0.101961)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -7)
+scale = Vector2(2, 2)
+texture = ExtResource("1_g6g2f")

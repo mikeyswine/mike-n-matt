@@ -23,10 +23,15 @@ shape = SubResource("RectangleShape2D_ks8n1")
 debug_color = Color(0.784314, 1, 0, 0.0941176)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -43)
+position = Vector2(0, -55)
 scale = Vector2(3, 3)
 texture = ExtResource("1_sspxd")
 hframes = 11
+frame = 9
+
+[node name="GrowthStepTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
 
 [node name="DeathParticles" type="CPUParticles2D" parent="."]
 z_index = 10
@@ -52,4 +57,4 @@ scale_curve_y = null
 color_ramp = SubResource("Gradient_rkdws")
 color_initial_ramp = SubResource("Gradient_hilkw")
 
-[connection signal="finished" from="DeathParticles" to="." method="_on_death_particles_finished"]
+[connection signal="timeout" from="GrowthStepTimer" to="." method="_on_growth_step_timer_timeout"]

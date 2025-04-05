@@ -1,10 +1,20 @@
 extends Area2D
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var death_particles: CPUParticles2D = $DeathParticles
+const PLOT = preload("res://Plants/plot.tscn")
+
+const PEPPER_PRODUCE = preload("res://Plants/pepper_produce.tscn")
 
 var growth_state:=0
 var state_name:= "seed"
+var action_name:String
 var picked:= false
+
+func _ready() -> void:
+	var theClock = get_node("/root/World/Clock")
+	theClock.time_has_elapsed.connect(_time_elapsed)
+	sprite_2d.frame = 0
 
 
 func growth_step():
@@ -35,14 +45,14 @@ func update_growth_state():
 		6:
 			state_name= "ripening"
 			sprite_2d.frame = 6
-		7:
+		7, 8:
 			if picked:
 				state_name = "picked"
 				sprite_2d.frame = 4
 			else:
 				state_name="ripe"
 				sprite_2d.frame = 7
-		9:
+		9, 10, 11, 12:
 			if picked:
 				state_name = "senescent"
 				sprite_2d.frame = 9
@@ -52,24 +62,44 @@ func update_growth_state():
 		13:
 			state_name = "senescent"
 			sprite_2d.frame = 9
-		14:
+		14, _:
 			state_name = "dead"
 			sprite_2d.frame = 10
+	#print(state_name)
+
 
 func use():
 	if state_name == "ripe":
 		print ("picked ripe peppers")
+		spawn_produce(false)
 		picked = true
 		update_growth_state()
-	if state_name == "overipe":
-		print ("picked overipe peppers")
+	if state_name == "overripe":
+		print ("picked overripe peppers")
+		spawn_produce(true)
 		picked = true
 		update_growth_state()
+	if state_name == "dead":
+		death_particles.emitting = true
+		$Sprite2D.visible = false
+		set_collision_layer_value(3,false)
 
-func take_damage():
-	queue_free()
-	##TODO could add effect here.  could drop fruit if present.
 
-
-func _on_growth_step_timer_timeout() -> void:
+func _time_elapsed(new_time):
+	print()
 	growth_step()
+
+
+func _on_death_particles_finished() -> void:
+	queue_free()
+	var new_plot = PLOT.instantiate()
+	new_plot.global_position = global_position
+	get_tree().get_current_scene().call_deferred("add_child", new_plot)
+	queue_free()
+
+
+func spawn_produce(is_overripe):
+	var new_produce = PEPPER_PRODUCE.instantiate()
+	new_produce.overripe = is_overripe
+	new_produce.global_position = global_position
+	get_tree().get_current_scene().call_deferred("add_child", new_produce)

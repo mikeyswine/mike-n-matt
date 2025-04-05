@@ -1,15 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0eu1i6lwku2b"]
+[gd_scene load_steps=9 format=3 uid="uid://c0eu1i6lwku2b"]
 
+[ext_resource type="PackedScene" uid="uid://bxs3tsfbo4sie" path="res://UI/clock.tscn" id="1_ks8n1"]
 [ext_resource type="PackedScene" uid="uid://da8owc1tf6iyy" path="res://Map/terrain_square.tscn" id="1_otu5x"]
 [ext_resource type="PackedScene" uid="uid://b7gevtn5qptsv" path="res://Player/player.tscn" id="2_dem7s"]
 [ext_resource type="PackedScene" uid="uid://1ghsj83k4lht" path="res://Plants/grass.tscn" id="3_pa6j6"]
 [ext_resource type="PackedScene" uid="uid://bd14e486dr4th" path="res://Plants/pepper_plant.tscn" id="4_4dvsh"]
+[ext_resource type="PackedScene" uid="uid://uldhigsug0nl" path="res://Map/store_house.tscn" id="6_x5oxt"]
+[ext_resource type="PackedScene" uid="uid://cjj5otdaqgmre" path="res://Plants/plot.tscn" id="7_vqnaq"]
+[ext_resource type="PackedScene" uid="uid://bspxlbr2gs5sq" path="res://Pests/crow.tscn" id="8_rljl1"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 
+[node name="Clock" parent="." instance=ExtResource("1_ks8n1")]
+
 [node name="Player" parent="." instance=ExtResource("2_dem7s")]
-z_index = 1
+unique_name_in_owner = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position_smoothing_enabled = true
@@ -197,18 +203,32 @@ position = Vector2(800, 0)
 position = Vector2(900, 0)
 
 [node name="Grass" parent="." instance=ExtResource("3_pa6j6")]
+position = Vector2(0, 240)
 
 [node name="Grass2" parent="." instance=ExtResource("3_pa6j6")]
-position = Vector2(100, 0)
+position = Vector2(100, 240)
 
 [node name="Grass3" parent="." instance=ExtResource("3_pa6j6")]
-position = Vector2(200, 0)
+position = Vector2(200, 240)
 
 [node name="PepperPlant" parent="." instance=ExtResource("4_4dvsh")]
-position = Vector2(500, 0)
+position = Vector2(500, 240)
 
 [node name="PepperPlant2" parent="." instance=ExtResource("4_4dvsh")]
-position = Vector2(600, 0)
+position = Vector2(600, 240)
 
 [node name="PepperPlant3" parent="." instance=ExtResource("4_4dvsh")]
-position = Vector2(700, 0)
+position = Vector2(700, 240)
+
+[node name="PepperPlant4" parent="." instance=ExtResource("4_4dvsh")]
+
+[node name="StoreHouse" parent="." instance=ExtResource("6_x5oxt")]
+position = Vector2(450, -95)
+
+[node name="Plot" parent="." instance=ExtResource("7_vqnaq")]
+position = Vector2(200, 0)
+
+[node name="Crow" parent="." instance=ExtResource("8_rljl1")]
+position = Vector2(-198, -338)
+
+[connection signal="time_elapsed" from="Player" to="Clock" method="_on_player_time_elapsed"]

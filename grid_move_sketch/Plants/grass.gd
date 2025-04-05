@@ -1,16 +1,24 @@
 extends Area2D
 
-
 @onready var cpu_particles_2d: CPUParticles2D = $CPUParticles2D
 @onready var cpu_particles_2d_2: CPUParticles2D = $CPUParticles2D2
-@onready var reset_timer: Timer = $ResetTimer
 
+var description := "Grass"
+var use_description := "Cut"
+var growth_counter:= 0
 
 enum{
 	CUT,
 	LONG
 }
 var state = LONG
+
+func _ready() -> void:
+	var theClock = get_node("/root/World/Clock")
+	theClock.time_has_elapsed.connect(_time_elapsed)
+	
+
+
 
 ##TODO This will either check for or be called by a tool in the end
 func use():
@@ -31,16 +39,21 @@ func cut():
 	state = CUT
 	cpu_particles_2d.emitting = true
 	cpu_particles_2d_2.emitting = true
-	reset_timer.start()#randi_range(9.0,11.0))
+	growth_counter = 0
 	#call_deferred("set_monitoring", false)
 	#call_deferred("set_monitorable", false)
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	$Sprite2D.visible = false
 
+func get_description():
+	return description
 
 func _on_cpu_particles_2d_finished() -> void:
 	pass
 	#queue_free()
 
-func _on_reset_timer_timeout() -> void:
-	regrow()
+func _time_elapsed(_new_time):
+	growth_counter += 1
+	if growth_counter >= 5:
+		growth_counter = 0
+		regrow()

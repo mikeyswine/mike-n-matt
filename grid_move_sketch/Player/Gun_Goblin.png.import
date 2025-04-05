@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b78baqiek514c"
-path="res://.godot/imported/scythe.svg-ed262f0774e9e217608dc1422e48374b.ctex"
+uid="uid://dee5fygfbrob"
+path="res://.godot/imported/Gun_Goblin.png-e14b86655fef097b7d8ea3a0051f79be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/Weapons/scythe.svg"
-dest_files=["res://.godot/imported/scythe.svg-ed262f0774e9e217608dc1422e48374b.ctex"]
+source_file="res://Player/Gun_Goblin.png"
+dest_files=["res://.godot/imported/Gun_Goblin.png-e14b86655fef097b7d8ea3a0051f79be.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

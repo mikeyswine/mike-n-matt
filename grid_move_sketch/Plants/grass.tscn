@@ -68,10 +68,5 @@ scale_curve_x = null
 scale_curve_y = null
 color_ramp = SubResource("Gradient_dp7cd")
 
-[node name="ResetTimer" type="Timer" parent="."]
-wait_time = 10.0
-one_shot = true
-
 [connection signal="finished" from="CPUParticles2D" to="." method="_on_cpu_particles_2d_finished"]
 [connection signal="finished" from="CPUParticles2D2" to="." method="_on_cpu_particles_2d_finished"]
-[connection signal="timeout" from="ResetTimer" to="." method="_on_reset_timer_timeout"]
