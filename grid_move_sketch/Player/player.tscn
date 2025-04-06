@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7gevtn5qptsv"]
+[gd_scene load_steps=11 format=3 uid="uid://b7gevtn5qptsv"]
 
 [ext_resource type="Script" uid="uid://bh4ufu2qdvi4q" path="res://Player/player.gd" id="1_b3glx"]
 [ext_resource type="Texture2D" uid="uid://dee5fygfbrob" path="res://Player/Gun_Goblin.png" id="2_btcbx"]
 [ext_resource type="FontFile" uid="uid://cxlk4v07lriud" path="res://UI/Kenney Pixel.ttf" id="3_btcbx"]
+[ext_resource type="AudioStream" uid="uid://d2fgbvsa5f8wf" path="res://UI/rollover6.ogg" id="4_gwnis"]
+[ext_resource type="Texture2D" uid="uid://c0b7b74qrji31" path="res://UI/tile_0087.png" id="4_k53q1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c5lyl"]
 size = Vector2(100, 80)
@@ -127,17 +129,46 @@ hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="Popup" type="Label" parent="."]
+[node name="Popup" type="VBoxContainer" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -40.0
-offset_top = -90.0
-offset_right = 40.0
-offset_bottom = -67.0
+offset_left = -50.0
+offset_top = 40.0
+offset_right = 50.0
+offset_bottom = 80.0
 grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+
+[node name="title" type="Label" parent="Popup"]
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_btcbx")
-text = "use"
+text = "no object"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="ActionContainer" type="HBoxContainer" parent="Popup"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="Popup/ActionContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("4_k53q1")
+expand_mode = 3
+
+[node name="action" type="Label" parent="Popup/ActionContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_btcbx")
+theme_override_font_sizes/font_size = 32
+text = "use"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="UI_No" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_gwnis")
+volume_db = -10.0

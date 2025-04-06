@@ -72,7 +72,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_5mr20"]
 resource_name = "peck_prep"
-length = 3.0
+length = 4.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -80,10 +80,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.8, 1.36667, 2.13333, 2.36667, 2.6, 2.83333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.36667, 2.13333, 2.36667, 2.6, 2.83333, 3.06667, 3.3, 3.52718, 3.76051),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [3, 7, 3, 4, 5, 6, 5, 6]
+"values": [3, 7, 3, 4, 5, 6, 5, 6, 5, 6, 5, 6]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -92,11 +92,11 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(2.96667),
+"times": PackedFloat32Array(3.96667),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"pecking"
+"method": &"pecking_done"
 }]
 }
 
@@ -148,5 +148,12 @@ vframes = 4
 libraries = {
 &"": SubResource("AnimationLibrary_40elu")
 }
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 4
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
