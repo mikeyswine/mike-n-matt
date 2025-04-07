@@ -172,3 +172,6 @@ metadata/_edit_use_anchors_ = true
 [node name="UI_No" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_gwnis")
 volume_db = -10.0
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true

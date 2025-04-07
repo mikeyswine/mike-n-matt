@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://uwkdby0as68e"]
+[gd_scene load_steps=10 format=3 uid="uid://uwkdby0as68e"]
 
 [ext_resource type="Script" uid="uid://b5r0xunifkvqi" path="res://Map/brewery.gd" id="1_afq82"]
 [ext_resource type="Texture2D" uid="uid://cbqqa8jhau27b" path="res://Map/Boiler.png" id="2_xyxaw"]
 [ext_resource type="Texture2D" uid="uid://rokandu4vmre" path="res://Map/Boiler_Liquid.png" id="3_q5a5u"]
+[ext_resource type="AudioStream" uid="uid://huv5u6lvpabn" path="res://Map/cooking_without_cover_01.ogg" id="4_xyxaw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h7ikf"]
 size = Vector2(100, 80)
@@ -50,6 +51,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_m1rmh"]
 resource_name = "boil"
@@ -90,6 +103,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [1, 2, 3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yyjw6"]
@@ -137,3 +162,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_yyjw6")
 }
 autoplay = "RESET"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Boiler"]
+stream = ExtResource("4_xyxaw")
+volume_db = 5.0
+pitch_scale = 0.8
+max_distance = 1000.0
+parameters/looping = true
