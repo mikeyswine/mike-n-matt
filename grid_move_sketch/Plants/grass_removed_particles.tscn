@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://by4bpa2krmjwg"]
+
+[ext_resource type="Texture2D" uid="uid://dbnjq81xf2tbi" path="res://Plants/GrassBlade.png" id="1_7k4x6"]
+[ext_resource type="Script" uid="uid://cvveugbv5q4ks" path="res://Plants/pepper_removed_particles.gd" id="2_3xd3b"]
+
+[sub_resource type="Gradient" id="Gradient_3xd3b"]
+offsets = PackedFloat32Array(0.74, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Grass_removed_particles" type="CPUParticles2D"]
+z_index = 10
+emitting = false
+texture = ExtResource("1_7k4x6")
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.8
+emission_shape = 3
+emission_rect_extents = Vector2(50, 20)
+direction = Vector2(0, -2)
+gravity = Vector2(0, 200)
+initial_velocity_min = 150.0
+initial_velocity_max = 250.0
+angular_velocity_max = 60.0
+angle_max = 45.0
+scale_amount_min = 4.0
+scale_amount_max = 4.0
+split_scale = true
+scale_curve_x = null
+scale_curve_y = null
+color_ramp = SubResource("Gradient_3xd3b")
+script = ExtResource("2_3xd3b")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

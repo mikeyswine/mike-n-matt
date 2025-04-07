@@ -8,37 +8,10 @@ var action_name := "Cut"
 var growth_counter:= 0
 var alive:= true
 
-func _ready() -> void:
-	var theClock = get_node("/root/World/Clock")
-	theClock.time_has_elapsed.connect(_time_elapsed)
 
-
-
-##TODO This will either check for or be called by a tool in the end
 func use():
-	cut()
+	die()
 	return true
-
-func take_damage():
-	cut()
-
-
-func cut():
-	alive = false
-	cpu_particles_2d.emitting = true
-	cpu_particles_2d_2.emitting = true
-	growth_counter = 0
-	#$CollisionShape2D.call_deferred("set_disabled", true)
-	set_collision_layer_value(3,false)
-	$Sprite2D.visible = false
-	title = ""
-	action_name = ""
-
-
-func _on_cpu_particles_2d_finished() -> void:
-	pass
-	#queue_free()
-
 
 func get_info() -> Dictionary:
 	var use_info = {}
@@ -47,5 +20,19 @@ func get_info() -> Dictionary:
 		use_info.action = action_name
 	return use_info
 
-func _time_elapsed():
-	pass
+
+const PLOT = preload("res://Plants/plot.tscn")
+const GRASS_REMOVED_PARTICLES = preload("res://Plants/grass_removed_particles.tscn")
+
+func die():
+	## Spawn Removal Effect
+	var new_effect = GRASS_REMOVED_PARTICLES.instantiate()
+	new_effect.global_position = global_position
+	get_tree().get_current_scene().call_deferred("add_child", new_effect)
+	
+	## Spawn in Empty Plot
+	var new_plot = PLOT.instantiate()
+	new_plot.global_position = global_position
+	get_tree().get_current_scene().call_deferred("add_child", new_plot)
+	
+	queue_free()
