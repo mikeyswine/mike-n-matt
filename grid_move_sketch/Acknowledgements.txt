@@ -1,8 +1,17 @@
 Assets Used
 
-Kenney.nl
+Kenney.nl____________________
 Kenney Pixel.ttf
+Kenney UI Audio
 
-itch.io
+itch.io______________________
 smithygames
-crow-sprite
+	crow-sprite
+elthen
+	2D Pixel Art Goblin King Sprites
+republic32
+	Goblin Girl
+lionheart963
+	Goblin Character Sprite
+zneeke
+	Goblin Scout Silhouete

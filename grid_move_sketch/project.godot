@@ -72,6 +72,7 @@ cancel={
 2d_physics/layer_3="Plants"
 2d_physics/layer_4="Produce"
 2d_physics/layer_5="Equipment"
+2d_physics/layer_6="Customer"
 
 [rendering]
 

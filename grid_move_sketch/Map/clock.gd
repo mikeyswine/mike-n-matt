@@ -2,6 +2,7 @@ extends Node
 
 @onready var clock_label: Label = %ClockLabel
 
+
 signal time_has_elapsed()
 
 var time:int = 0
