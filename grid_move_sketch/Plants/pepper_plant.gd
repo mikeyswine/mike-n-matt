@@ -5,8 +5,9 @@ const PLOT = preload("res://Plants/plot.tscn")
 const PEPPER_PRODUCE = preload("res://Plants/pepper_produce.tscn")
 const PEPPER_REMOVED_PARTICLES = preload("res://Plants/pepper_removed_particles.tscn")
 
+
 var growth_state:=0
-var state_name:= "seed"
+var state_name:= "Sdeed"
 var action_name:String
 
 ## For now, I got rid of the picked bool concept.  When the plant is picked, it
@@ -22,8 +23,11 @@ func _ready() -> void:
 
 
 func _time_elapsed():
-	print()
 	growth_step()
+	if state_name == "Ripe": #or "Overripe":
+		print("Pepper Plant is " + str(state_name))
+		print("Rolling to spawn crow.")
+		attempt_spawn_crow()
 
 
 func growth_step():
@@ -90,6 +94,14 @@ func update_growth_state():
 	#print(state_name)
 
 
+func get_info() -> Dictionary:
+	var use_info = {}
+	use_info.title = str(state_name) + " Pepper Plant"
+	if action_name:
+		use_info.action = action_name
+	return use_info
+
+
 func use() -> bool:
 	match state_name:
 		"Ripe":
@@ -116,14 +128,6 @@ func use() -> bool:
 			return false
 
 
-func get_info() -> Dictionary:
-	var use_info = {}
-	use_info.title = str(state_name) + " Pepper Plant"
-	if action_name:
-		use_info.action = action_name
-	return use_info
-
-
 func spawn_produce(is_overripe,quantity = 1):
 	var new_produce = PEPPER_PRODUCE.instantiate()
 	new_produce.overripe = is_overripe
@@ -143,3 +147,21 @@ func die():
 	get_tree().get_current_scene().call_deferred("add_child", new_plot)
 	
 	queue_free()
+
+
+## Crow Spawning System
+@export var crow_spawn_chance:= 60
+const CROW = preload("res://Pests/crow.tscn")
+
+func attempt_spawn_crow():
+	if crow_spawn_chance == 0:
+		return
+	if randi_range(1,crow_spawn_chance) > 1:
+		return
+	var new_crow = CROW.instantiate()
+	new_crow.global_position.x = global_position.x + (float(randi_range(0,2)*2-1) * randf_range(200,800))
+	new_crow.global_position.y = global_position.y + randf_range(-1200,-1400)
+	new_crow.destination = Vector2(
+		global_position.x + randf_range(-20,20), 
+		global_position.y + randf_range(1,15))
+	get_tree().get_current_scene().call_deferred("add_child", new_crow)

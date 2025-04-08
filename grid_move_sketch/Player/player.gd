@@ -72,6 +72,9 @@ func _physics_process(delta: float) -> void:
 				animation_player.play("idle")
 				state = IDLE
 				get_info()
+				## Prompt Clock to advance.  
+				## Placed here so that spamming move doesn't elapse time. Only when player arrives.
+				time_elapsed.emit()
 
 		USING:
 			pass
@@ -132,7 +135,7 @@ func attempt_move(new_direction):
 	state = MOVING
 	animation_player.play("move")
 	current_location = move_target
-	time_elapsed.emit()
+	#time_elapsed.emit()
 	return true
 
 

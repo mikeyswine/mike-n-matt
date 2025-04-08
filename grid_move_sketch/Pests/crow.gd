@@ -28,6 +28,7 @@ func _ready() -> void:
 	## Connect Clock Signal
 	var theClock = get_node("/root/World/Clock")
 	theClock.time_has_elapsed.connect(_time_elapsed)
+	handle_direction()
 
 
 func _physics_process(delta: float) -> void:
@@ -66,13 +67,21 @@ func pecking_done():
 	var pecked_plant = ray_cast_2d.get_collider()
 	## TODO If we add plant health/variable harvest, this will turn into a damage loop instead of
 	## a simple request to die
-	if pecked_plant.has_method("die"):
-		pecked_plant.die()
+	if pecked_plant:
+		if pecked_plant.has_method("die"):
+			pecked_plant.die()
 	flee()
 
 func flee():
+	handle_direction()
 	animation_player.play("fly")
 	set_collision_mask_value(2,false)
 	destination.x = randf_range(destination.x -1000.0, destination.x + 1000.0)
 	destination.y = destination.y - 2000
 	state = FLEEING
+
+func handle_direction():
+	if destination > global_position:
+		$Sprite2D.flip_h = false
+	else:
+		$Sprite2D.flip_h = true

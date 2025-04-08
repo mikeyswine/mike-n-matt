@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0eu1i6lwku2b"]
+[gd_scene load_steps=8 format=3 uid="uid://c0eu1i6lwku2b"]
 
 [ext_resource type="PackedScene" uid="uid://bxs3tsfbo4sie" path="res://UI/clock.tscn" id="1_2qe8j"]
 [ext_resource type="PackedScene" uid="uid://b7gevtn5qptsv" path="res://Player/player.tscn" id="2_0xrvh"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://uldhigsug0nl" path="res://Map/store_house.tscn" id="6_m1rmh"]
 [ext_resource type="PackedScene" uid="uid://swpivh364orj" path="res://Map/shop.tscn" id="8_0xrvh"]
 [ext_resource type="PackedScene" uid="uid://uwkdby0as68e" path="res://Map/brewery.tscn" id="8_2qe8j"]
-[ext_resource type="PackedScene" uid="uid://bspxlbr2gs5sq" path="res://Pests/crow.tscn" id="8_yyjw6"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -326,10 +325,6 @@ position = Vector2(900, 400)
 
 [node name="StoreHouse" parent="." instance=ExtResource("6_m1rmh")]
 position = Vector2(450, -95)
-
-[node name="Crow" parent="." instance=ExtResource("8_yyjw6")]
-position = Vector2(-361, -676)
-destination = Vector2(600, 240)
 
 [node name="Brewery" parent="." instance=ExtResource("8_2qe8j")]
 

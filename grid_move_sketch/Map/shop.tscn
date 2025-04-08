@@ -1,49 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://swpivh364orj"]
 
-[sub_resource type="GDScript" id="GDScript_xjw41"]
-script/source = "extends StaticBody2D
-
-@onready var spawn_point: Marker2D = $SpawnPoint
-@export var spawn_chance:int = 20
-
-const CUSTOMER_0 = preload(\"res://Map/Customers/customer_0.tscn\")
-const CUSTOMER_1 = preload(\"res://Map/Customers/customer_1.tscn\")
-const CUSTOMER_2 = preload(\"res://Map/Customers/customer_2.tscn\")
-const CUSTOMER_K = preload(\"res://Map/Customers/customer_k.tscn\")
-
-func _ready() -> void:
-	var theClock = get_node(\"/root/World/Clock\")
-	theClock.time_has_elapsed.connect(_time_elapsed)
-
-
-func buy():
-	print(\"Item Bought\")
-
-
-func spawn_customer_roll():
-	if randi_range(1,spawn_chance) > 1:
-		return
-	
-	var character_roll = randi_range(0,100)
-	var character_to_spawn
-	if character_roll <=50:
-		character_to_spawn = CUSTOMER_0.instantiate()
-	elif character_roll <=80:
-		character_to_spawn = CUSTOMER_1.instantiate()
-	elif character_roll <=98:
-		character_to_spawn = CUSTOMER_2.instantiate()
-	else:
-		character_to_spawn = CUSTOMER_K.instantiate()
-	print(\"Spawning Customer\")
-	character_to_spawn.position = spawn_point.position
-	character_to_spawn.position.y -= randf_range(0.0,100.0)
-	#get_tree().get_current_scene().
-	call_deferred(\"add_child\", character_to_spawn)
-
-
-func _time_elapsed():
-	spawn_customer_roll()
-"
+[ext_resource type="Script" uid="uid://cjiiismbvv6eb" path="res://Map/shop.gd" id="1_xour6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xjw41"]
 size = Vector2(80, 200)
@@ -54,7 +11,7 @@ size = Vector2(100, 2000)
 [node name="Shop" type="StaticBody2D"]
 collision_layer = 32
 collision_mask = 0
-script = SubResource("GDScript_xjw41")
+script = ExtResource("1_xour6")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 7
