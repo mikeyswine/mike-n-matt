@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://dht7cxh5ey386"]
+[gd_scene load_steps=16 format=4 uid="uid://dht7cxh5ey386"]
 
 [ext_resource type="PackedScene" uid="uid://ctmu7wrocro8i" path="res://Player/player.tscn" id="1_pdtjp"]
 [ext_resource type="Texture2D" uid="uid://1r2vox2wlxlj" path="res://Levels/Tileset1.png" id="2_0i1si"]
@@ -49,6 +49,28 @@ tile_size = Vector2i(8, 8)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_eotfg")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5pjb"]
+atlas = ExtResource("8_1owmk")
+region = Rect2(0, 0, 8, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tsi2"]
+atlas = ExtResource("8_1owmk")
+region = Rect2(8, 0, 8, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rx07n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5pjb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3tsi2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
 [node name="World" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -96,10 +118,17 @@ destination_level_file = "res://Levels/matt_level_1.tscn"
 position = Vector2(8, 0)
 destination_level_file = "res://Levels/matt_level_1.tscn"
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TeleporterMattLv1"]
+position = Vector2(-49, 93)
+sprite_frames = SubResource("SpriteFrames_rx07n")
+autoplay = "default"
+frame_progress = 0.293963
+
 [node name="Kelp" type="Node2D" parent="."]
 position = Vector2(50, 96)
 
 [node name="Sprite2D" type="Sprite2D" parent="Kelp"]
+visible = false
 position = Vector2(0, -3)
 texture = ExtResource("8_1owmk")
 hframes = 2
@@ -107,6 +136,7 @@ vframes = 3
 frame = 4
 
 [node name="Sprite2D2" type="Sprite2D" parent="Kelp"]
+visible = false
 position = Vector2(0, -9)
 texture = ExtResource("8_1owmk")
 hframes = 2
@@ -114,6 +144,7 @@ vframes = 3
 frame = 2
 
 [node name="Sprite2D3" type="Sprite2D" parent="Kelp"]
+visible = false
 position = Vector2(0, -17)
 texture = ExtResource("8_1owmk")
 hframes = 2
