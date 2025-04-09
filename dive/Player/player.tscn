@@ -44,10 +44,10 @@ var high = false
 
 ## Enumerator to describe possible states
 enum {
-	WALK,
-	FALL,
-	ANCHOR,
-	DEAD
+    WALK,
+    FALL,
+    ANCHOR,
+    DEAD
 }
 ## State Machine current state
 var state = WALK
@@ -56,170 +56,170 @@ var state = WALK
 
 ## Runtime Functions ###########################################################
 func _ready() -> void:
-	if LevelSingleton.custom_start_position:
-		global_position = LevelSingleton.custom_start_position
-		LevelSingleton.custom_start_position = null
+    if LevelSingleton.custom_start_position:
+        global_position = LevelSingleton.custom_start_position
+        LevelSingleton.custom_start_position = null
 
 func _physics_process(delta: float) -> void:
-	match state:
-		WALK:
-			walk_state(delta)
-		FALL:
-			fall_state(delta)
-		ANCHOR:
-			anchor_state(delta)
-		DEAD:
-			dead_state(delta)
-			
-	if Input.is_action_just_pressed(\"restart\"):
-		get_tree().call_deferred(\"reload_current_scene\")
-	## TODO This used to handle being high.  Refactor if you wanna move forward with that feature.
-	#if high:
-		#velocity.x *= -1
+    match state:
+        WALK:
+            walk_state(delta)
+        FALL:
+            fall_state(delta)
+        ANCHOR:
+            anchor_state(delta)
+        DEAD:
+            dead_state(delta)
+            
+    if Input.is_action_just_pressed(\"restart\"):
+        get_tree().call_deferred(\"reload_current_scene\")
+    ## TODO This used to handle being high.  Refactor if you wanna move forward with that feature.
+    #if high:
+        #velocity.x *= -1
 
 
 
 ## State Functions #############################################################
 func walk_state(delta):
-	## Check Float State Transition
-	if not is_on_floor():
-		state = FALL
-		return
-		
-	## Handle jump
-	# Might be better to use up arrow and save space for another function?
-	if Input.is_action_just_pressed(\"up\") or Input.is_action_just_pressed(\"jump\"):
-		velocity.y = jump_speed
-	
-	## Handle move
-	var direction := Input.get_axis(\"left\", \"right\")
-	if direction:
-		velocity.x = direction * move_speed_walk
-		## Handle Sprite Animation
-		animation_player.play(\"walk\")
-		if velocity.x>0:
-			sprite_2d.flip_h = false
-		else:
-			sprite_2d.flip_h = true
-	else:
-		## Stop
-		velocity.x = 0.0
-		animation_player.play(\"idle\")
-	
-	move_and_slide()
+    ## Check Float State Transition
+    if not is_on_floor():
+        state = FALL
+        return
+        
+    ## Handle jump
+    # Might be better to use up arrow and save space for another function?
+    if Input.is_action_just_pressed(\"up\") or Input.is_action_just_pressed(\"jump\"):
+        velocity.y = jump_speed
+    
+    ## Handle move
+    var direction := Input.get_axis(\"left\", \"right\")
+    if direction:
+        velocity.x = direction * move_speed_walk
+        ## Handle Sprite Animation
+        animation_player.play(\"walk\")
+        if velocity.x>0:
+            sprite_2d.flip_h = false
+        else:
+            sprite_2d.flip_h = true
+    else:
+        ## Stop
+        velocity.x = 0.0
+        animation_player.play(\"idle\")
+    
+    move_and_slide()
 
 
 func fall_state(delta):
-	## Check Walk State Transition
-	if is_on_floor():
-		velocity.y = 0.0
-		state = WALK
-		return
-	
-	## Apply Gravity
-	if floating:
-		velocity += Vector2(0,-float_rate) * delta
-	else:
-		velocity += Vector2(0,sink_rate) * delta 
-	#Multiplied by delta because this is an acceleration.
-	#Scaling it by delta will keep the rate from being framerate dependent.
-	
-	## Hold Down to speed up your fall
-	if Input.is_action_just_pressed(\"down\"):
-		if PlayerSingleton.has_anchor:
-			velocity=Vector2.ZERO
-			state = ANCHOR
-			animation_player.play(\"anchor\")
-			return
-		velocity += Vector2(0,sink_rate) * delta 
-	
-	## Handle Fall Movement
-	var direction := Input.get_axis(\"left\", \"right\")
-	if direction:
-		velocity.x = direction * move_speed_sink
-		## Handle Sprite Animation
-		animation_player.play(\"fall\")
-		if velocity.x>0:
-			sprite_2d.flip_h = false
-		else:
-			sprite_2d.flip_h = true
-	else:
-		## Stop
-		velocity.x = 0.0
-	
-	move_and_slide()
+    ## Check Walk State Transition
+    if is_on_floor():
+        velocity.y = 0.0
+        state = WALK
+        return
+    
+    ## Apply Gravity
+    if floating:
+        velocity += Vector2(0,-float_rate) * delta
+    else:
+        velocity += Vector2(0,sink_rate) * delta 
+    #Multiplied by delta because this is an acceleration.
+    #Scaling it by delta will keep the rate from being framerate dependent.
+    
+    ## Hold Down to speed up your fall
+    if Input.is_action_just_pressed(\"down\"):
+        if PlayerSingleton.has_anchor:
+            velocity=Vector2.ZERO
+            state = ANCHOR
+            animation_player.play(\"anchor\")
+            return
+        velocity += Vector2(0,sink_rate) * delta 
+    
+    ## Handle Fall Movement
+    var direction := Input.get_axis(\"left\", \"right\")
+    if direction:
+        velocity.x = direction * move_speed_sink
+        ## Handle Sprite Animation
+        animation_player.play(\"fall\")
+        if velocity.x>0:
+            sprite_2d.flip_h = false
+        else:
+            sprite_2d.flip_h = true
+    else:
+        ## Stop
+        velocity.x = 0.0
+    
+    move_and_slide()
 
 
 
 func anchor_state(delta):
-	if is_on_floor():
-		state = WALK
-		anchor_armed = false
-		return
-		
-	velocity.x = 0.0
-	if anchor_armed:
-		velocity.y = anchor_rate
-		var collision = move_and_collide(velocity)
-		if collision:
-			var body = collision.get_collider()
-			if body.has_method(\"take_damage\"): body.take_damage()
-			audio_stream_player_2d.stream = ANCHOR_CLANG
-			audio_stream_player_2d.play()
-			$DustClouds.emitting = true
-			anchor_armed = false
-			animation_player.play(\"walk\")
-			state = WALK
-			#move_and_slide()
+    if is_on_floor():
+        state = WALK
+        anchor_armed = false
+        return
+        
+    velocity.x = 0.0
+    if anchor_armed:
+        velocity.y = anchor_rate
+        var collision = move_and_collide(velocity)
+        if collision:
+            var body = collision.get_collider()
+            if body.has_method(\"take_damage\"): body.take_damage()
+            audio_stream_player_2d.stream = ANCHOR_CLANG
+            audio_stream_player_2d.play()
+            $DustClouds.emitting = true
+            anchor_armed = false
+            animation_player.play(\"walk\")
+            state = WALK
+            #move_and_slide()
 
 
 func dead_state(delta):
-	if (Input.is_action_just_pressed(\"up\") or 
-	Input.is_action_just_pressed(\"down\") or 
-	Input.is_action_just_pressed(\"left\") or 
-	Input.is_action_just_pressed(\"right\") or 
-	Input.is_action_just_pressed(\"jump\")):
-		get_tree().call_deferred(\"reload_current_scene\")
-		#get_tree().reload_current_scene()
-		return
-	death_timer -= delta
-	if death_timer <= 0.0:
-		get_tree().call_deferred(\"reload_current_scene\")
-		return
-	velocity.y -= float_rate * delta
-	velocity.x = move_toward(velocity.x,0.0,1.0*delta)
-	move_and_slide()
-	## Throwing an error on level reset for some reason.
-	
+    if (Input.is_action_just_pressed(\"up\") or 
+    Input.is_action_just_pressed(\"down\") or 
+    Input.is_action_just_pressed(\"left\") or 
+    Input.is_action_just_pressed(\"right\") or 
+    Input.is_action_just_pressed(\"jump\")):
+        get_tree().call_deferred(\"reload_current_scene\")
+        #get_tree().reload_current_scene()
+        return
+    death_timer -= delta
+    if death_timer <= 0.0:
+        get_tree().call_deferred(\"reload_current_scene\")
+        return
+    velocity.y -= float_rate * delta
+    velocity.x = move_toward(velocity.x,0.0,1.0*delta)
+    move_and_slide()
+    ## Throwing an error on level reset for some reason.
+    
 
 func start_float():
-	floating = true
+    floating = true
 
 func stop_float():
-	floating = false
+    floating = false
 
 
 ## Custom Functions ############################################################
 func increment_coins(amount=1):
-	PlayerSingleton.coins += amount
-	player_coins.text = str(PlayerSingleton.coins)
-	audio_stream_player_2d.stream = PICKUP_COIN
-	audio_stream_player_2d.play()
-	
+    PlayerSingleton.coins += amount
+    player_coins.text = str(PlayerSingleton.coins)
+    audio_stream_player_2d.stream = PICKUP_COIN
+    audio_stream_player_2d.play()
+    
 func take_damage():
-	var blood_splatter = load(\"res://Items/blood_splatter.tscn\").instantiate()
-	blood_splatter.emitting = true
-	# blood_splatter will queue_free upon completion.
-	add_child(blood_splatter)
+    var blood_splatter = load(\"res://Items/blood_splatter.tscn\").instantiate()
+    blood_splatter.emitting = true
+    # blood_splatter will queue_free upon completion.
+    add_child(blood_splatter)
 
 func get_high():
-	high = true
+    high = true
 
 func die():
-	animation_player.play(\"death\")
-	## Unset Player Collision Layer so that player won't trigger world objects anymore.
-	set_collision_layer_value(2,false)
-	state = DEAD
+    animation_player.play(\"death\")
+    ## Unset Player Collision Layer so that player won't trigger world objects anymore.
+    set_collision_layer_value(2,false)
+    state = DEAD
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dycd5"]

@@ -1,0 +1,171 @@
+[gd_scene load_steps=10 format=3 uid="uid://uwkdby0as68e"]
+
+[ext_resource type="Script" uid="uid://b5r0xunifkvqi" path="res://Map/brewery.gd" id="1_afq82"]
+[ext_resource type="Texture2D" uid="uid://cbqqa8jhau27b" path="res://Map/Boiler.png" id="2_xyxaw"]
+[ext_resource type="Texture2D" uid="uid://rokandu4vmre" path="res://Map/Boiler_Liquid.png" id="3_q5a5u"]
+[ext_resource type="AudioStream" uid="uid://huv5u6lvpabn" path="res://Map/cooking_without_cover_01.ogg" id="4_xyxaw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7ikf"]
+size = Vector2(100, 80)
+
+[sub_resource type="Curve" id="Curve_0mggs"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.607955, 3), 0.0, 0.0, 0, 0, Vector2(0.914773, 3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Animation" id="Animation_2vax8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Liquid/CPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Liquid:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_m1rmh"]
+resource_name = "boil"
+length = 0.600003
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Liquid/CPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Liquid:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yyjw6"]
+_data = {
+&"RESET": SubResource("Animation_2vax8"),
+&"boil": SubResource("Animation_m1rmh")
+}
+
+[node name="Brewery" type="Area2D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_afq82")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_h7ikf")
+debug_color = Color(0.28, 0, 0.7, 0.333333)
+
+[node name="Boiler" type="Sprite2D" parent="."]
+position = Vector2(0, -107)
+scale = Vector2(4, 4)
+texture = ExtResource("2_xyxaw")
+hframes = 4
+
+[node name="Liquid" type="Sprite2D" parent="Boiler"]
+modulate = Color(0.6003, 0.1518, 0.69, 1)
+texture = ExtResource("3_q5a5u")
+hframes = 4
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Boiler/Liquid"]
+position = Vector2(0, -1.625)
+scale = Vector2(0.25, 0.25)
+emitting = false
+amount = 7
+lifetime = 2.0
+randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(20, 2)
+gravity = Vector2(0, -25)
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_0mggs")
+
+[node name="BoilerAnimationPlayer" type="AnimationPlayer" parent="Boiler"]
+libraries = {
+&"": SubResource("AnimationLibrary_yyjw6")
+}
+autoplay = "RESET"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Boiler"]
+stream = ExtResource("4_xyxaw")
+volume_db = 5.0
+pitch_scale = 0.8
+max_distance = 1000.0
+parameters/looping = true

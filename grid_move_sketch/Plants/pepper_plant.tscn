@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bd14e486dr4th"]
+
+[ext_resource type="Script" uid="uid://dvy8ufbgdp1sp" path="res://Plants/pepper_plant.gd" id="1_rkdws"]
+[ext_resource type="Texture2D" uid="uid://boctrf0wmhl38" path="res://Plants/Pepper.png" id="1_sspxd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ks8n1"]
+size = Vector2(100, 80)
+
+[node name="PepperPlant" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_rkdws")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ks8n1")
+debug_color = Color(0.784314, 1, 0, 0.0941176)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -43)
+scale = Vector2(3, 3)
+texture = ExtResource("1_sspxd")
+hframes = 11

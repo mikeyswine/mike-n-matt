@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgcpxylt6i0fj"]
+
+[ext_resource type="Script" uid="uid://1nv8svth56d8" path="res://Plants/pepper_produce.gd" id="1_bsn11"]
+[ext_resource type="Texture2D" uid="uid://djqf2kpein37a" path="res://Plants/Produce_Pepper.png" id="2_66mha"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ey7r"]
+radius = 20.0
+
+[node name="PepperProduce" type="CharacterBody2D"]
+z_index = 10
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_bsn11")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7ey7r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(4, 4)
+texture = ExtResource("2_66mha")
+hframes = 2

@@ -1,0 +1,113 @@
+[gd_scene load_steps=15 format=3 uid="uid://bm6id75etysjt"]
+
+[ext_resource type="Script" uid="uid://ddxgis2rcx466" path="res://Map/Customers/customer_k.gd" id="1_d0mta"]
+[ext_resource type="Texture2D" uid="uid://cloib1m5jhtir" path="res://Map/Customers/Goblin King Sprite Sheet.png" id="1_iuto2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xt2s1"]
+radius = 44.0
+height = 94.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0mta"]
+atlas = ExtResource("1_iuto2")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rvu1"]
+atlas = ExtResource("1_iuto2")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmpf0"]
+atlas = ExtResource("1_iuto2")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyj7i"]
+atlas = ExtResource("1_iuto2")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0w61"]
+atlas = ExtResource("1_iuto2")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ahdw"]
+atlas = ExtResource("1_iuto2")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_836ec"]
+atlas = ExtResource("1_iuto2")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4q4e"]
+atlas = ExtResource("1_iuto2")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gns7"]
+atlas = ExtResource("1_iuto2")
+region = Rect2(256, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kc4j5"]
+atlas = ExtResource("1_iuto2")
+region = Rect2(320, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l70cn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0mta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rvu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmpf0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xyj7i")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0w61")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ahdw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_836ec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4q4e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gns7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kc4j5")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="CustomerK" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 32
+motion_mode = 1
+script = ExtResource("1_d0mta")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -46)
+shape = SubResource("CapsuleShape2D_xt2s1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -96)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_l70cn")
+animation = &"walk"
+frame_progress = 0.570961
+
+[node name="ShoppingTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="ShoppingTimer" to="." method="_on_shopping_timer_timeout"]

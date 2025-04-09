@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://swpivh364orj"]
+
+[ext_resource type="Script" uid="uid://cjiiismbvv6eb" path="res://Map/shop.gd" id="1_xour6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xjw41"]
+size = Vector2(80, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xour6"]
+size = Vector2(100, 2000)
+
+[node name="Shop" type="StaticBody2D"]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_xour6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -201.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.23, 0.1955, 0.21965, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -100)
+shape = SubResource("RectangleShape2D_xjw41")
+
+[node name="CustomerBlocker" type="StaticBody2D" parent="."]
+position = Vector2(1500, 0)
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CustomerBlocker"]
+shape = SubResource("RectangleShape2D_xour6")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(1000, 0)
