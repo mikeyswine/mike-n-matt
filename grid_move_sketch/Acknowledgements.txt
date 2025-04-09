@@ -15,3 +15,7 @@ lionheart963
 	Goblin Character Sprite
 zneeke
 	Goblin Scout Silhouete
+
+opengameart.org______________
+BMacZero
+	Bubble Sound Effects

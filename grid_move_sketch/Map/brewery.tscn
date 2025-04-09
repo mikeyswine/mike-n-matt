@@ -1,12 +1,92 @@
-[gd_scene load_steps=10 format=3 uid="uid://uwkdby0as68e"]
+[gd_scene load_steps=16 format=3 uid="uid://uwkdby0as68e"]
 
 [ext_resource type="Script" uid="uid://b5r0xunifkvqi" path="res://Map/brewery.gd" id="1_afq82"]
+[ext_resource type="Texture2D" uid="uid://dmja47scyokrt" path="res://Map/Fermenter.png" id="2_60be5"]
 [ext_resource type="Texture2D" uid="uid://cbqqa8jhau27b" path="res://Map/Boiler.png" id="2_xyxaw"]
+[ext_resource type="Texture2D" uid="uid://geug0mkae00e" path="res://Map/Fermenter_Liquid.png" id="3_l8suf"]
 [ext_resource type="Texture2D" uid="uid://rokandu4vmre" path="res://Map/Boiler_Liquid.png" id="3_q5a5u"]
+[ext_resource type="AudioStream" uid="uid://4y8lswhjiqs" path="res://Map/bubbles-single1.wav" id="4_60be5"]
 [ext_resource type="AudioStream" uid="uid://huv5u6lvpabn" path="res://Map/cooking_without_cover_01.ogg" id="4_xyxaw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h7ikf"]
 size = Vector2(100, 80)
+
+[sub_resource type="Animation" id="Animation_stj1x"]
+resource_name = "ferment"
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.516667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FermenterLiquid:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.516667, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_60be5")
+}],
+"times": PackedFloat32Array(0.2)
+}
+tracks/2/use_blend = true
+
+[sub_resource type="Animation" id="Animation_83km7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FermenterLiquid:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n74dx"]
+_data = {
+&"RESET": SubResource("Animation_83km7"),
+&"ferment": SubResource("Animation_stj1x")
+}
 
 [sub_resource type="Curve" id="Curve_0mggs"]
 _limits = [0.0, 3.0, 0.0, 1.0]
@@ -18,7 +98,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Liquid/CPUParticles2D:emitting")
+tracks/0/path = NodePath("BoilerLiquid/CPUParticles2D:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -30,7 +110,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Liquid:frame")
+tracks/1/path = NodePath("BoilerLiquid:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -50,18 +130,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_m1rmh"]
@@ -71,7 +139,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Liquid/CPUParticles2D:emitting")
+tracks/0/path = NodePath("BoilerLiquid/CPUParticles2D:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -83,7 +151,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Liquid:frame")
+tracks/1/path = NodePath("BoilerLiquid:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -103,18 +171,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [1, 2, 3]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yyjw6"]
@@ -132,18 +188,34 @@ script = ExtResource("1_afq82")
 shape = SubResource("RectangleShape2D_h7ikf")
 debug_color = Color(0.28, 0, 0.7, 0.333333)
 
+[node name="Fermenter" type="Sprite2D" parent="."]
+position = Vector2(76, -170)
+scale = Vector2(4, 4)
+texture = ExtResource("2_60be5")
+hframes = 5
+
+[node name="FermenterLiquid" type="Sprite2D" parent="Fermenter"]
+texture = ExtResource("3_l8suf")
+hframes = 5
+
+[node name="FermenterAnimationPlayer" type="AnimationPlayer" parent="Fermenter"]
+libraries = {
+&"": SubResource("AnimationLibrary_n74dx")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Fermenter"]
+
 [node name="Boiler" type="Sprite2D" parent="."]
 position = Vector2(0, -107)
 scale = Vector2(4, 4)
 texture = ExtResource("2_xyxaw")
 hframes = 4
 
-[node name="Liquid" type="Sprite2D" parent="Boiler"]
-modulate = Color(0.6003, 0.1518, 0.69, 1)
+[node name="BoilerLiquid" type="Sprite2D" parent="Boiler"]
 texture = ExtResource("3_q5a5u")
 hframes = 4
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Boiler/Liquid"]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Boiler/BoilerLiquid"]
 position = Vector2(0, -1.625)
 scale = Vector2(0.25, 0.25)
 emitting = false
@@ -163,7 +235,7 @@ libraries = {
 }
 autoplay = "RESET"
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Boiler"]
+[node name="BoilerAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Boiler"]
 stream = ExtResource("4_xyxaw")
 volume_db = 5.0
 pitch_scale = 0.8
