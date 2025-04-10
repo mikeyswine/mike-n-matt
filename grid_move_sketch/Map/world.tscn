@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0eu1i6lwku2b"]
+[gd_scene load_steps=9 format=3 uid="uid://c0eu1i6lwku2b"]
 
 [ext_resource type="PackedScene" uid="uid://bxs3tsfbo4sie" path="res://UI/clock.tscn" id="1_2qe8j"]
 [ext_resource type="PackedScene" uid="uid://b7gevtn5qptsv" path="res://Player/player.tscn" id="2_0xrvh"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://uldhigsug0nl" path="res://Map/store_house.tscn" id="6_m1rmh"]
 [ext_resource type="PackedScene" uid="uid://swpivh364orj" path="res://Map/shop.tscn" id="8_0xrvh"]
 [ext_resource type="PackedScene" uid="uid://uwkdby0as68e" path="res://Map/brewery.tscn" id="8_2qe8j"]
+[ext_resource type="PackedScene" uid="uid://cxrkrhn3e80um" path="res://Map/basket.tscn" id="8_dt0mj"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -330,5 +331,16 @@ position = Vector2(450, -95)
 
 [node name="Shop" parent="." instance=ExtResource("8_0xrvh")]
 position = Vector2(1048, -44)
+
+[node name="BasketPepper" parent="." instance=ExtResource("8_dt0mj")]
+position = Vector2(143, -333)
+scale = Vector2(5, 5)
+produce_type = "PepperProduce"
+
+[node name="BasketPepperOverripe" parent="." instance=ExtResource("8_dt0mj")]
+position = Vector2(143, -211)
+scale = Vector2(5, 5)
+produce_type = "PepperProduce"
+produce_overripe = true
 
 [connection signal="time_elapsed" from="Player" to="Clock" method="_on_player_time_elapsed"]
