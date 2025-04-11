@@ -7,6 +7,7 @@
 radius = 20.0
 
 [node name="PepperProduce" type="CharacterBody2D"]
+z_index = 10
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_bsn11")
@@ -16,6 +17,6 @@ shape = SubResource("CircleShape2D_7ey7r")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
-scale = Vector2(4, 4)
+scale = Vector2(3, 3)
 texture = ExtResource("2_66mha")
 hframes = 2

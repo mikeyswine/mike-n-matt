@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://6jdrcvtv2g17"]
+[gd_scene load_steps=13 format=3 uid="uid://6jdrcvtv2g17"]
 
 [ext_resource type="Texture2D" uid="uid://blc3vfmmw4w3p" path="res://Map/Customers/gobu coveralls walk.png" id="1_5yr82"]
 
@@ -67,6 +67,18 @@ func roll_character():
 	speed = randf_range(40.0,80.0)
 "
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xt2s1"]
+radius = 34.0
+height = 68.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yr82"]
+atlas = ExtResource("1_5yr82")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0trjy"]
+atlas = ExtResource("1_5yr82")
+region = Rect2(160, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_84oap"]
 atlas = ExtResource("1_5yr82")
 region = Rect2(0, 0, 32, 32)
@@ -93,7 +105,13 @@ region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_l70cn"]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5yr82")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0trjy")
+}],
 "loop": true,
 "name": &"idle",
 "speed": 3.0
@@ -122,25 +140,22 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xt2s1"]
-radius = 34.0
-height = 68.0
-
 [node name="Customer1" type="CharacterBody2D"]
 collision_layer = 0
 collision_mask = 32
 motion_mode = 1
 script = SubResource("GDScript_1guet")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -34)
+shape = SubResource("CapsuleShape2D_xt2s1")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3, -40)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_l70cn")
-animation = &"walk"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -34)
-shape = SubResource("CapsuleShape2D_xt2s1")
+animation = &"idle"
+frame_progress = 0.1131
 
 [node name="ShoppingTimer" type="Timer" parent="."]
 one_shot = true
