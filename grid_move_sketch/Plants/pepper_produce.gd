@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var speed:= 300.0
 var accel:= 200.0
+var produce_type:= "Pepper"
 var overripe:= false
 var for_basket:= false
 

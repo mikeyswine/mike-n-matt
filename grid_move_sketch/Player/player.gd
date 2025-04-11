@@ -9,10 +9,10 @@ extends Area2D
 
 ## Use Components
 @onready var use_raycast: RayCast2D = $UseRaycast
-@onready var popup: VBoxContainer = $Popup
-@onready var title: Label = $Popup/title
-@onready var action_container: HBoxContainer = $Popup/ActionContainer
-@onready var action: Label = $Popup/ActionContainer/action
+@onready var popup: VBoxContainer = %Popup
+@onready var title: Label = %title
+@onready var action_container: HBoxContainer = %ActionContainer
+@onready var action: Label = %action
 
 
 

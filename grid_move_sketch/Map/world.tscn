@@ -1,16 +1,110 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0eu1i6lwku2b"]
+[gd_scene load_steps=16 format=3 uid="uid://c0eu1i6lwku2b"]
 
 [ext_resource type="PackedScene" uid="uid://bxs3tsfbo4sie" path="res://UI/clock.tscn" id="1_2qe8j"]
+[ext_resource type="Texture2D" uid="uid://ciu47nuhysyj" path="res://Map/Background/Sunset/1.png" id="1_yyjw6"]
 [ext_resource type="PackedScene" uid="uid://b7gevtn5qptsv" path="res://Player/player.tscn" id="2_0xrvh"]
+[ext_resource type="Texture2D" uid="uid://c3oe3ujnyhgye" path="res://Map/Background/Sunset/2.png" id="2_beu64"]
 [ext_resource type="PackedScene" uid="uid://da8owc1tf6iyy" path="res://Map/terrain_square.tscn" id="3_dt0mj"]
+[ext_resource type="Texture2D" uid="uid://bm5k3idtvxthi" path="res://Map/Background/Sunset/3.png" id="3_nrrth"]
 [ext_resource type="PackedScene" uid="uid://1ghsj83k4lht" path="res://Plants/grass.tscn" id="4_h7ikf"]
+[ext_resource type="Texture2D" uid="uid://bpkhocbiu6f88" path="res://Map/Background/Sunset/4.png" id="4_ud2ca"]
+[ext_resource type="Texture2D" uid="uid://bdigilufxmhe6" path="res://Map/Background/Sunset/5.png" id="5_0vg40"]
 [ext_resource type="PackedScene" uid="uid://uldhigsug0nl" path="res://Map/store_house.tscn" id="6_m1rmh"]
+[ext_resource type="Texture2D" uid="uid://cxdh3sxylqrtf" path="res://Map/Background/Sunset/6.png" id="6_n3r6h"]
+[ext_resource type="Texture2D" uid="uid://h1mvjrkihsys" path="res://Map/Background/Sunset/7.png" id="7_jmppy"]
 [ext_resource type="PackedScene" uid="uid://swpivh364orj" path="res://Map/shop.tscn" id="8_0xrvh"]
 [ext_resource type="PackedScene" uid="uid://uwkdby0as68e" path="res://Map/brewery.tscn" id="8_2qe8j"]
-[ext_resource type="PackedScene" uid="uid://cxrkrhn3e80um" path="res://Map/basket.tscn" id="8_dt0mj"]
+[ext_resource type="Texture2D" uid="uid://dbpw5aftymgcd" path="res://Map/Background/Sunset/8.png" id="8_f7oi8"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -110
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.988235, 0.866667, 0.85098, 1)
+
+[node name="Parallax" type="CanvasGroup" parent="."]
+z_index = -100
+position = Vector2(0, -350)
+
+[node name="Parallax2D" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.2, 1)
+repeat_size = Vector2(960, 0)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Parallax2D"]
+scale = Vector2(3, 3)
+texture = ExtResource("1_yyjw6")
+
+[node name="Parallax2D2" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.3, 1)
+repeat_size = Vector2(960, 0)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Parallax2D2"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_beu64")
+
+[node name="Parallax2D3" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.4, 1)
+repeat_size = Vector2(960, 0)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Parallax2D3"]
+scale = Vector2(3, 3)
+texture = ExtResource("3_nrrth")
+
+[node name="Parallax2D4" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.5, 1)
+repeat_size = Vector2(960, 0)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Parallax2D4"]
+scale = Vector2(3, 3)
+texture = ExtResource("4_ud2ca")
+
+[node name="Parallax2D5" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.6, 1)
+repeat_size = Vector2(960, 0)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Parallax2D5"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_0vg40")
+
+[node name="Parallax2D6" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.7, 1)
+repeat_size = Vector2(960, 0)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Parallax2D6"]
+scale = Vector2(3, 3)
+texture = ExtResource("6_n3r6h")
+
+[node name="Parallax2D7" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.8, 1)
+repeat_size = Vector2(960, 0)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Parallax2D7"]
+scale = Vector2(3, 3)
+texture = ExtResource("7_jmppy")
+
+[node name="Parallax2D8" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.9, 1)
+repeat_size = Vector2(960, 0)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Parallax2D8"]
+scale = Vector2(3, 3)
+texture = ExtResource("8_f7oi8")
 
 [node name="Clock" parent="." instance=ExtResource("1_2qe8j")]
 
@@ -325,22 +419,11 @@ position = Vector2(800, 400)
 position = Vector2(900, 400)
 
 [node name="StoreHouse" parent="." instance=ExtResource("6_m1rmh")]
-position = Vector2(450, -209)
+position = Vector2(351, -364)
 
 [node name="Brewery" parent="." instance=ExtResource("8_2qe8j")]
 
 [node name="Shop" parent="." instance=ExtResource("8_0xrvh")]
 position = Vector2(1048, -44)
-
-[node name="BasketPepper" parent="." instance=ExtResource("8_dt0mj")]
-position = Vector2(143, -333)
-scale = Vector2(5, 5)
-produce_type = "PepperProduce"
-
-[node name="BasketPepperOverripe" parent="." instance=ExtResource("8_dt0mj")]
-position = Vector2(143, -211)
-scale = Vector2(5, 5)
-produce_type = "PepperProduce"
-produce_overripe = true
 
 [connection signal="time_elapsed" from="Player" to="Clock" method="_on_player_time_elapsed"]

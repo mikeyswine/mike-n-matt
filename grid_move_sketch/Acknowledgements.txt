@@ -17,6 +17,8 @@ zneeke
 	Goblin Scout Silhouete
 VariPixels
 	Potions Sprites
+kayillustrations
+	Parallax Sunset Mountains
 
 opengameart.org______________
 BMacZero

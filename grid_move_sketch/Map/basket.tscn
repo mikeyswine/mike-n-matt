@@ -1,22 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxrkrhn3e80um"]
+[gd_scene load_steps=5 format=3 uid="uid://cxrkrhn3e80um"]
 
 [ext_resource type="Texture2D" uid="uid://b61dlarkdng2" path="res://Map/basket.png" id="1_8hhr4"]
 [ext_resource type="Script" uid="uid://cvk5ks0gdji43" path="res://Map/basket.gd" id="1_cfj0y"]
+[ext_resource type="Texture2D" uid="uid://di2x8yt5n7ovl" path="res://UI/TileHilight.png" id="3_xnmai"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfj0y"]
-size = Vector2(10, 5)
+size = Vector2(100, 80)
 
 [node name="Basket" type="Area2D" groups=["baskets"]]
 z_index = -1
+collision_layer = 16
+collision_mask = 0
 script = ExtResource("1_cfj0y")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(5.96046e-08, -8)
+scale = Vector2(5, 5)
 texture = ExtResource("1_8hhr4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_cfj0y")
 
 [node name="ProduceHolder" type="Node2D" parent="."]
 position = Vector2(0, 1)
+
+[node name="Hilight" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_xnmai")

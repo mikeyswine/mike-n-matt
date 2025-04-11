@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://uldhigsug0nl"]
+[gd_scene load_steps=5 format=3 uid="uid://uldhigsug0nl"]
 
 [ext_resource type="Script" uid="uid://c72gr3v07x7ua" path="res://Map/store_house.gd" id="1_4dxrf"]
+[ext_resource type="PackedScene" uid="uid://da8owc1tf6iyy" path="res://Map/terrain_square.tscn" id="2_t5eoc"]
+[ext_resource type="PackedScene" uid="uid://cxrkrhn3e80um" path="res://Map/basket.tscn" id="3_5hqck"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j8b5w"]
 size = Vector2(238, 42)
@@ -28,5 +30,38 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_j8b5w")
+
+[node name="TerrainSquare" parent="." instance=ExtResource("2_t5eoc")]
+position = Vector2(-150, 284)
+
+[node name="TerrainSquare2" parent="." instance=ExtResource("2_t5eoc")]
+position = Vector2(-50, 284)
+
+[node name="TerrainSquare3" parent="." instance=ExtResource("2_t5eoc")]
+position = Vector2(50, 284)
+
+[node name="TerrainSquare4" parent="." instance=ExtResource("2_t5eoc")]
+position = Vector2(150, 284)
+
+[node name="TerrainSquare5" parent="." instance=ExtResource("2_t5eoc")]
+position = Vector2(-150, 204)
+
+[node name="TerrainSquare6" parent="." instance=ExtResource("2_t5eoc")]
+position = Vector2(-50, 204)
+
+[node name="TerrainSquare7" parent="." instance=ExtResource("2_t5eoc")]
+position = Vector2(50, 204)
+
+[node name="TerrainSquare8" parent="." instance=ExtResource("2_t5eoc")]
+position = Vector2(150, 204)
+
+[node name="BasketPepper" parent="." instance=ExtResource("3_5hqck")]
+position = Vector2(-150, 284)
+produce_type = "Pepper"
+
+[node name="BasketPepperOverripe" parent="." instance=ExtResource("3_5hqck")]
+position = Vector2(-150, 204)
+produce_type = "Pepper"
+produce_overripe = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
