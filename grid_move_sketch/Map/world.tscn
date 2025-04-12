@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c0eu1i6lwku2b"]
+[gd_scene load_steps=17 format=3 uid="uid://c0eu1i6lwku2b"]
 
 [ext_resource type="PackedScene" uid="uid://bxs3tsfbo4sie" path="res://UI/clock.tscn" id="1_2qe8j"]
 [ext_resource type="Texture2D" uid="uid://ciu47nuhysyj" path="res://Map/Background/Sunset/1.png" id="1_yyjw6"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://swpivh364orj" path="res://Map/shop.tscn" id="8_0xrvh"]
 [ext_resource type="PackedScene" uid="uid://uwkdby0as68e" path="res://Map/brewery.tscn" id="8_2qe8j"]
 [ext_resource type="Texture2D" uid="uid://dbpw5aftymgcd" path="res://Map/Background/Sunset/8.png" id="8_f7oi8"]
+[ext_resource type="PackedScene" uid="uid://c2qcdg7dun0pf" path="res://Plants/coin.tscn" id="16_beu64"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -425,5 +426,9 @@ position = Vector2(351, -364)
 
 [node name="Shop" parent="." instance=ExtResource("8_0xrvh")]
 position = Vector2(1048, -44)
+
+[node name="Coin" parent="." instance=ExtResource("16_beu64")]
+position = Vector2(-176, 210)
+scale = Vector2(10, 10)
 
 [connection signal="time_elapsed" from="Player" to="Clock" method="_on_player_time_elapsed"]
