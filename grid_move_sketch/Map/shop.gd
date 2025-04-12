@@ -3,6 +3,8 @@ extends StaticBody2D
 @onready var spawn_point: Marker2D = $SpawnPoint
 @export var spawn_chance:int = 20
 
+const COIN = preload("res://Plants/coin.tscn")
+
 const CUSTOMER_0 = preload("res://Map/Customers/customer_0.tscn")
 const CUSTOMER_1 = preload("res://Map/Customers/customer_1.tscn")
 const CUSTOMER_2 = preload("res://Map/Customers/customer_2.tscn")
@@ -14,7 +16,10 @@ func _ready() -> void:
 
 
 func buy():
-    print("Item Bought")
+    var new_coin = COIN.instantiate()
+    new_coin.global_position = global_position
+    get_tree().get_current_scene().call_deferred("add_child", new_coin)
+
 
 
 func spawn_customer_roll():

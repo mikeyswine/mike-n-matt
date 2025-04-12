@@ -4,6 +4,8 @@ var baskets: Array = []
 var produce: Dictionary = {'Pepper': [0,0]}
 var selected_basket := "Pepper"
 var gold:= 50
+@onready var store_house_label: Label = %StoreHouseLabel
+
 
 func _ready() -> void:
     baskets = get_tree().get_nodes_in_group("baskets")
@@ -19,7 +21,8 @@ func get_basket(produce_type: String, overripe: bool) -> Area2D:
     return null
 
 func _on_body_entered(body: Node2D) -> void:
-    if body.has_method("get_stored"):
+    #if body.has_method("get_stored"):
+    if "overripe" in body:
         var basket = get_basket(body.produce_type, body.overripe)
         var prior_produce = produce[body.produce_type]
         if not body.overripe: 
@@ -27,8 +30,10 @@ func _on_body_entered(body: Node2D) -> void:
         else:
             produce[body.produce_type][1] += 1
         basket.add_produce(body.overripe)
-        body.get_stored()
-
+    else:
+        gold = gold + 1
+        store_house_label.text = str(gold)
+    body.get_stored()
 
 func select_basket(new_basket_choice, overripe):
     selected_basket = new_basket_choice
