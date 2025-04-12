@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://by4bpa2krmjwg"]
+[gd_scene load_steps=5 format=3 uid="uid://by4bpa2krmjwg"]
 
 [ext_resource type="Texture2D" uid="uid://dbnjq81xf2tbi" path="res://Plants/GrassBlade.png" id="1_7k4x6"]
 [ext_resource type="Script" uid="uid://cvveugbv5q4ks" path="res://Plants/pepper_removed_particles.gd" id="2_3xd3b"]
+[ext_resource type="AudioStream" uid="uid://5051df748tbi" path="res://Plants/sounds/LeavesTest001 044.wav" id="3_52awj"]
 
 [sub_resource type="Gradient" id="Gradient_3xd3b"]
 offsets = PackedFloat32Array(0.74, 1)
@@ -29,5 +30,9 @@ scale_curve_x = null
 scale_curve_y = null
 color_ramp = SubResource("Gradient_3xd3b")
 script = ExtResource("2_3xd3b")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_52awj")
+autoplay = true
 
 [connection signal="finished" from="." to="." method="_on_finished"]

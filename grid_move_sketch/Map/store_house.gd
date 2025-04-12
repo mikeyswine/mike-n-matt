@@ -3,7 +3,7 @@ var baskets: Array = []
 # key 'ProduceName', value [ripe count: index 0, overripe count: index 1]. 
 var produce: Dictionary = {'Pepper': [0,0]}
 var selected_basket := "Pepper"
-
+var gold:= 50
 
 func _ready() -> void:
 	baskets = get_tree().get_nodes_in_group("baskets")

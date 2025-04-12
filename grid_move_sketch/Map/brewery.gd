@@ -32,7 +32,7 @@ func get_info() -> Dictionary:
 	## Handle Buying Brewery
 	if !purchased:
 		var purchase_use_info = {}
-		purchase_use_info.title = "Distillery: " + str(purchase_price)
+		purchase_use_info.title = "Buy Brewery: " + str(purchase_price)
 		if storehouse.gold >= purchase_price:
 			purchase_use_info.action = "Purchase"
 		return purchase_use_info
@@ -51,6 +51,7 @@ func use() -> bool:
 		if storehouse.gold >= purchase_price:
 			storehouse.gold -= purchase_price
 			purchased = true
+			update_brew_progress()
 			return true
 		return false
 	

@@ -25,3 +25,7 @@ BMacZero
 	Bubble Sound Effects
 Amarikah
 	Sack of Gold
+StarNinjas
+	12 Coin Sound Effects
+Tim Mortimer
+	Leaves Cracking and Crumbling

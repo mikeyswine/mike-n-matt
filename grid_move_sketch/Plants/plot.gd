@@ -11,9 +11,13 @@ func _ready() -> void:
 	storehouse = get_node("/root/World/StoreHouse")
 
 func use():
-	if storehouse.request_plant():
-		queue_free()
-		return true
+	var new_plant = PEPPER_PLANT.instantiate()
+	new_plant.global_position = global_position
+	get_tree().get_current_scene().call_deferred("add_child", new_plant)
+	queue_free()
+	#if storehouse.request_plant():
+		#queue_free()
+		#return true
 	return false
 
 
@@ -29,15 +33,15 @@ func get_info() -> Dictionary:
 	return use_info
 
 
-func request_plant():
-	## Instantiate Selected Plant
-	var new_plant
-	match selected_basket:
-		"Pepper":
-			new_plant = PEPPER_PLANT.instantiate()
-	new_plant.global_position = global_position
-	get_tree().get_current_scene().call_deferred("add_child", new_plant)
-	
-	## TODO Decrement That Basket
-
-	return true
+#func request_plant():
+	### Instantiate Selected Plant
+	#var new_plant
+	#match selected_basket:
+		#"Pepper":
+			#new_plant = PEPPER_PLANT.instantiate()
+	#new_plant.global_position = global_position
+	#get_tree().get_current_scene().call_deferred("add_child", new_plant)
+	#
+	### TODO Decrement That Basket
+#
+	#return true
