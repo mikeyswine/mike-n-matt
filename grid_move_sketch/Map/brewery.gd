@@ -5,22 +5,39 @@ extends Area2D
 
 @onready var boiler_liquid: Sprite2D = $Boiler/BoilerLiquid
 @onready var fermenter_liquid: Sprite2D = $Fermenter/FermenterLiquid
-
 @onready var boiler_audio_stream_player_2d: AudioStreamPlayer2D = $Boiler/BoilerAudioStreamPlayer2D
 
 @export var liquid_color:Color = Color.WEB_PURPLE
+@export var purchase_price:= 50
+
+var storehouse: Area2D
 
 var title:= "Brewery"
 var action:= "brew"
 
+var purchased:= false
+
 var brew_progress: int = 0
+
 
 func _ready() -> void:
 	var theClock = get_node("/root/World/Clock")
 	theClock.time_has_elapsed.connect(_time_elapsed)
+	storehouse = get_node("/root/World/StoreHouse")
+	fermenter_animation_player.play("unpurchased")
+	boiler_animation_player.play("unpurchased")
 
 
 func get_info() -> Dictionary:
+	## Handle Buying Brewery
+	if !purchased:
+		var purchase_use_info = {}
+		purchase_use_info.title = "Distillery: " + str(purchase_price)
+		if storehouse.gold >= purchase_price:
+			purchase_use_info.action = "Purchase"
+		return purchase_use_info
+	
+	## Handle Operating Brewery
 	update_brew_progress()
 	var use_info = {}
 	use_info.title = title
@@ -29,6 +46,15 @@ func get_info() -> Dictionary:
 	return use_info
 
 func use() -> bool:
+	## Handle Buying Brewery
+	if !purchased:
+		if storehouse.gold >= purchase_price:
+			storehouse.gold -= purchase_price
+			purchased = true
+			return true
+		return false
+	
+	## Handle Operational Brewery
 	if brew_progress == 0:
 		brew_progress = 1
 		update_brew_progress()
@@ -37,19 +63,13 @@ func use() -> bool:
 		return true
 	update_brew_progress()
 	return false
-	#if brewing:
-		#action = "brew"
-		#boiler_animation_player.play("RESET")
-		#brewing = false
-	#else:
-		#action = "stop brewing"
-		#boiler_animation_player.play("boil")
-		#brewing = true
+
 
 func _time_elapsed():
 	if brew_progress > 0:
 		brew_progress += 1
 		update_brew_progress()
+
 
 func update_brew_progress():
 	if brew_progress == 0:

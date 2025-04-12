@@ -29,6 +29,7 @@ func _on_body_entered(body: Node2D) -> void:
 		basket.add_produce(body.overripe)
 		body.get_stored()
 
+
 func select_basket(new_basket_choice, overripe):
 	selected_basket = new_basket_choice
 	for basket in baskets:

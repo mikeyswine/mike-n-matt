@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://uwkdby0as68e"]
+[gd_scene load_steps=18 format=3 uid="uid://uwkdby0as68e"]
 
 [ext_resource type="Script" uid="uid://b5r0xunifkvqi" path="res://Map/brewery.gd" id="1_afq82"]
 [ext_resource type="Texture2D" uid="uid://dmja47scyokrt" path="res://Map/Fermenter.png" id="2_60be5"]
@@ -82,10 +82,39 @@ tracks/2/keys = {
 }
 tracks/2/use_blend = true
 
+[sub_resource type="Animation" id="Animation_l8suf"]
+resource_name = "unpurchased"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FermenterLiquid:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n74dx"]
 _data = {
 &"RESET": SubResource("Animation_83km7"),
-&"ferment": SubResource("Animation_stj1x")
+&"ferment": SubResource("Animation_stj1x"),
+&"unpurchased": SubResource("Animation_l8suf")
 }
 
 [sub_resource type="Curve" id="Curve_0mggs"]
@@ -173,10 +202,39 @@ tracks/2/keys = {
 "values": [1, 2, 3]
 }
 
+[sub_resource type="Animation" id="Animation_n74dx"]
+resource_name = "unpurchased"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BoilerLiquid:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yyjw6"]
 _data = {
 &"RESET": SubResource("Animation_2vax8"),
-&"boil": SubResource("Animation_m1rmh")
+&"boil": SubResource("Animation_m1rmh"),
+&"unpurchased": SubResource("Animation_n74dx")
 }
 
 [node name="Brewery" type="Area2D"]
@@ -192,7 +250,7 @@ debug_color = Color(0.28, 0, 0.7, 0.333333)
 position = Vector2(76, -170)
 scale = Vector2(4, 4)
 texture = ExtResource("2_60be5")
-hframes = 5
+hframes = 6
 
 [node name="FermenterLiquid" type="Sprite2D" parent="Fermenter"]
 texture = ExtResource("3_l8suf")
@@ -209,7 +267,7 @@ libraries = {
 position = Vector2(0, -107)
 scale = Vector2(4, 4)
 texture = ExtResource("2_xyxaw")
-hframes = 4
+hframes = 5
 
 [node name="BoilerLiquid" type="Sprite2D" parent="Boiler"]
 texture = ExtResource("3_q5a5u")
