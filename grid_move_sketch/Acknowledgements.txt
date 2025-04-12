@@ -6,26 +6,26 @@ Kenney UI Audio
 
 itch.io______________________
 smithygames
-	crow-sprite
+    crow-sprite
 elthen
-	2D Pixel Art Goblin King Sprites
+    2D Pixel Art Goblin King Sprites
 republic32
-	Goblin Girl
+    Goblin Girl
 lionheart963
-	Goblin Character Sprite
+    Goblin Character Sprite
 zneeke
-	Goblin Scout Silhouete
+    Goblin Scout Silhouete
 VariPixels
-	Potions Sprites
+    Potions Sprites
 kayillustrations
-	Parallax Sunset Mountains
+    Parallax Sunset Mountains
 
 opengameart.org______________
 BMacZero
-	Bubble Sound Effects
+    Bubble Sound Effects
 Amarikah
-	Sack of Gold
+    Sack of Gold
 StarNinjas
-	12 Coin Sound Effects
+    12 Coin Sound Effects
 Tim Mortimer
-	Leaves Cracking and Crumbling
+    Leaves Cracking and Crumbling
