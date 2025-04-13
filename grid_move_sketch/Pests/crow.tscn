@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bspxlbr2gs5sq"]
+[gd_scene load_steps=12 format=3 uid="uid://bspxlbr2gs5sq"]
 
 [ext_resource type="Script" uid="uid://n62fra528gxk" path="res://Pests/crow.gd" id="1_8iicx"]
 [ext_resource type="Texture2D" uid="uid://d26843he0p5lf" path="res://Pests/Crow.png" id="1_d80ja"]
+[ext_resource type="AudioStream" uid="uid://bxtps7sivyeff" path="res://Pests/crow_caw.wav" id="3_40elu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06jdw"]
 size = Vector2(280, 220)
@@ -154,5 +155,10 @@ collision_mask = 4
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_40elu")
+volume_db = 2.0
+autoplay = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

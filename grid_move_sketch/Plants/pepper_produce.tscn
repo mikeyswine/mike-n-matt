@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgcpxylt6i0fj"]
+[gd_scene load_steps=6 format=3 uid="uid://dgcpxylt6i0fj"]
 
 [ext_resource type="Script" uid="uid://1nv8svth56d8" path="res://Plants/pepper_produce.gd" id="1_bsn11"]
 [ext_resource type="Texture2D" uid="uid://djqf2kpein37a" path="res://Plants/Produce_Pepper.png" id="2_66mha"]
+[ext_resource type="AudioStream" uid="uid://cmcr7antybsp6" path="res://Plants/sounds/LeavesTest001 065.wav" id="3_66mha"]
+[ext_resource type="AudioStream" uid="uid://jye6c3imfp6p" path="res://UI/life_pickup.wav" id="4_2npjt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ey7r"]
 radius = 20.0
 
-[node name="PepperProduce" type="CharacterBody2D"]
+[node name="PepperProduce" type="CharacterBody2D" groups=["produce"]]
 z_index = 10
 collision_layer = 8
 collision_mask = 0
@@ -20,3 +22,12 @@ rotation = 1.5708
 scale = Vector2(2, 2)
 texture = ExtResource("2_66mha")
 hframes = 2
+
+[node name="PickAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_66mha")
+volume_db = -10.0
+pitch_scale = 0.98
+
+[node name="CollectAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_2npjt")
+volume_db = -5.0

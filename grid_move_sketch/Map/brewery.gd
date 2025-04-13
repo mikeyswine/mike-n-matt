@@ -18,7 +18,7 @@ var action:= "brew"
 var purchased:= false
 
 var brew_progress: int = 0
-
+var brew_type:= ""
 
 func _ready() -> void:
     var theClock = get_node("/root/World/Clock")
@@ -45,6 +45,7 @@ func get_info() -> Dictionary:
         use_info.action = action
     return use_info
 
+
 func use() -> bool:
     ## Handle Buying Brewery
     if !purchased:
@@ -57,6 +58,14 @@ func use() -> bool:
     
     ## Handle Operational Brewery
     if brew_progress == 0:
+        brew_type = storehouse.request_produce()
+        match brew_type:
+            "Pepper":
+                liquid_color = Color.RED
+            "Overripe Pepper":
+                liquid_color = Color.DARK_RED
+            _:
+                return false
         brew_progress = 1
         update_brew_progress()
         fermenter_liquid.modulate = liquid_color
@@ -96,3 +105,9 @@ func update_brew_progress():
         return
     brew_progress = 0
     update_brew_progress()
+     
+        
+        
+# Spawn Bottle    
+func spawn_bottle():
+    pass

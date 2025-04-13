@@ -29,3 +29,9 @@ StarNinjas
     12 Coin Sound Effects
 Tim Mortimer
     Leaves Cracking and Crumbling
+Lamoot
+    Life Pickup Yo Frankie
+TheMightyGlider
+    Shovel Sound
+ZeroIsNotNull
+    Crow Caw

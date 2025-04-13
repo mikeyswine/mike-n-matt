@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var speed:= 300.0
 var accel:= 200.0
-var produce_type:= "Pepper"
+var produce_type:= "Overripe Pepper"
 @export var for_basket:= false
 
 func _ready() -> void:

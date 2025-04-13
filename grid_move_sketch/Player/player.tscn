@@ -183,3 +183,9 @@ volume_db = -10.0
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 current = true
+
+[node name="UseInfoTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="UseInfoTimer" to="." method="_on_use_info_timer_timeout"]

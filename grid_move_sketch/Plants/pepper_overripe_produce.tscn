@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://ynaf5i2dlq4x"]
+
+[ext_resource type="Script" uid="uid://q2afumis5sps" path="res://Plants/pepper_overripe_produce.gd" id="1_c0qvv"]
+[ext_resource type="Texture2D" uid="uid://djqf2kpein37a" path="res://Plants/Produce_Pepper.png" id="2_3gy2x"]
+[ext_resource type="AudioStream" uid="uid://b8jxkqd1dfyfd" path="res://Plants/sounds/LeavesTest001 033.wav" id="3_3gy2x"]
+[ext_resource type="AudioStream" uid="uid://jye6c3imfp6p" path="res://UI/life_pickup.wav" id="4_dkd2m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ey7r"]
+radius = 20.0
+
+[node name="OverripePepperProduce" type="CharacterBody2D" groups=["produce"]]
+z_index = 10
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_c0qvv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7ey7r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("2_3gy2x")
+hframes = 2
+frame = 1
+
+[node name="PickAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_3gy2x")
+volume_db = -10.0
+
+[node name="CollectAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_dkd2m")
+volume_db = -5.0

@@ -20,6 +20,7 @@ var speed = 200.0
 
 
 func _ready() -> void:
+    $AudioStreamPlayer.pitch_scale = randf_range(0.8,1.1)
     animation_player.play("fly")
     #set_deferred("monitoring", false)
     set_collision_mask_value(2,false)
@@ -73,6 +74,7 @@ func pecking_done():
     flee()
 
 func flee():
+    $AudioStreamPlayer.play()
     handle_direction()
     animation_player.play("fly")
     set_collision_mask_value(2,false)

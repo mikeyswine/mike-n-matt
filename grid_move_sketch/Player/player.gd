@@ -33,7 +33,6 @@ enum{
 enum{
     IDLE,
     MOVING,
-    USING
 }
 
 var state = IDLE
@@ -76,12 +75,6 @@ func _physics_process(delta: float) -> void:
                 ## Placed here so that spamming move doesn't elapse time. Only when player arrives.
                 time_elapsed.emit()
 
-        USING:
-            pass
-        
-        #if current_location:
-            #if global_position == current_location.global_position:
-                #get_info()
 
 
 func handle_move_input():
@@ -177,4 +170,8 @@ func use():
             ## expects use() to return true to indicate if an action is taken.
             ## if no action is taken, plays a sound to indicate no action available.
     useable = null
+    get_info()
+    $UseInfoTimer.start()
+
+func _on_use_info_timer_timeout() -> void:
     get_info()

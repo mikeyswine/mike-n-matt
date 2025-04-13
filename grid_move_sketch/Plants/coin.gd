@@ -3,6 +3,7 @@ extends CharacterBody2D
 var speed:= 50.0
 var accel:= 30.0
 var direction
+var produce_type:= "gold"
 
 
 # Called when the node enters the scene tree for the first time.

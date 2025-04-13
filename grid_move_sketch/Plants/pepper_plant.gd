@@ -3,11 +3,12 @@ extends Area2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 const PLOT = preload("res://Plants/plot.tscn")
 const PEPPER_PRODUCE = preload("res://Plants/pepper_produce.tscn")
+const OVERRIPE_PEPPER_PRODUCE = preload("res://Plants/pepper_overripe_produce.tscn")
 const PEPPER_REMOVED_PARTICLES = preload("res://Plants/pepper_removed_particles.tscn")
 
 
 var growth_state:=0
-var state_name:= "Sdeed"
+var state_name:= "Seed"
 var action_name:String
 
 ## For now, I got rid of the picked bool concept.  When the plant is picked, it
@@ -106,33 +107,40 @@ func use() -> bool:
     match state_name:
         "Ripe":
             ## Pick Ripe Fruit
-            spawn_produce(false)
-            #picked = true
+            spawn_produce(false,randi_range(1,4))
             growth_state = 50
             update_growth_state()
             ## Manually setting growth frame to handle corner case.
             sprite_2d.frame = 4
             return true
+        
         "Overripe":
             ## Pick Overripe Fruit
-            spawn_produce(true)
-            #picked = true
+            spawn_produce(true,randi_range(2,1))
             growth_state = 50
             update_growth_state()
             return true
+        
         "Dead":
             ## Remove Dead Plant
             die()
             return true
+        
         _:
             return false
 
 
-func spawn_produce(is_overripe,quantity = 1):
-    var new_produce = PEPPER_PRODUCE.instantiate()
-    new_produce.overripe = is_overripe
-    new_produce.global_position = global_position
-    get_tree().get_current_scene().call_deferred("add_child", new_produce)
+func spawn_produce(is_overripe,quantity:= 1):
+    for an_item in quantity:
+        var new_produce 
+        if is_overripe:
+            new_produce = OVERRIPE_PEPPER_PRODUCE.instantiate()
+        else:
+            new_produce = PEPPER_PRODUCE.instantiate()
+        new_produce.global_position = global_position
+        new_produce.global_position += Vector2(randf_range(-10.0,10.0),randf_range(-10.0,10.0))
+        get_tree().get_current_scene().call_deferred("add_child", new_produce)
+        await get_tree().create_timer(0.2).timeout
 
 
 func die():
@@ -149,7 +157,8 @@ func die():
     queue_free()
 
 
-## Crow Spawning System
+## Crow Spawning System ##
+####################################################################################################
 @export var crow_spawn_chance:= 60
 const CROW = preload("res://Pests/crow.tscn")
 

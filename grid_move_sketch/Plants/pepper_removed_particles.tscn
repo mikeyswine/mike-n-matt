@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dah2dk70mrch"]
+[gd_scene load_steps=5 format=3 uid="uid://dah2dk70mrch"]
 
 [ext_resource type="Script" uid="uid://cvveugbv5q4ks" path="res://Plants/pepper_removed_particles.gd" id="1_tsq8c"]
+[ext_resource type="AudioStream" uid="uid://ixa1sc6mf1qd" path="res://Plants/sounds/LeavesTest001 079.wav" id="2_r410a"]
 
 [sub_resource type="Gradient" id="Gradient_pxyk2"]
 offsets = PackedFloat32Array(0.74, 1)
@@ -32,5 +33,9 @@ scale_curve_y = null
 color_ramp = SubResource("Gradient_pxyk2")
 color_initial_ramp = SubResource("Gradient_tsq8c")
 script = ExtResource("1_tsq8c")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_r410a")
+autoplay = true
 
 [connection signal="finished" from="." to="." method="_on_finished"]
