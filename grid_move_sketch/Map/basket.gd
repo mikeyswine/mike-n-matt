@@ -41,8 +41,9 @@ func remove_produce():
     var children = get_children()
     for a_child in children:
         if a_child.is_in_group("produce"):
-            a_child.queue_free()
-            return
+            if !a_child.is_queued_for_deletion():
+                a_child.queue_free()
+                return
 
 func get_info():
     ##TODO if produce_count == 0, handle buy more of this produce

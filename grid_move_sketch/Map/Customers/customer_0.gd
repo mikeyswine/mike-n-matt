@@ -26,9 +26,9 @@ func _physics_process(delta: float) -> void:
             velocity.x = -speed
             var collision = move_and_collide(velocity*delta)
             if collision:
-                var potential_shop = collision.get_collider()
+                var potential_shop = collision.get_collider().get_parent()
                 if potential_shop.has_method("buy"):
-                    potential_shop.buy()
+                    potential_shop.buy(Vector2(global_position.x,global_position.y-30))
                     start_shopping()
                     return
         SHOPPING:

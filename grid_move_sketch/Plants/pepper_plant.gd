@@ -26,8 +26,8 @@ func _ready() -> void:
 func _time_elapsed():
     growth_step()
     if state_name == "Ripe": #or "Overripe":
-        print("Pepper Plant is " + str(state_name))
-        print("Rolling to spawn crow.")
+        #print("Pepper Plant is " + str(state_name))
+        #print("Rolling to spawn crow.")
         attempt_spawn_crow()
 
 
@@ -167,6 +167,7 @@ func attempt_spawn_crow():
         return
     if randi_range(1,crow_spawn_chance) > 1:
         return
+    print("Spawning Crow")
     var new_crow = CROW.instantiate()
     new_crow.global_position.x = global_position.x + (float(randi_range(0,2)*2-1) * randf_range(200,800))
     new_crow.global_position.y = global_position.y + randf_range(-1200,-1400)

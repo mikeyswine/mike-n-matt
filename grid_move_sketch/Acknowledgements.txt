@@ -19,6 +19,8 @@ VariPixels
     Potions Sprites
 kayillustrations
     Parallax Sunset Mountains
+Chiecola
+    Gobu Gobu Goblins
 
 opengameart.org______________
 BMacZero

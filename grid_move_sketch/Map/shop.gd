@@ -1,25 +1,106 @@
-extends StaticBody2D
+extends Area2D
 
 @onready var spawn_point: Marker2D = $SpawnPoint
+@onready var counter: Node2D = $Counter
+
+
 @export var spawn_chance:int = 20
 
 const COIN = preload("res://Plants/coin.tscn")
+
+const PEPPER_PRODUCE = preload("res://Plants/pepper_produce.tscn")
+const OVERRIPE_PEPPER_PRODUCE = preload("res://Plants/pepper_overripe_produce.tscn")
 
 const CUSTOMER_0 = preload("res://Map/Customers/customer_0.tscn")
 const CUSTOMER_1 = preload("res://Map/Customers/customer_1.tscn")
 const CUSTOMER_2 = preload("res://Map/Customers/customer_2.tscn")
 const CUSTOMER_K = preload("res://Map/Customers/customer_k.tscn")
 
+
+
+@export var purchase_price:= 10
+var operating:= false
+var storehouse
+
+var stocked_product:Array = []
+
 func _ready() -> void:
     var theClock = get_node("/root/World/Clock")
     theClock.time_has_elapsed.connect(_time_elapsed)
+    storehouse = get_node("/root/World/StoreHouse")
+
+func get_info():
+    ## Handle Opening Shop
+    if !operating:
+        var purchase_use_info = {}
+        purchase_use_info.title = "Open FarmStand: " + str(purchase_price) + " Ripe Peppers"
+        if storehouse.produce.Pepper > purchase_price:
+            purchase_use_info.action = "Purchase"
+        return purchase_use_info
+    
+    ## Handle Operational Shop
+    var shop_info = {}
+    var current_crop = storehouse.request_info()
+    if current_crop == "":
+        shop_info.title = "No Selected Produce Available"
+        return shop_info
+    shop_info.title = "Stock Farmstand with 1: " + storehouse.request_info()
+    shop_info.action = "stock"
+    return shop_info
 
 
-func buy():
+func use() -> bool:
+    ## Handle Buying FarmStand
+    if !operating:
+        ## If Player Has Enough Produce
+        if storehouse.produce.Pepper > purchase_price:
+            ## Remove that much produce from storehouse, and add it to the farmstand
+            for purchase in purchase_price:
+                storehouse.request_produce("Pepper")
+                stock_produce("Pepper")
+            ## Make storehouse operational.
+            operating = true
+            return true
+        return false
+    
+    ## Handle Stocking Shop
+    ## TODO Either Don't allow player to stock the last pepper, or add in ability to buy a pepper with gold.
+    var produce_to_stock = storehouse.request_produce()
+    if produce_to_stock:
+            stock_produce(produce_to_stock)
+            return true
+    return false
+
+
+func stock_produce(produce_type:String):
+    var new_produce
+    match produce_type:
+        'Pepper':
+            new_produce = PEPPER_PRODUCE.instantiate()
+        'Overripe Pepper':
+            new_produce = OVERRIPE_PEPPER_PRODUCE.instantiate()
+    new_produce.for_basket = true
+    new_produce.position.x += randf_range(-40,40)
+    new_produce.position.y += randf_range(-100,100.0)
+    new_produce.rotate(randf_range(-PI,-PI/2))
+    counter.call_deferred("add_child", new_produce)
+
+
+func buy(buyer_location):
+    var purchase = counter.get_child(0)
+    if purchase:
+        match purchase.produce_type:
+            "Pepper":
+                spawn_coin()
+                spawn_coin()
+            "Overripe Pepper":
+                spawn_coin()
+
+
+func spawn_coin():
     var new_coin = COIN.instantiate()
-    new_coin.global_position = global_position
+    new_coin.global_position = counter.global_position
     get_tree().get_current_scene().call_deferred("add_child", new_coin)
-
 
 
 func spawn_customer_roll():
@@ -44,4 +125,5 @@ func spawn_customer_roll():
 
 
 func _time_elapsed():
-    spawn_customer_roll()
+    if operating:
+        spawn_customer_roll()

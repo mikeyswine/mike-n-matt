@@ -155,14 +155,14 @@ func clear_get_info():
 
 func use():
     var useable = use_raycast.get_collider()
-    print(useable)
+    #print(useable)
     ## Check if there's a useable under the player
     if !useable: 
         print("No Useable Found")
         $UI_No.play()
         return
     if useable.has_method("use"): 
-        print("Attempting to use")
+        #print("Attempting to use")
         if useable.use():
             useable = null
         else:

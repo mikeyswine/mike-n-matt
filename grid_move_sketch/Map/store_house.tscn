@@ -1,12 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://uldhigsug0nl"]
+[gd_scene load_steps=5 format=3 uid="uid://uldhigsug0nl"]
 
 [ext_resource type="Script" uid="uid://c72gr3v07x7ua" path="res://Map/store_house.gd" id="1_4dxrf"]
 [ext_resource type="PackedScene" uid="uid://da8owc1tf6iyy" path="res://Map/terrain_square.tscn" id="2_t5eoc"]
 [ext_resource type="PackedScene" uid="uid://cxrkrhn3e80um" path="res://Map/basket.tscn" id="3_5hqck"]
-[ext_resource type="PackedScene" uid="uid://dgcpxylt6i0fj" path="res://Plants/pepper_produce.tscn" id="4_53nyi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j8b5w"]
-size = Vector2(238, 42)
+size = Vector2(384, 318)
 
 [node name="StoreHouse" type="Area2D"]
 collision_layer = 0
@@ -39,7 +38,17 @@ color = Color(0.36, 0.2592, 0.26424, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -90)
 shape = SubResource("RectangleShape2D_j8b5w")
+
+[node name="BasketPepper" parent="." instance=ExtResource("3_5hqck")]
+position = Vector2(-150, 41)
+produce_type = "Pepper"
+
+[node name="BasketPepperOverripe" parent="." instance=ExtResource("3_5hqck")]
+position = Vector2(-150, -39)
+produce_type = "Overripe Pepper"
+produce_overripe = true
 
 [node name="TerrainSquare" parent="." instance=ExtResource("2_t5eoc")]
 position = Vector2(-150, 41)
@@ -64,34 +73,5 @@ position = Vector2(50, -39)
 
 [node name="TerrainSquare8" parent="." instance=ExtResource("2_t5eoc")]
 position = Vector2(150, -39)
-
-[node name="BasketPepper" parent="." instance=ExtResource("3_5hqck")]
-position = Vector2(-150, 41)
-produce_type = "Pepper"
-
-[node name="PepperProduce" parent="BasketPepper" instance=ExtResource("4_53nyi")]
-position = Vector2(-12, 2)
-rotation = -2.1293
-for_basket = true
-
-[node name="PepperProduce2" parent="BasketPepper" instance=ExtResource("4_53nyi")]
-position = Vector2(-9, -9)
-rotation = 2.93041
-for_basket = true
-
-[node name="PepperProduce3" parent="BasketPepper" instance=ExtResource("4_53nyi")]
-position = Vector2(18, -2)
-rotation = 0.783653
-for_basket = true
-
-[node name="PepperProduce4" parent="BasketPepper" instance=ExtResource("4_53nyi")]
-position = Vector2(11, 9)
-rotation = -3.34231
-for_basket = true
-
-[node name="BasketPepperOverripe" parent="." instance=ExtResource("3_5hqck")]
-position = Vector2(-150, -39)
-produce_type = "Overripe Pepper"
-produce_overripe = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

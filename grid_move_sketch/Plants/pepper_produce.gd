@@ -8,11 +8,12 @@ var produce_type:= "Pepper"
 func _ready() -> void:
     if not for_basket:
         var store_house = get_node("/root/World/StoreHouse")
-        rotation = get_angle_to(store_house.global_position)
+        rotation = get_angle_to(store_house.get_basket(produce_type).global_position)
         $PickAudio.pitch_scale = randf_range(0.9,1.1)
         $PickAudio.play()
     else:
         $CollectAudio.play()
+        set_collision_layer_value(4,false)
 
 func _physics_process(delta: float) -> void:
     if not for_basket:

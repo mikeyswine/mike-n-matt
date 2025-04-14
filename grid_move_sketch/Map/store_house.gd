@@ -4,7 +4,7 @@ const PEPPER_PLANT = preload("res://Plants/pepper_plant.tscn")
 
 var baskets: Array = []
 var produce: Dictionary = {
-    'Pepper': 4,
+    'Pepper': 0,
     'Overripe Pepper': 0}
 var selected_basket:= "Pepper"
 var gold:= 50
@@ -31,6 +31,7 @@ func _on_body_entered(body: Node2D) -> void:
     if body.produce_type == "gold":
         gold = gold + 1
         store_house_label.text = str(gold)
+        body.queue_free()
         return
     # Handle Produce
     var basket = get_basket(body.produce_type)
@@ -49,14 +50,21 @@ func select_basket(new_basket_choice, overripe):
 
 
 ## Soil, Brewery, Farmstand, etc. calls this to try to consume 1 stored produce for it's own purposes.
-func request_produce() -> String:
+## Accepts an argument that will override the currently selected produce.
+func request_produce(specific_produce="") -> String:
+    var produce_to_give
+    if specific_produce:
+        produce_to_give = specific_produce
+    else:
+        produce_to_give = selected_basket
+        
     ## Make sure produce is in stock.
-    if produce[selected_basket] <= 0:
+    if produce[produce_to_give] <= 0:
         return ""
         
-    produce[selected_basket] -= 1
-    get_basket(selected_basket).remove_produce()
-    return str(selected_basket)
+    produce[produce_to_give] -= 1
+    get_basket(produce_to_give).remove_produce()
+    return str(produce_to_give)
 
 
 ## Soil, Brewery, Farmstand call this to see what's selected.  

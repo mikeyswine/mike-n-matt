@@ -1,7 +1,12 @@
 extends CharacterBody2D
 
-var speed:= 50.0
-var accel:= 30.0
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+const COIN_1 = preload("res://Plants/sounds/coin.2.ogg")
+const COIN_2 = preload("res://Plants/sounds/coin.3.ogg")
+const COIN_3 = preload("res://Plants/sounds/coin.11.ogg")
+
+var speed:= 100.0
+var accel:= 50.0
 var direction
 var produce_type:= "gold"
 
@@ -10,7 +15,14 @@ var produce_type:= "gold"
 func _ready() -> void:
     var store_house = get_node("/root/World/StoreHouse")
     direction = global_position.direction_to(store_house.global_position)
-    
+    match randi_range(1,3):
+        1:
+            audio_stream_player.stream = COIN_1
+        2:
+            audio_stream_player.stream = COIN_2
+        3:
+            audio_stream_player.stream = COIN_3
+    audio_stream_player.play()
     
 func _physics_process(delta: float) -> void:
     speed += accel * delta
