@@ -2,7 +2,6 @@ extends Area2D
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 const PLOT = preload("res://Plants/plot.tscn")
-## TODO Update with Pumpkin!
 const PRODUCE = preload("res://Plants/pumpkin_produce.tscn")
 const PEPPER_REMOVED_PARTICLES = preload("res://Plants/pepper_removed_particles.tscn")
 

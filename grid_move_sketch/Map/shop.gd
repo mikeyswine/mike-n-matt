@@ -10,6 +10,7 @@ const COIN = preload("res://Plants/coin.tscn")
 
 const PEPPER_PRODUCE = preload("res://Plants/pepper_produce.tscn")
 const OVERRIPE_PEPPER_PRODUCE = preload("res://Plants/pepper_overripe_produce.tscn")
+const PUMPKIN_PRODUCE = preload("res://Plants/pumpkin_produce.tscn")
 const PEPPER_HOOCH_PRODUCE = preload("res://Plants/pepper_hooch_produce.tscn")
 
 
@@ -44,7 +45,7 @@ func get_info():
     var shop_info = {}
     var current_crop = storehouse.request_info()
     if current_crop == "":
-        shop_info.title = "No Selected Produce Available"
+        shop_info.title = "Not Enough Selected Produce"
         return shop_info
     shop_info.title = "Stock Farmstand with 1: " + storehouse.request_info()
     shop_info.action = "stock"
@@ -87,6 +88,9 @@ func stock_produce(produce_type:String):
             new_produce.rotate(randf_range(-PI,-PI/2))
         'Pepper Schnapps':
             new_produce = PEPPER_HOOCH_PRODUCE.instantiate()
+        'Pumpkin':
+            new_produce = PUMPKIN_PRODUCE.instantiate()
+            new_produce.rotate(randf_range(-PI,-PI/2))
     new_produce.for_basket = true
     new_produce.position.x += randf_range(-20,20)
     new_produce.position.y += randf_range(-40,40)
@@ -116,6 +120,13 @@ func buy(buyer_location):
                 spawn_coin()
                 spawn_coin()
                 spawn_coin()
+            "Pumpkin":
+                spawn_coin()
+                spawn_coin()
+                spawn_coin()
+                spawn_coin()
+                spawn_coin()
+                
                 
         purchase.queue_free()
 
@@ -123,7 +134,7 @@ func buy(buyer_location):
 func spawn_coin():
     var new_coin = COIN.instantiate()
     new_coin.global_position = counter.global_position
-    new_coin.global_position+= Vector2(randf_range(-3.0,3.0),randf_range(-3.0,3.0))
+    new_coin.global_position+= Vector2(randf_range(-16.0,16.0),randf_range(-16.0,16.0))
     get_tree().get_current_scene().call_deferred("add_child", new_coin)
 
 

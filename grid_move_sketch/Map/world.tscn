@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c0eu1i6lwku2b"]
+[gd_scene load_steps=20 format=3 uid="uid://c0eu1i6lwku2b"]
 
 [ext_resource type="PackedScene" uid="uid://bxs3tsfbo4sie" path="res://UI/clock.tscn" id="1_2qe8j"]
 [ext_resource type="Texture2D" uid="uid://ciu47nuhysyj" path="res://Map/Background/Sunset/1.png" id="1_yyjw6"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://b1puldgxajv2i" path="res://Map/Background/Sunset/9.png" id="9_nrrth"]
 [ext_resource type="PackedScene" uid="uid://dgcpxylt6i0fj" path="res://Plants/pepper_produce.tscn" id="16_beu64"]
 [ext_resource type="PackedScene" uid="uid://njjsf6vf4b6x" path="res://Plants/pumpkin_produce.tscn" id="18_ud2ca"]
+[ext_resource type="AudioStream" uid="uid://dm88q3o746q6o" path="res://UI/sleepy_head.mp3" id="19_0vg40"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -32,10 +33,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.988235, 0.866667, 0.85098, 1)
+metadata/_edit_lock_ = true
 
 [node name="Parallax" type="CanvasGroup" parent="."]
 z_index = -100
 position = Vector2(0, -400)
+metadata/_edit_lock_ = true
 
 [node name="Parallax2D" type="Parallax2D" parent="Parallax"]
 scroll_scale = Vector2(0.2, 1)
@@ -164,34 +167,35 @@ position = Vector2(1000, 0)
 position = Vector2(-100, 0)
 
 [node name="TerrainSquare5" parent="Terrain" instance=ExtResource("3_dt0mj")]
+modulate = Color(1, 0.79, 0.79, 1)
 position = Vector2(0, 80)
 
-[node name="TerrainSquare6" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(100, 80)
+[node name="TerrainSquare6" parent="Terrain/TerrainSquare5" instance=ExtResource("3_dt0mj")]
+position = Vector2(100, 0)
 
-[node name="TerrainSquare15" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(200, 80)
+[node name="TerrainSquare15" parent="Terrain/TerrainSquare5" instance=ExtResource("3_dt0mj")]
+position = Vector2(200, 0)
 
-[node name="TerrainSquare16" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(300, 80)
+[node name="TerrainSquare16" parent="Terrain/TerrainSquare5" instance=ExtResource("3_dt0mj")]
+position = Vector2(300, 0)
 
-[node name="TerrainSquare17" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(400, 80)
+[node name="TerrainSquare17" parent="Terrain/TerrainSquare5" instance=ExtResource("3_dt0mj")]
+position = Vector2(400, 0)
 
-[node name="TerrainSquare18" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(500, 80)
+[node name="TerrainSquare18" parent="Terrain/TerrainSquare5" instance=ExtResource("3_dt0mj")]
+position = Vector2(500, 0)
 
-[node name="TerrainSquare19" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(600, 80)
+[node name="TerrainSquare19" parent="Terrain/TerrainSquare5" instance=ExtResource("3_dt0mj")]
+position = Vector2(600, 0)
 
-[node name="TerrainSquare20" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(700, 80)
+[node name="TerrainSquare20" parent="Terrain/TerrainSquare5" instance=ExtResource("3_dt0mj")]
+position = Vector2(700, 0)
 
-[node name="TerrainSquare21" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(800, 80)
+[node name="TerrainSquare21" parent="Terrain/TerrainSquare5" instance=ExtResource("3_dt0mj")]
+position = Vector2(800, 0)
 
-[node name="TerrainSquare22" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(900, 80)
+[node name="TerrainSquare22" parent="Terrain/TerrainSquare5" instance=ExtResource("3_dt0mj")]
+position = Vector2(900, 0)
 
 [node name="TerrainSquare23" parent="Terrain" instance=ExtResource("3_dt0mj")]
 position = Vector2(1000, 80)
@@ -200,34 +204,35 @@ position = Vector2(1000, 80)
 position = Vector2(-100, 80)
 
 [node name="TerrainSquare25" parent="Terrain" instance=ExtResource("3_dt0mj")]
+modulate = Color(1, 0.79, 0.79, 1)
 position = Vector2(0, 160)
 
-[node name="TerrainSquare26" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(100, 160)
+[node name="TerrainSquare26" parent="Terrain/TerrainSquare25" instance=ExtResource("3_dt0mj")]
+position = Vector2(100, 0)
 
-[node name="TerrainSquare27" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(200, 160)
+[node name="TerrainSquare27" parent="Terrain/TerrainSquare25" instance=ExtResource("3_dt0mj")]
+position = Vector2(200, 0)
 
-[node name="TerrainSquare28" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(300, 160)
+[node name="TerrainSquare28" parent="Terrain/TerrainSquare25" instance=ExtResource("3_dt0mj")]
+position = Vector2(300, 0)
 
-[node name="TerrainSquare29" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(400, 160)
+[node name="TerrainSquare29" parent="Terrain/TerrainSquare25" instance=ExtResource("3_dt0mj")]
+position = Vector2(400, 0)
 
-[node name="TerrainSquare30" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(500, 160)
+[node name="TerrainSquare30" parent="Terrain/TerrainSquare25" instance=ExtResource("3_dt0mj")]
+position = Vector2(500, 0)
 
-[node name="TerrainSquare31" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(600, 160)
+[node name="TerrainSquare31" parent="Terrain/TerrainSquare25" instance=ExtResource("3_dt0mj")]
+position = Vector2(600, 0)
 
-[node name="TerrainSquare32" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(700, 160)
+[node name="TerrainSquare32" parent="Terrain/TerrainSquare25" instance=ExtResource("3_dt0mj")]
+position = Vector2(700, 0)
 
-[node name="TerrainSquare33" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(800, 160)
+[node name="TerrainSquare33" parent="Terrain/TerrainSquare25" instance=ExtResource("3_dt0mj")]
+position = Vector2(800, 0)
 
-[node name="TerrainSquare34" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(900, 160)
+[node name="TerrainSquare34" parent="Terrain/TerrainSquare25" instance=ExtResource("3_dt0mj")]
+position = Vector2(900, 0)
 
 [node name="TerrainSquare35" parent="Terrain" instance=ExtResource("3_dt0mj")]
 position = Vector2(1000, 160)
@@ -272,34 +277,35 @@ position = Vector2(1000, 240)
 position = Vector2(-100, 240)
 
 [node name="TerrainSquare49" parent="Terrain" instance=ExtResource("3_dt0mj")]
+modulate = Color(1, 0.79, 0.79, 1)
 position = Vector2(0, 320)
 
-[node name="TerrainSquare50" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(100, 320)
+[node name="TerrainSquare50" parent="Terrain/TerrainSquare49" instance=ExtResource("3_dt0mj")]
+position = Vector2(100, 0)
 
-[node name="TerrainSquare51" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(200, 320)
+[node name="TerrainSquare51" parent="Terrain/TerrainSquare49" instance=ExtResource("3_dt0mj")]
+position = Vector2(200, 0)
 
-[node name="TerrainSquare52" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(300, 320)
+[node name="TerrainSquare52" parent="Terrain/TerrainSquare49" instance=ExtResource("3_dt0mj")]
+position = Vector2(300, 0)
 
-[node name="TerrainSquare53" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(400, 320)
+[node name="TerrainSquare53" parent="Terrain/TerrainSquare49" instance=ExtResource("3_dt0mj")]
+position = Vector2(400, 0)
 
-[node name="TerrainSquare54" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(500, 320)
+[node name="TerrainSquare54" parent="Terrain/TerrainSquare49" instance=ExtResource("3_dt0mj")]
+position = Vector2(500, 0)
 
-[node name="TerrainSquare55" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(600, 320)
+[node name="TerrainSquare55" parent="Terrain/TerrainSquare49" instance=ExtResource("3_dt0mj")]
+position = Vector2(600, 0)
 
-[node name="TerrainSquare56" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(700, 320)
+[node name="TerrainSquare56" parent="Terrain/TerrainSquare49" instance=ExtResource("3_dt0mj")]
+position = Vector2(700, 0)
 
-[node name="TerrainSquare57" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(800, 320)
+[node name="TerrainSquare57" parent="Terrain/TerrainSquare49" instance=ExtResource("3_dt0mj")]
+position = Vector2(800, 0)
 
-[node name="TerrainSquare58" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(900, 320)
+[node name="TerrainSquare58" parent="Terrain/TerrainSquare49" instance=ExtResource("3_dt0mj")]
+position = Vector2(900, 0)
 
 [node name="TerrainSquare59" parent="Terrain" instance=ExtResource("3_dt0mj")]
 position = Vector2(1000, 320)
@@ -308,34 +314,35 @@ position = Vector2(1000, 320)
 position = Vector2(-100, 320)
 
 [node name="TerrainSquare61" parent="Terrain" instance=ExtResource("3_dt0mj")]
+modulate = Color(1, 0.79, 0.79, 1)
 position = Vector2(0, 400)
 
-[node name="TerrainSquare62" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(100, 400)
+[node name="TerrainSquare62" parent="Terrain/TerrainSquare61" instance=ExtResource("3_dt0mj")]
+position = Vector2(100, 0)
 
-[node name="TerrainSquare63" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(200, 400)
+[node name="TerrainSquare63" parent="Terrain/TerrainSquare61" instance=ExtResource("3_dt0mj")]
+position = Vector2(200, 0)
 
-[node name="TerrainSquare64" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(300, 400)
+[node name="TerrainSquare64" parent="Terrain/TerrainSquare61" instance=ExtResource("3_dt0mj")]
+position = Vector2(300, 0)
 
-[node name="TerrainSquare65" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(400, 400)
+[node name="TerrainSquare65" parent="Terrain/TerrainSquare61" instance=ExtResource("3_dt0mj")]
+position = Vector2(400, 0)
 
-[node name="TerrainSquare66" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(500, 400)
+[node name="TerrainSquare66" parent="Terrain/TerrainSquare61" instance=ExtResource("3_dt0mj")]
+position = Vector2(500, 0)
 
-[node name="TerrainSquare67" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(600, 400)
+[node name="TerrainSquare67" parent="Terrain/TerrainSquare61" instance=ExtResource("3_dt0mj")]
+position = Vector2(600, 0)
 
-[node name="TerrainSquare68" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(700, 400)
+[node name="TerrainSquare68" parent="Terrain/TerrainSquare61" instance=ExtResource("3_dt0mj")]
+position = Vector2(700, 0)
 
-[node name="TerrainSquare69" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(800, 400)
+[node name="TerrainSquare69" parent="Terrain/TerrainSquare61" instance=ExtResource("3_dt0mj")]
+position = Vector2(800, 0)
 
-[node name="TerrainSquare70" parent="Terrain" instance=ExtResource("3_dt0mj")]
-position = Vector2(900, 400)
+[node name="TerrainSquare70" parent="Terrain/TerrainSquare61" instance=ExtResource("3_dt0mj")]
+position = Vector2(900, 0)
 
 [node name="TerrainSquare71" parent="Terrain" instance=ExtResource("3_dt0mj")]
 position = Vector2(1000, 400)
@@ -380,133 +387,176 @@ position = Vector2(1000, 480)
 position = Vector2(-100, 480)
 
 [node name="Grass" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(0, 80)
 
 [node name="Grass2" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(100, 80)
 
 [node name="Grass3" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(200, 80)
 
 [node name="Grass4" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(300, 80)
 
 [node name="Grass5" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(400, 80)
 
 [node name="Grass6" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(500, 80)
 
 [node name="Grass7" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(600, 80)
 
 [node name="Grass8" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(700, 80)
 
 [node name="Grass9" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(800, 80)
 
 [node name="Grass10" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(900, 80)
 
 [node name="Grass11" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(0, 160)
 
 [node name="Grass12" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(100, 160)
 
 [node name="Grass13" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(200, 160)
 
 [node name="Grass14" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(300, 160)
 
 [node name="Grass15" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(400, 160)
 
 [node name="Grass16" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(500, 160)
 
 [node name="Grass17" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(600, 160)
 
 [node name="Grass18" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(700, 160)
 
 [node name="Grass19" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(800, 160)
 
 [node name="Grass20" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(900, 160)
 
 [node name="Grass21" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(0, 320)
 
 [node name="Grass22" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(100, 320)
 
 [node name="Grass23" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(200, 320)
 
 [node name="Grass24" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(300, 320)
 
 [node name="Grass25" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(400, 320)
 
 [node name="Grass26" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(500, 320)
 
 [node name="Grass27" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(600, 320)
 
 [node name="Grass28" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(700, 320)
 
 [node name="Grass29" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(800, 320)
 
 [node name="Grass30" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(900, 320)
 
 [node name="Grass31" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(0, 400)
 
 [node name="Grass32" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(100, 400)
 
 [node name="Grass33" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(200, 400)
 
 [node name="Grass34" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(300, 400)
 
 [node name="Grass35" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(400, 400)
 
 [node name="Grass36" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(500, 400)
 
 [node name="Grass37" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(600, 400)
 
 [node name="Grass38" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(700, 400)
 
 [node name="Grass39" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(800, 400)
 
 [node name="Grass40" parent="." instance=ExtResource("4_h7ikf")]
+visible = false
 position = Vector2(900, 400)
 
 [node name="StoreHouse" parent="." instance=ExtResource("6_m1rmh")]
 position = Vector2(351, -121)
+metadata/_edit_lock_ = true
 
 [node name="Brewery" parent="." instance=ExtResource("8_2qe8j")]
 position = Vector2(1, -80)
+metadata/_edit_lock_ = true
 
 [node name="Shop" parent="." instance=ExtResource("8_0xrvh")]
 position = Vector2(901, -80)
+metadata/_edit_lock_ = true
 
 [node name="PepperProduce" parent="." instance=ExtResource("16_beu64")]
 position = Vector2(186, -18)
@@ -522,5 +572,13 @@ position = Vector2(209, -11)
 
 [node name="PumpkinProduce" parent="." instance=ExtResource("18_ud2ca")]
 position = Vector2(299, -16)
+
+[node name="SleepyHead" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_0vg40")
+volume_db = -15.0
+autoplay = true
+parameters/looping = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="time_elapsed" from="Player" to="Clock" method="_on_player_time_elapsed"]

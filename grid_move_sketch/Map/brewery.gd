@@ -14,7 +14,7 @@ var storehouse: Area2D
 var shop: Area2D
 
 var title:= "Brewery"
-var action:= "brew"
+var action:= ""
 
 var purchased:= false
 
@@ -44,9 +44,14 @@ func get_info() -> Dictionary:
     ## TODO Update to specific Recipe
     update_brew_progress()
     var use_info = {}
+    if brew_progress == 0:
+        title = "Brew Alcohol Using Produce"
+    else:
+        title = "Brewing " + str(brew_type) + " Alcohol"
     use_info.title = title
+    action = storehouse.request_info()
     if action:
-        use_info.action = action
+        use_info.action = "Brew"
     return use_info
 
 
@@ -70,6 +75,8 @@ func use() -> bool:
                 liquid_color = Color.RED
             "Overripe Pepper":
                 liquid_color = Color.DARK_RED
+            "Pumpkin":
+                liquid_color = Color.ORANGE
             _:
                 return false
         fermenter_liquid.modulate = liquid_color
@@ -111,7 +118,7 @@ func update_brew_progress():
         boiler_audio_stream_player_2d.stop()
         return
     match brew_type:
-        "Pepper","Overripe Pepper":
+        "Pepper","Overripe Pepper","Pumpkin":
             shop.stock_produce("Pepper Schnapps")
     brew_progress = 0
     update_brew_progress()

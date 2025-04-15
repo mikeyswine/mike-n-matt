@@ -72,7 +72,7 @@ func request_produce(specific_produce="") -> String:
 ## Soil, Brewery, Farmstand call this to see what's selected.  
 ## Returns the name of the selected basket if any are available.
 func request_info() -> String:
-    if produce[selected_basket] <= 0:
+    if produce[selected_basket] <= 1:
         return ""
     return selected_basket
     

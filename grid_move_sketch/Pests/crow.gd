@@ -30,6 +30,7 @@ func _ready() -> void:
     var theClock = get_node("/root/World/Clock")
     theClock.time_has_elapsed.connect(_time_elapsed)
     handle_direction()
+    top_level = true
 
 
 func _physics_process(delta: float) -> void:
@@ -38,6 +39,7 @@ func _physics_process(delta: float) -> void:
             global_position = global_position.move_toward(destination,speed*delta)
             if global_position == destination:
                 state = WAITING
+                top_level = false
                 #set_deferred("monitoring", true)
                 set_collision_mask_value(2,true)
                 animation_player.play("idle")
@@ -81,6 +83,7 @@ func flee():
     destination.x = randf_range(destination.x -1000.0, destination.x + 1000.0)
     destination.y = destination.y - 2000
     state = FLEEING
+    top_level = true
 
 func handle_direction():
     if destination > global_position:

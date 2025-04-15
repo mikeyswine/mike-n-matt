@@ -4,11 +4,12 @@ var title:= "Open Plot"
 var action:= ""
 
 var PEPPER_PLANT: PackedScene
-const PUMPKIN_PLANT = preload("res://Plants/pumpkin_plant.tscn")
+var PUMPKIN_PLANT: PackedScene
 var storehouse: Area2D
 
 func _ready() -> void:
     PEPPER_PLANT = load("res://Plants/pepper_plant.tscn")
+    PUMPKIN_PLANT = load("res://Plants/pumpkin_plant.tscn")
     storehouse = get_node("/root/World/StoreHouse")
 
 func use():
