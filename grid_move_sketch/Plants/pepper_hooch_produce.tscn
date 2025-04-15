@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cj3o5skkmaenv"]
+
+[ext_resource type="Texture2D" uid="uid://cxegkcftnujas" path="res://Map/Shop/Pepper Bottle.png" id="1_1eo0o"]
+[ext_resource type="Script" uid="uid://bmgaegt1mmxhn" path="res://Plants/pepper_hooch_produce.gd" id="1_580ur"]
+[ext_resource type="AudioStream" uid="uid://d0n107l5i7kpq" path="res://Plants/sounds/glug_1.wav" id="3_1eo0o"]
+
+[node name="PepperHoochProduce" type="Sprite2D" groups=["produce"]]
+z_index = 10
+scale = Vector2(2, 2)
+texture = ExtResource("1_1eo0o")
+script = ExtResource("1_580ur")
+
+[node name="CollectAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1eo0o")
+volume_db = 5.0
+autoplay = true

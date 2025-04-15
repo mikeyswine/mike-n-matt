@@ -1,13 +1,15 @@
 extends Area2D
 
 const PEPPER_PLANT = preload("res://Plants/pepper_plant.tscn")
+const PUMPKIN_PLANT = preload("res://Plants/pumpkin_plant.tscn")
 
 var baskets: Array = []
 var produce: Dictionary = {
     'Pepper': 0,
-    'Overripe Pepper': 0}
+    'Overripe Pepper': 0,
+    'Pumpkin': 0}
 var selected_basket:= "Pepper"
-var gold:= 50
+var gold:= 0
 @onready var store_house_label: Label = %StoreHouseLabel
 
 
@@ -30,7 +32,7 @@ func _on_body_entered(body: Node2D) -> void:
     # Handle Gold
     if body.produce_type == "gold":
         gold = gold + 1
-        store_house_label.text = str(gold)
+        store_house_label.text = str(gold) + " coins"
         body.queue_free()
         return
     # Handle Produce

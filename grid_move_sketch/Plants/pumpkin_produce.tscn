@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://njjsf6vf4b6x"]
+
+[ext_resource type="Script" uid="uid://0t1yreud28ks" path="res://Plants/pumpkin_produce.gd" id="1_hf6eq"]
+[ext_resource type="Texture2D" uid="uid://b30tv5j058ntp" path="res://Plants/Rumpkin_Produce.png" id="2_hf6eq"]
+[ext_resource type="AudioStream" uid="uid://cmcr7antybsp6" path="res://Plants/sounds/LeavesTest001 065.wav" id="3_17fxa"]
+[ext_resource type="AudioStream" uid="uid://jye6c3imfp6p" path="res://UI/life_pickup.wav" id="4_f48oa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ey7r"]
+radius = 20.0
+
+[node name="PumpkinProduce" type="CharacterBody2D" groups=["produce"]]
+z_index = 10
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_hf6eq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7ey7r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("2_hf6eq")
+
+[node name="PickAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_17fxa")
+volume_db = -10.0
+pitch_scale = 0.98
+
+[node name="CollectAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_f48oa")
+volume_db = -5.0

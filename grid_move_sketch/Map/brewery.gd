@@ -11,6 +11,7 @@ extends Area2D
 @export var purchase_price:= 50
 
 var storehouse: Area2D
+var shop: Area2D
 
 var title:= "Brewery"
 var action:= "brew"
@@ -24,6 +25,7 @@ func _ready() -> void:
     var theClock = get_node("/root/World/Clock")
     theClock.time_has_elapsed.connect(_time_elapsed)
     storehouse = get_node("/root/World/StoreHouse")
+    shop = get_node("/root/World/Shop")
     fermenter_animation_player.play("unpurchased")
     boiler_animation_player.play("unpurchased")
 
@@ -37,7 +39,9 @@ func get_info() -> Dictionary:
             purchase_use_info.action = "Purchase"
         return purchase_use_info
     
+    
     ## Handle Operating Brewery
+    ## TODO Update to specific Recipe
     update_brew_progress()
     var use_info = {}
     use_info.title = title
@@ -52,6 +56,8 @@ func use() -> bool:
         if storehouse.gold >= purchase_price:
             storehouse.gold -= purchase_price
             purchased = true
+            $Sign.visible = false
+            $PurchaseSound.play()
             update_brew_progress()
             return true
         return false
@@ -66,10 +72,11 @@ func use() -> bool:
                 liquid_color = Color.DARK_RED
             _:
                 return false
-        brew_progress = 1
-        update_brew_progress()
         fermenter_liquid.modulate = liquid_color
         boiler_liquid.modulate = liquid_color
+        brew_progress = 1
+        update_brew_progress()
+        
         return true
     update_brew_progress()
     return false
@@ -103,6 +110,9 @@ func update_brew_progress():
         fermenter_animation_player.play("ferment")
         boiler_audio_stream_player_2d.stop()
         return
+    match brew_type:
+        "Pepper","Overripe Pepper":
+            shop.stock_produce("Pepper Schnapps")
     brew_progress = 0
     update_brew_progress()
      

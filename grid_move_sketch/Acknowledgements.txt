@@ -22,6 +22,7 @@ kayillustrations
 Chiecola
     Gobu Gobu Goblins
 
+
 opengameart.org______________
 BMacZero
     Bubble Sound Effects
@@ -37,3 +38,9 @@ TheMightyGlider
     Shovel Sound
 ZeroIsNotNull
     Crow Caw
+BlueCarrot16
+    LPC Crops
+Reemax
+    LPC Signposts Graves, Line Cloths and Scare Crow
+Idylwild
+    Idylwild's Foliage Pack

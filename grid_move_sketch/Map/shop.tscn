@@ -1,7 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://swpivh364orj"]
+[gd_scene load_steps=11 format=3 uid="uid://swpivh364orj"]
 
 [ext_resource type="Script" uid="uid://cjiiismbvv6eb" path="res://Map/shop.gd" id="1_xour6"]
 [ext_resource type="PackedScene" uid="uid://da8owc1tf6iyy" path="res://Map/terrain_square.tscn" id="2_27yse"]
+[ext_resource type="Texture2D" uid="uid://bj5jpwk7btsdh" path="res://Map/Shadow.png" id="2_xevv3"]
+[ext_resource type="Texture2D" uid="uid://da66p5rbiyfuj" path="res://Map/FarmStand.png" id="3_pmuos"]
+[ext_resource type="Texture2D" uid="uid://cjdu1ggyehkwf" path="res://Map/signpost-outsidestuff.png" id="4_c6er4"]
+[ext_resource type="FontFile" uid="uid://qyfxsl212a2o" path="res://UI/Kenney Mini Square Mono.ttf" id="5_xevv3"]
+[ext_resource type="Texture2D" uid="uid://dbwx2iyt5xx42" path="res://Plants/Produce_Pepper_Icon.png" id="6_ivjub"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_27yse"]
 size = Vector2(100, 80)
@@ -20,36 +25,40 @@ script = ExtResource("1_xour6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_27yse")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -50.0
-offset_top = -241.0
-offset_right = 150.0
-offset_bottom = -41.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.23, 0.1955, 0.21965, 1)
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+position = Vector2(24, -94)
+scale = Vector2(5, 4)
+texture = ExtResource("2_xevv3")
 
-[node name="ColorRect2" type="ColorRect" parent="."]
-visible = false
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -50.0
-offset_top = -241.0
-offset_right = 150.0
-offset_bottom = -41.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.23, 0.1955, 0.21965, 1)
-metadata/_edit_use_anchors_ = true
+[node name="OpenSign" type="Sprite2D" parent="."]
+position = Vector2(184, -183)
+scale = Vector2(3, 3)
+texture = ExtResource("4_c6er4")
+hframes = 4
+vframes = 4
+frame = 4
+
+[node name="Label" type="Label" parent="OpenSign"]
+offset_left = -14.3333
+offset_top = -7.99998
+offset_right = 45.6667
+offset_bottom = 22.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("5_xevv3")
+theme_override_font_sizes/font_size = 8
+text = "Goblin
+market
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="OpenSign"]
+offset_left = -11.6667
+offset_right = 36.3333
+offset_bottom = 23.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_xevv3")
+text = "open"
 
 [node name="CustomerCollider" type="StaticBody2D" parent="."]
 position = Vector2(1650, -40)
@@ -74,4 +83,32 @@ position = Vector2(1150, -40)
 [node name="TerrainSquare" parent="." instance=ExtResource("2_27yse")]
 
 [node name="Counter" type="Node2D" parent="."]
-position = Vector2(110, -146)
+position = Vector2(116, -126)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(46, -96)
+scale = Vector2(3, 3)
+texture = ExtResource("3_pmuos")
+
+[node name="BuySign" type="Sprite2D" parent="."]
+position = Vector2(0, -69)
+scale = Vector2(3, 3)
+texture = ExtResource("4_c6er4")
+hframes = 4
+vframes = 4
+frame = 4
+
+[node name="Label" type="Label" parent="BuySign"]
+offset_left = -3.66666
+offset_top = -7.33333
+offset_right = 36.3333
+offset_bottom = 15.6667
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_xevv3")
+text = "x10"
+
+[node name="Sprite2D" type="Sprite2D" parent="BuySign"]
+position = Vector2(-8.66667, 1)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_ivjub")
+hframes = 2

@@ -4,6 +4,8 @@ extends Area2D
 
 const PEPPER_PRODUCE = preload("res://Plants/pepper_produce.tscn")
 const OVERRIPE_PEPPER_PRODUCE = preload("res://Plants/pepper_overripe_produce.tscn")
+const PUMPKIN_PRODUCE = preload("res://Plants/pumpkin_produce.tscn")
+
 
 @export var produce_type: String = 'NothingBerry'
 @export var produce_overripe: bool = false
@@ -27,6 +29,8 @@ func add_produce() -> void:
             new_produce = PEPPER_PRODUCE.instantiate()
         'Overripe Pepper':
             new_produce = OVERRIPE_PEPPER_PRODUCE.instantiate()
+        'Pumpkin':
+            new_produce = PUMPKIN_PRODUCE.instantiate()
     new_produce.for_basket = true
     #new_produce.overripe = is_overripe
     #new_produce.scale = Vector2(produce_scale, produce_scale)
@@ -37,6 +41,7 @@ func add_produce() -> void:
     call_deferred("add_child", new_produce)
     #new_produce.top_level = true  ## This is gonna cause problems with the player walking over them.
 
+
 func remove_produce():
     var children = get_children()
     for a_child in children:
@@ -44,6 +49,7 @@ func remove_produce():
             if !a_child.is_queued_for_deletion():
                 a_child.queue_free()
                 return
+
 
 func get_info():
     ##TODO if produce_count == 0, handle buy more of this produce
@@ -55,16 +61,19 @@ func get_info():
         info.action = "Select"
     return info
 
+
 func use():
     if produce_count >0:
         select()
         return true
     return false
 
+
 func select():
     storehouse.select_basket(produce_type,produce_overripe)
     hilight.visible = true
     selected = true
+
 
 func deselect():
     hilight.visible = false

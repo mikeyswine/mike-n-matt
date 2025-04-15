@@ -10,12 +10,13 @@ const COIN = preload("res://Plants/coin.tscn")
 
 const PEPPER_PRODUCE = preload("res://Plants/pepper_produce.tscn")
 const OVERRIPE_PEPPER_PRODUCE = preload("res://Plants/pepper_overripe_produce.tscn")
+const PEPPER_HOOCH_PRODUCE = preload("res://Plants/pepper_hooch_produce.tscn")
+
 
 const CUSTOMER_0 = preload("res://Map/Customers/customer_0.tscn")
 const CUSTOMER_1 = preload("res://Map/Customers/customer_1.tscn")
 const CUSTOMER_2 = preload("res://Map/Customers/customer_2.tscn")
 const CUSTOMER_K = preload("res://Map/Customers/customer_k.tscn")
-
 
 
 @export var purchase_price:= 10
@@ -28,6 +29,7 @@ func _ready() -> void:
     var theClock = get_node("/root/World/Clock")
     theClock.time_has_elapsed.connect(_time_elapsed)
     storehouse = get_node("/root/World/StoreHouse")
+    $OpenSign.visible = false
 
 func get_info():
     ## Handle Opening Shop
@@ -60,6 +62,8 @@ func use() -> bool:
                 stock_produce("Pepper")
             ## Make storehouse operational.
             operating = true
+            $BuySign.visible = false
+            $OpenSign.visible = true
             return true
         return false
     
@@ -77,29 +81,49 @@ func stock_produce(produce_type:String):
     match produce_type:
         'Pepper':
             new_produce = PEPPER_PRODUCE.instantiate()
+            new_produce.rotate(randf_range(-PI,-PI/2))
         'Overripe Pepper':
             new_produce = OVERRIPE_PEPPER_PRODUCE.instantiate()
+            new_produce.rotate(randf_range(-PI,-PI/2))
+        'Pepper Schnapps':
+            new_produce = PEPPER_HOOCH_PRODUCE.instantiate()
     new_produce.for_basket = true
-    new_produce.position.x += randf_range(-40,40)
-    new_produce.position.y += randf_range(-100,100.0)
-    new_produce.rotate(randf_range(-PI,-PI/2))
+    new_produce.position.x += randf_range(-20,20)
+    new_produce.position.y += randf_range(-40,40)
+    
     counter.call_deferred("add_child", new_produce)
 
 
 func buy(buyer_location):
-    var purchase = counter.get_child(0)
-    if purchase:
+    ## Pop a random child off of the Counter
+    var child_number = counter.get_child_count()
+    if child_number > 0:
+        var purchase = counter.get_child(randi_range(0,child_number-1))
         match purchase.produce_type:
             "Pepper":
                 spawn_coin()
                 spawn_coin()
             "Overripe Pepper":
                 spawn_coin()
+            "Pepper Schnapps":
+                spawn_coin()
+                spawn_coin()
+                spawn_coin()
+                spawn_coin()
+                spawn_coin()
+                spawn_coin()
+                spawn_coin()
+                spawn_coin()
+                spawn_coin()
+                spawn_coin()
+                
+        purchase.queue_free()
 
 
 func spawn_coin():
     var new_coin = COIN.instantiate()
     new_coin.global_position = counter.global_position
+    new_coin.global_position+= Vector2(randf_range(-3.0,3.0),randf_range(-3.0,3.0))
     get_tree().get_current_scene().call_deferred("add_child", new_coin)
 
 

@@ -4,6 +4,7 @@ var title:= "Open Plot"
 var action:= ""
 
 var PEPPER_PLANT: PackedScene
+const PUMPKIN_PLANT = preload("res://Plants/pumpkin_plant.tscn")
 var storehouse: Area2D
 
 func _ready() -> void:
@@ -15,6 +16,8 @@ func use():
     match storehouse.request_produce():
         "Pepper","Overripe Pepper":
             new_plant = PEPPER_PLANT.instantiate()
+        "Pumpkin":
+            new_plant = PUMPKIN_PLANT.instantiate()
         _:
             return false
     new_plant.global_position = global_position

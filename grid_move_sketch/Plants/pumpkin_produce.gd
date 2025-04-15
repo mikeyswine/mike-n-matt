@@ -2,9 +2,8 @@ extends CharacterBody2D
 
 var speed:= 300.0
 var accel:= 200.0
-var produce_type:= "Pepper"
+var produce_type:= "Pumpkin"
 @export var for_basket:= false
-
 
 func _ready() -> void:
     if not for_basket:
@@ -15,7 +14,6 @@ func _ready() -> void:
     else:
         $CollectAudio.play()
         set_collision_layer_value(4,false)
-
 
 func _physics_process(delta: float) -> void:
     if not for_basket:

@@ -12,8 +12,8 @@ enum {
 var state = ARRIVING
 
 @export var destination:= Vector2(500.0,0.0)
-@export var wait_time_min:= 3
-@export var wait_time_max:= 6
+@export var wait_time_min:= 1
+@export var wait_time_max:= 3
 var wait_time:int
 
 var speed = 200.0

@@ -1,8 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://uldhigsug0nl"]
+[gd_scene load_steps=10 format=3 uid="uid://uldhigsug0nl"]
 
 [ext_resource type="Script" uid="uid://c72gr3v07x7ua" path="res://Map/store_house.gd" id="1_4dxrf"]
 [ext_resource type="PackedScene" uid="uid://da8owc1tf6iyy" path="res://Map/terrain_square.tscn" id="2_t5eoc"]
 [ext_resource type="PackedScene" uid="uid://cxrkrhn3e80um" path="res://Map/basket.tscn" id="3_5hqck"]
+[ext_resource type="Texture2D" uid="uid://bj5jpwk7btsdh" path="res://Map/Shadow.png" id="4_ly332"]
+[ext_resource type="Texture2D" uid="uid://dgdaora5fstyd" path="res://Map/RoofTile.png" id="5_6n8tw"]
+[ext_resource type="Texture2D" uid="uid://bhc6y82hscmuq" path="res://Map/Wooden Back.png" id="5_yr58s"]
+[ext_resource type="Texture2D" uid="uid://dv08151sgmrtr" path="res://Map/Post.png" id="6_vli0i"]
+[ext_resource type="FontFile" uid="uid://cxlk4v07lriud" path="res://UI/Kenney Pixel.ttf" id="8_vli0i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j8b5w"]
 size = Vector2(384, 318)
@@ -12,34 +17,10 @@ collision_layer = 0
 collision_mask = 8
 script = ExtResource("1_4dxrf")
 
-[node name="StoreHouseLabel" type="Label" parent="."]
-unique_name_in_owner = true
-top_level = true
-offset_top = -243.0
-offset_right = 40.0
-offset_bottom = -220.0
-text = "0"
-metadata/_edit_use_anchors_ = true
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -200.0
-offset_top = -404.0
-offset_right = 200.0
-offset_bottom = -84.0
-color = Color(0.23, 0.1955, 0.21965, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="ColorRect2" type="ColorRect" parent="."]
-offset_left = -190.0
-offset_top = -392.0
-offset_right = 190.0
-offset_bottom = -222.0
-color = Color(0.36, 0.2592, 0.26424, 1)
-metadata/_edit_use_anchors_ = true
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -90)
 shape = SubResource("RectangleShape2D_j8b5w")
+debug_color = Color(0, 0.595, 0.7, 0.0901961)
 
 [node name="BasketPepper" parent="." instance=ExtResource("3_5hqck")]
 position = Vector2(-150, 41)
@@ -49,6 +30,10 @@ produce_type = "Pepper"
 position = Vector2(-150, -39)
 produce_type = "Overripe Pepper"
 produce_overripe = true
+
+[node name="BasketPumpkin" parent="." instance=ExtResource("3_5hqck")]
+position = Vector2(-50, 41)
+produce_type = "Pumpkin"
 
 [node name="TerrainSquare" parent="." instance=ExtResource("2_t5eoc")]
 position = Vector2(-150, 41)
@@ -73,5 +58,144 @@ position = Vector2(50, -39)
 
 [node name="TerrainSquare8" parent="." instance=ExtResource("2_t5eoc")]
 position = Vector2(150, -39)
+
+[node name="Roof" type="CanvasGroup" parent="."]
+position = Vector2(-179, -129)
+scale = Vector2(3, 3)
+
+[node name="Shadow" type="Sprite2D" parent="Roof"]
+position = Vector2(59.6667, 21.6667)
+scale = Vector2(4.4, 0.5)
+texture = ExtResource("4_ly332")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Roof"]
+position = Vector2(43, -3.33331)
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_yr58s")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Roof"]
+position = Vector2(75.3333, -3.33331)
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_yr58s")
+
+[node name="Post" type="Sprite2D" parent="Roof"]
+position = Vector2(-6.33333, 27)
+scale = Vector2(0.5, 1)
+texture = ExtResource("6_vli0i")
+
+[node name="Post2" type="Sprite2D" parent="Roof"]
+position = Vector2(126, 27)
+scale = Vector2(0.5, 1)
+texture = ExtResource("6_vli0i")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Roof"]
+position = Vector2(0, -36)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Roof/Sprite2D3"]
+position = Vector2(20, 0)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Roof/Sprite2D3"]
+position = Vector2(40, 0)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Roof/Sprite2D3"]
+position = Vector2(60, 0)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Roof/Sprite2D3"]
+position = Vector2(80, 0)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Roof/Sprite2D3"]
+position = Vector2(100, 0)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Roof/Sprite2D3"]
+position = Vector2(120, 0)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Roof"]
+position = Vector2(0, -18)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Roof/Sprite2D"]
+position = Vector2(20, 0)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Roof/Sprite2D"]
+position = Vector2(40, 0)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Roof/Sprite2D"]
+position = Vector2(60, 0)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Roof/Sprite2D"]
+position = Vector2(80, 0)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Roof/Sprite2D"]
+position = Vector2(100, 0)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Roof/Sprite2D"]
+position = Vector2(120, 0)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Roof"]
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Roof/Sprite2D2"]
+position = Vector2(20, 0)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Roof/Sprite2D2"]
+position = Vector2(40, 0)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Roof/Sprite2D2"]
+position = Vector2(60, 0)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Roof/Sprite2D2"]
+position = Vector2(80, 0)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Roof/Sprite2D2"]
+position = Vector2(100, 0)
+texture = ExtResource("5_6n8tw")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Roof/Sprite2D2"]
+position = Vector2(120, 0)
+texture = ExtResource("5_6n8tw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="StoreHouseLabel" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_vli0i")
+theme_override_font_sizes/font_size = 48
+text = "0 coins"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

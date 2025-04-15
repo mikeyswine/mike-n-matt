@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://uwkdby0as68e"]
+[gd_scene load_steps=23 format=3 uid="uid://uwkdby0as68e"]
 
 [ext_resource type="Script" uid="uid://b5r0xunifkvqi" path="res://Map/brewery.gd" id="1_afq82"]
 [ext_resource type="Texture2D" uid="uid://dmja47scyokrt" path="res://Map/Fermenter.png" id="2_60be5"]
@@ -7,6 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://rokandu4vmre" path="res://Map/Boiler_Liquid.png" id="3_q5a5u"]
 [ext_resource type="AudioStream" uid="uid://4y8lswhjiqs" path="res://Map/bubbles-single1.wav" id="4_60be5"]
 [ext_resource type="AudioStream" uid="uid://huv5u6lvpabn" path="res://Map/cooking_without_cover_01.ogg" id="4_xyxaw"]
+[ext_resource type="Texture2D" uid="uid://cjdu1ggyehkwf" path="res://Map/signpost-outsidestuff.png" id="8_n74dx"]
+[ext_resource type="PackedScene" uid="uid://da8owc1tf6iyy" path="res://Map/terrain_square.tscn" id="8_stj1x"]
+[ext_resource type="FontFile" uid="uid://qyfxsl212a2o" path="res://UI/Kenney Mini Square Mono.ttf" id="9_0r5eg"]
+[ext_resource type="Texture2D" uid="uid://biai8d6vosumb" path="res://Plants/coin.png" id="11_0r5eg"]
+[ext_resource type="AudioStream" uid="uid://btmvvjyx0tiku" path="res://Plants/sounds/gold_sack.wav" id="12_in5h2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h7ikf"]
 size = Vector2(100, 80)
@@ -299,3 +304,30 @@ volume_db = 5.0
 pitch_scale = 0.8
 max_distance = 1000.0
 parameters/looping = true
+
+[node name="TerrainSquare" parent="." instance=ExtResource("8_stj1x")]
+
+[node name="Sign" type="Sprite2D" parent="."]
+position = Vector2(0, -81)
+scale = Vector2(3, 3)
+texture = ExtResource("8_n74dx")
+hframes = 4
+vframes = 4
+frame = 4
+
+[node name="Label" type="Label" parent="Sign"]
+offset_left = -3.66666
+offset_top = -7.33333
+offset_right = 36.3333
+offset_bottom = 15.6667
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("9_0r5eg")
+text = "x50"
+
+[node name="Sprite2D" type="Sprite2D" parent="Sign"]
+position = Vector2(-8, -1.66667)
+texture = ExtResource("11_0r5eg")
+hframes = 3
+
+[node name="PurchaseSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_in5h2")
