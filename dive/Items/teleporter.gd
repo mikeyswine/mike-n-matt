@@ -6,9 +6,9 @@ extends Area2D
 
 
 func _on_body_entered(body: Node2D) -> void:
-    #get_tree().change_scene_to_packed(destination_level)
-    if custom_start_position:
-        LevelSingleton.custom_start_position = custom_start_position
-        
-    #get_tree().call_deferred("change_scene_to_packed", destination_level)
-    get_tree().call_deferred("change_scene_to_file",destination_level_file)
+	#get_tree().change_scene_to_packed(destination_level)
+	if custom_start_position:
+		LevelSingleton.custom_start_position = custom_start_position
+		
+	#get_tree().call_deferred("change_scene_to_packed", destination_level)
+	get_tree().call_deferred("change_scene_to_file",destination_level_file)
